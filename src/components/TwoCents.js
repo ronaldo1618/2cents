@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import NavBar from './nav/NavBar';
-import ApplicationViews from './ApplicationViews';
+import React, { useState } from "react";
+import NavBar from "./nav/NavBar";
+import ApplicationViews from "./ApplicationViews";
 
 const TwoCents = () => {
   const isAuthenticated = () => sessionStorage.getItem("credentials") !== null;
@@ -9,7 +9,7 @@ const TwoCents = () => {
   const clearUser = () => {
     sessionStorage.clear();
     setHasUser(isAuthenticated());
-  };
+  }
 
   const setUser = user => {
     sessionStorage.setItem("credentials", JSON.stringify(user));
@@ -18,8 +18,9 @@ const TwoCents = () => {
 
   return (
     <>
+      <h3>hello</h3>
       <NavBar hasUser={hasUser} clearUser={clearUser} />
-      <ApplicationViews hasUser={hasUser} setUser={setUser} />
+      <ApplicationViews hasUser={hasUser} setUser={setUser}/>
     </>
   );
 };

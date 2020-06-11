@@ -1,0 +1,20 @@
+/* div {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+} */
+
+fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#idk {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  height: 100px;
+}
