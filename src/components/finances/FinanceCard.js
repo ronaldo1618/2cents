@@ -9,9 +9,9 @@ const FinanceCard = ({financeObj, history, deleteFinance, toggleTrueFalse, isTog
         <Card.Text>${financeObj.amount}</Card.Text>
         <Card.Text>{financeObj.date}</Card.Text>
         <hr/>
-        <Button variant="outline-info" type="button" onClick={() => {
+        {/* <Button variant="outline-info" type="button" onClick={() => {
           history.push(`/finances/${financeObj.id}/details`)
-        }}>Details</Button>
+        }}>Details</Button> */}
         <Button variant="outline-secondary" type="button" onClick={() => {
           history.push(`/finances/form/${financeObj.id}/`)
         }}>Edit</Button>

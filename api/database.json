@@ -1,22 +1,22 @@
 {
   "finances": [
     {
-      "name": "gas bill",
-      "amount": -123.12,
-      "date": "2020-06-11",
-      "userId": 1,
-      "bill": true,
+      "id": 2,
+      "name": "income",
+      "amount": 20,
+      "date": "2020-06-10",
       "totalFinanceId": 1,
-      "id": 1
+      "bill": false,
+      "userId": 1
     },
     {
-      "name": "inceom",
-      "amount": 234.2,
-      "date": "2020-06-09",
-      "userId": 1,
-      "bill": false,
+      "id": 3,
+      "name": "bill #2",
+      "amount": -20,
+      "date": "2020-06-11",
       "totalFinanceId": 1,
-      "id": 2
+      "bill": true,
+      "userId": 1
     }
   ],
   "users": [
@@ -36,9 +36,9 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -123.12,
-      "allIncome": 234.2,
-      "amountLeft": 111.07999999999998,
+      "allBills": -20,
+      "allIncome": 20,
+      "amountLeft": 0,
       "id": 1
     }
   ]
