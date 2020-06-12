@@ -10,3 +10,7 @@ export function MonthNameMaker(setTimeStamp, fullDate) {
     return fullDate.split("-")[0]
   }
 }
+
+export function fixNum(value) {
+  return parseFloat(value.toFixed(2))
+}

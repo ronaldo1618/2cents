@@ -15,7 +15,7 @@ const Login = props => {
     e.preventDefault();
     apiManager.get("users")
       .then(users => {
-        const user = users.find(user => user.email === credentials.email)
+        const user = users.find(user => user.email === credentials.email && user.password === credentials.password)
         if(!user) return alert('user does not exist')
         let date = new Date()
         console.log(user.id)

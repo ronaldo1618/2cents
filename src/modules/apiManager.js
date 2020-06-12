@@ -4,6 +4,9 @@ export default {
   get(collection) {
     return fetch(`${remoteURL}/${collection}`).then(data => data.json())
   },
+  getById(collection, id) {
+    return fetch(`${remoteURL}/${collection}/${id}`).then(data => data.json());
+  },
   getByUserId(collection, id) {
     return fetch(`${remoteURL}/${collection}/?userId=${id}`).then(result => result.json());
   },

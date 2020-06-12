@@ -3,6 +3,8 @@ import React from 'react';
 import Login from './auth/Login';
 import CryptoList from './cryptos/CryptoList';
 import FinanceList from './finances/FinanceList';
+import Home from './home/Home';
+import FinanceForm from './finances/FinanceForm';
 
 const ApplicationViews = props => {
   const hasUser = props.hasUser;
@@ -18,6 +20,14 @@ const ApplicationViews = props => {
         return <Login setUser={setUser} hasUser={hasUser} {...props}/>
       }}
       />
+      <Route exact path="/" render={props => {
+        if(hasUser) {
+          return <Home userId={userId} {...props}/>
+        } else {
+          return <Redirect to="Login"/>
+        }
+      }}
+      />
       <Route path="/crypto" render={props => {
         if(hasUser) {
           return <CryptoList hasUser={hasUser} userId={userId} {...props}/>
@@ -26,9 +36,25 @@ const ApplicationViews = props => {
         }
       }}
       />
-      <Route path="/finances" render={props => {
+      <Route exact path="/finances" render={props => {
         if(hasUser) {
           return <FinanceList userId={userId} {...props}/>
+        } else {
+          return <Redirect to="/Login"/>
+        }
+      }}
+      />
+      <Route exact path="/finances/form" render={props => {
+        if(hasUser) {
+          return <FinanceForm userId={userId} {...props}/>
+        } else {
+          return <Redirect to="login"/>
+        }
+      }}
+      />
+      <Route exact path="/finances/form/:financeId(\d+)" render={props => {
+        if(hasUser) {
+          return <FinanceForm userId={userId} {...props}/>
         } else {
           return <Redirect to="/Login"/>
         }

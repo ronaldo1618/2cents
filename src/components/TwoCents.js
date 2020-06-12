@@ -18,7 +18,6 @@ const TwoCents = () => {
 
   return (
     <>
-      <h3>hello</h3>
       <NavBar hasUser={hasUser} clearUser={clearUser} />
       <ApplicationViews hasUser={hasUser} setUser={setUser}/>
     </>

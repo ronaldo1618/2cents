@@ -1,20 +1,20 @@
 {
   "finances": [
     {
-      "name": "side job",
-      "amount": 400,
+      "name": "gas bill",
+      "amount": -123.12,
       "date": "2020-06-11",
       "userId": 1,
-      "billOrNot": false,
+      "bill": true,
       "totalFinanceId": 1,
       "id": 1
     },
     {
-      "name": "credit card bill #1",
-      "amount": -122.73,
-      "date": "2020-06-15",
+      "name": "inceom",
+      "amount": 234.2,
+      "date": "2020-06-09",
       "userId": 1,
-      "billOrNot": true,
+      "bill": false,
       "totalFinanceId": 1,
       "id": 2
     }
@@ -36,9 +36,9 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allIncome": 400,
-      "allBills": -122.73,
-      "amountLeft": 277.27,
+      "allBills": -123.12,
+      "allIncome": 234.2,
+      "amountLeft": 111.07999999999998,
       "id": 1
     }
   ]
