@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import Login from './auth/Login';
 import CryptoList from './cryptos/CryptoList';
+import ProjectList from './projects/ProjectList';
 import FinanceList from './finances/FinanceList';
 import Home from './home/Home';
 import FinanceForm from './finances/FinanceForm';
@@ -39,6 +40,14 @@ const ApplicationViews = props => {
       <Route exact path="/finances" render={props => {
         if(hasUser) {
           return <FinanceList userId={userId} {...props}/>
+        } else {
+          return <Redirect to="/Login"/>
+        }
+      }}
+      />
+      <Route exact path="/projects" render={props => {
+        if(hasUser) {
+          return <ProjectList userId={userId} {...props}/>
         } else {
           return <Redirect to="/Login"/>
         }

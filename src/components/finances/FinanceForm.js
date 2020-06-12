@@ -15,12 +15,34 @@ const FinanceForm = props => {
     expenseObj.bill = bill
     if(bill === true) expenseObj.amount *= -1
     if(bill === false) expenseObj.amount = Math.abs(expenseObj.amount)
+    let oldMonthInput = ''
+    let oldYearInput = ''
+    if(props.match.params.financeId) {
+      oldMonthInput = MonthNameMaker("month", oldExpenseObj.date)
+      oldYearInput = MonthNameMaker("year", oldExpenseObj.date)
+    }
     let monthInput = MonthNameMaker("month", expenseObj.date)
     let yearInput = MonthNameMaker("year", expenseObj.date)
+    if(props.match.params.financeId) {
+      if(oldMonthInput !== monthInput || oldYearInput !== yearInput) {
+        apiManager.getTotalFinancesWithAllFinances(oldYearInput, oldMonthInput, props.userId).then(results => {
+          let oldTotalFinance = results[0];
+          if(expenseObj.bill === true) {
+            oldTotalFinance.allBills -= expenseObj.amount;
+          } else {
+            oldTotalFinance.allIncome -= expenseObj.amount;
+          }
+          oldTotalFinance.amountLeft = oldTotalFinance.allIncome + oldTotalFinance.allBills
+          delete oldTotalFinance.finances
+          apiManager.put("totalFinances", oldTotalFinance).then(() => {
+          })
+        })
+      }
+    }
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(results => {
       const existingTotalFinance = results.find(result => result.year === yearInput && result.month === monthInput && result.userId === props.userId)
       if(!existingTotalFinance) {
-        // Create a new totalFinance and do all the calculations        
+        // Create a new totalFinance and do all the calculations 
         expenseObj.amount = fixNum(expenseObj.amount)
         const totalExpenseObj = {
           month: monthInput,
@@ -39,14 +61,14 @@ const FinanceForm = props => {
         apiManager.post("totalFinances", totalExpenseObj).then(newTotalFinance => {
           expenseObj.totalFinanceId = newTotalFinance.id
           if(props.match.params.financeId) {
-            apiManager.put('finances', expenseObj).then(props.history.push('/finances'))
+            apiManager.put('finances', expenseObj).then(() => props.history.push('/finances'))
           } else {
-            apiManager.post("finances", expenseObj).then(props.history.push('/finances'))
+            apiManager.post("finances", expenseObj).then(() => props.history.push('/finances'))
           }
         })
       } else {
         // Update existing totalFinance and do all the calculations
-        if(props.match.params.financeId) {
+        if(props.match.params.financeId && monthInput === oldMonthInput && yearInput === oldYearInput) {
           if(oldExpenseObj.bill === true) {
             if(expenseObj.bill === true && oldExpenseObj.amount !== expenseObj.amount) {
               existingTotalFinance.allBills -= oldExpenseObj.amount
@@ -68,19 +90,17 @@ const FinanceForm = props => {
             }
           }
         }
-        if(expenseObj.amount < 0 && !props.match.params.financeId) existingTotalFinance.allBills += expenseObj.amount
-        if(expenseObj.amount > 0 && !props.match.params.financeId) existingTotalFinance.allIncome += expenseObj.amount
-        if(oldExpenseObj.amount !== expenseObj.amount) {
-          existingTotalFinance.amountLeft = existingTotalFinance.allIncome + existingTotalFinance.allBills
-        }
+        if(expenseObj.amount < 0 && monthInput !== oldMonthInput) existingTotalFinance.allBills += expenseObj.amount
+        if(expenseObj.amount > 0 && monthInput !== oldMonthInput) existingTotalFinance.allIncome += expenseObj.amount
+        if(oldExpenseObj.amount !== expenseObj.amount || monthInput !== oldMonthInput) existingTotalFinance.amountLeft = existingTotalFinance.allIncome + existingTotalFinance.allBills
         delete existingTotalFinance.finances
         //  Create currency calculator so values dont go lower than two decimal places
         apiManager.put("totalFinances", existingTotalFinance).then(existingTotalFinance => {
           expenseObj.totalFinanceId = existingTotalFinance.id
           if(props.match.params.financeId) {
-            apiManager.put('finances', expenseObj).then(props.history.push('/finances'))
+            apiManager.put('finances', expenseObj).then(() => props.history.push('/finances'))
           } else {
-            apiManager.post("finances", expenseObj).then(props.history.push('/finances'))
+            apiManager.post("finances", expenseObj).then(() => props.history.push('/finances'))
           }
         })
       }
