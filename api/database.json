@@ -1,0 +1,45 @@
+{
+  "finances": [
+    {
+      "id": 2,
+      "name": "income",
+      "amount": 20,
+      "date": "2020-06-10",
+      "totalFinanceId": 1,
+      "bill": false,
+      "userId": 1
+    },
+    {
+      "id": 3,
+      "name": "bill #2",
+      "amount": -20,
+      "date": "2020-06-11",
+      "totalFinanceId": 1,
+      "bill": true,
+      "userId": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "rolankford@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": 23,
+      "email": "rol@gmail.com",
+      "password": "word"
+    }
+  ],
+  "totalFinances": [
+    {
+      "month": "June",
+      "year": "2020",
+      "userId": 1,
+      "allBills": -20,
+      "allIncome": 20,
+      "amountLeft": 0,
+      "id": 1
+    }
+  ]
+}
