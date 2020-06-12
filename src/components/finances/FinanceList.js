@@ -2,39 +2,55 @@ import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import './FinanceList.css'
 import FinanceCard from './FinanceCard';
-import { fixNum } from '../../modules/helpers';
+import { fixNum, MonthNameMaker } from '../../modules/helpers';
+import { Button } from 'react-bootstrap'
 
 const FinanceList = props => {
   const [finances, setFinances] = useState([]);
+  const [totalFinance, setTotalFinance] = useState({});
 
-  const getFinances = () => {
-    return apiManager.getByUserId("finances", props.userId).then(setFinances);
-  };
+  const getTotalFinance = (monthInput, yearInput) => {
+    return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
+      if(totalFinance === '') return
+      setTotalFinance(totalFinance[0])
+      setFinances(totalFinance[0].finances)
+    })
+  }
 
   useEffect(() => {
-    getFinances()
+    let date = new Date().toISOString()
+    const monthInput = MonthNameMaker("month", date)
+    const yearInput = MonthNameMaker("year", date)
+    getTotalFinance(monthInput, yearInput)
   }, []);
 
   const deleteFinance = obj => {
-    console.log(obj)
-    apiManager.get('totalFinances', obj.totalFinanceId).then(totalFinance => {
+    apiManager.getById('totalFinances', obj.totalFinanceId).then(totalFinance => {
       if(obj.bill) {
         console.log(totalFinance)
-        totalFinance[0].allBills = fixNum(totalFinance[0].allBills -= obj.amount)
+        totalFinance.allBills = fixNum(totalFinance.allBills -= obj.amount)
       } else {
-        totalFinance[0].allIncome = fixNum(totalFinance[0].allIncome -= obj.amount)
+        totalFinance.allIncome = fixNum(totalFinance.allIncome -= obj.amount)
       }
-      totalFinance[0].amountLeft = fixNum(totalFinance[0].amountLeft -= obj.amount)
-      apiManager.put("totalFinances", totalFinance[0])
+      totalFinance.amountLeft = totalFinance.amountLeft - obj.amount
+      apiManager.put("totalFinances", totalFinance)
     }).then(() => {
-      apiManager.delete("finances", obj.id).then(getFinances)
+      apiManager.delete("finances", obj.id).then(() => {
+        getTotalFinance(totalFinance.month, totalFinance.year)
+        props.history.push('/finances')
+      })
     })
   }
 
   return (
     <>
       <section className="section-content">
-        <button type="button" className="btn" onClick={() => {props.history.push("./finances/form")}}>New Entry</button>
+        <div>
+          <h3>Amount left to spend this month {totalFinance.amountLeft}</h3>
+          <p>Total amount spent on bills this month {totalFinance.allBills}</p>
+          <p>Total amount of income this month {totalFinance.allIncome}</p>
+        </div>
+        <Button type="button" className="btn" onClick={() => {props.history.push("./finances/form")}}>New Entry</Button>
       </section>
       <div>
         {finances.map(finance => <FinanceCard key={finance.id} financeObj={finance} deleteFinance={deleteFinance} objURL="finances" {...props}/>)}
