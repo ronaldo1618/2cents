@@ -6,20 +6,16 @@ const Home = props => {
   // const [finances, setFinances] = useState([]);
   const [totalFinance, setTotalFinance] = useState({});
 
-  const getTotalFinance = (monthInput, yearInput) => {
-    return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
-      if(totalFinance === '') return
-      setTotalFinance(totalFinance[0])
-      // setFinances(totalFinance[0].finances)
-    })
-  }
-
   useEffect(() => {
     let date = new Date().toISOString()
     const monthInput = MonthNameMaker("month", date)
     const yearInput = MonthNameMaker("year", date)
-    getTotalFinance(monthInput, yearInput)
-  }, []);  
+    apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
+      if(totalFinance === '') return
+      setTotalFinance(totalFinance[0])
+      // setFinances(totalFinance[0].finances)
+    })
+  }, [props.userId]);  
 
   return (
     <>

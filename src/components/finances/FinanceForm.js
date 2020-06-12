@@ -133,7 +133,7 @@ const FinanceForm = props => {
         setOldExpenseObj(obj)
         setExpenseObj(obj)
       })
-  }}, [props.match.params.financeId])
+  }},[props.match.params.financeId])
 
   return (
     <Container className="d-flex justify-content-center">
