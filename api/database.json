@@ -19,13 +19,22 @@
       "id": 2
     },
     {
+      "id": 3,
       "name": "Side job",
       "amount": 50,
-      "totalFinanceId": 1,
       "date": "2020-06-18",
+      "totalFinanceId": 1,
+      "bill": false,
+      "userId": 1
+    },
+    {
+      "name": "side job",
+      "amount": 50,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
       "bill": false,
       "userId": 1,
-      "id": 3
+      "id": 4
     }
   ],
   "users": [
@@ -46,9 +55,20 @@
       "year": "2020",
       "userId": 1,
       "allBills": -50,
-      "allIncome": 100,
-      "amountLeft": 50,
+      "allIncome": 150,
+      "amountLeft": 100,
       "id": 1
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "New Car",
+      "startDate": "2020-06-10",
+      "completionDate": "2020-07-10",
+      "goalAmount": 300,
+      "amountIn": 1500
     }
   ]
 }

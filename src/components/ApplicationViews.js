@@ -6,6 +6,7 @@ import ProjectList from './projects/ProjectList';
 import FinanceList from './finances/FinanceList';
 import Home from './home/Home';
 import FinanceForm from './finances/FinanceForm';
+import ProjectForm from './projects/ProjectForm';
 
 const ApplicationViews = props => {
   const hasUser = props.hasUser;
@@ -61,9 +62,25 @@ const ApplicationViews = props => {
         }
       }}
       />
+      <Route exact path="/projects/form" render={props => {
+        if(hasUser) {
+          return <ProjectForm userId={userId} {...props}/>
+        } else {
+          return <Redirect to="login"/>
+        }
+      }}
+      />
       <Route exact path="/finances/form/:financeId(\d+)" render={props => {
         if(hasUser) {
           return <FinanceForm userId={userId} {...props}/>
+        } else {
+          return <Redirect to="/Login"/>
+        }
+      }}
+      />
+      <Route exact path="/projects/form/:projectId(\d+)" render={props => {
+        if(hasUser) {
+          return <ProjectForm userId={userId} {...props}/>
         } else {
           return <Redirect to="/Login"/>
         }
