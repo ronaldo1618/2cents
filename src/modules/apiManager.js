@@ -35,5 +35,8 @@ export default {
   },
   getTotalFinancesWithAllFinances(year, month, userId) {
     return fetch(`${remoteURL}/totalFinances/?userId=${userId}&month=${month}&year=${year}&_embed=finances`).then(result => result.json())
+  },
+  getTotalFinances(id) {
+    return fetch(`${remoteURL}/totalFinances/${id}?_embed=finances`).then(result => result.json())
   }
 }
