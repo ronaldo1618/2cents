@@ -26,6 +26,24 @@
       "totalFinanceId": 1,
       "bill": false,
       "userId": 1
+    },
+    {
+      "name": "College Fund Contribution",
+      "amount": -50,
+      "date": "2020-06-13",
+      "bill": true,
+      "userId": 1,
+      "totalFinanceId": 1,
+      "id": 4
+    },
+    {
+      "name": "College Fund Contribution",
+      "amount": -600,
+      "date": "2020-06-13",
+      "bill": true,
+      "userId": 1,
+      "totalFinanceId": 1,
+      "id": 5
     }
   ],
   "users": [
@@ -45,21 +63,30 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -50,
+      "allBills": -700,
       "allIncome": 100,
-      "amountLeft": 50,
+      "amountLeft": -600,
       "id": 1
     }
   ],
   "projects": [
     {
       "id": 1,
-      "userId": 1,
       "name": "New Car",
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
-      "goalAmount": 300,
-      "amountIn": 1500
+      "goalAmount": 3000,
+      "amountIn": 1850,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "name": "College Fund",
+      "startDate": "2020-06-12",
+      "completionDate": "2020-07-10",
+      "goalAmount": 5000,
+      "amountIn": 3600,
+      "userId": 1
     }
   ]
 }

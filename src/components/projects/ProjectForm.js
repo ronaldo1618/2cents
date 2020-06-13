@@ -6,7 +6,7 @@ const ProjectForm = props => {
   const [project, setProject] = useState({name: "", startDate: "", completionDate: "", goalAmount: 0, amountIn: 0})
 
   const handleChange = e => {
-    const stateToChange = {...project};
+    const stateToChange = { ...project };
     stateToChange[e.target.id] = e.target.value;
     setProject(stateToChange);
   }
@@ -14,17 +14,32 @@ const ProjectForm = props => {
   useEffect(() => {
     if(props.match.params.projectId) {
       apiManager.getById('projects', props.match.params.projectId).then(obj => {
+        console.log(obj)
         setProject(obj)
       })
     }
   },[props.match.params.projectId])
 
-  const editProject = () => {
-
+  const editProject = e => {
+    e.preventDefault();
+    const editedProject = {
+      id: props.match.params.projectId,
+      name: project.name,
+      startDate: project.startDate,
+      completionDate: project.completionDate,
+      goalAmount: parseFloat(project.goalAmount),
+      amountIn: parseFloat(project.amountIn),
+      userId: props.userId
+    }
+    apiManager.put('projects', editedProject).then(() => props.history.push("/projects"))
   }
 
-  const addToTotalAmount = () => {
-
+  const createNewProject = e => {
+    e.preventDefault();
+    // add catch clauses
+    project.goalAmount = parseFloat(project.goalAmount)
+    project.amountIn = parseFloat(project.amountIn)
+    apiManager.post('projects', project).then(() => props.history.push("/projects"))
   }
 
   return (
@@ -36,20 +51,20 @@ const ProjectForm = props => {
             <Form.Control type="text" id="name" required onChange={handleChange} placeholder="College Fund" value={project.name}/>
           </Form.Group>
           <Form.Group>
-              <Form.Label htmlFor="start-date">Start Date</Form.Label>
-              <input type="date" id="start-date" required onChange={handleChange} value={project.startDate}/>
+              <Form.Label htmlFor="startDate">Start Date</Form.Label>
+              <input type="date" id="startDate" required onChange={handleChange} value={project.startDate}/>
           </Form.Group>
           <Form.Group>
-              <Form.Label htmlFor="completion-date">Complete Date</Form.Label>
-              <input type="date" id="complete-date" required onChange={handleChange} value={project.completionDate}/>
+              <Form.Label htmlFor="completionDate">Complete Date</Form.Label>
+              <input type="date" id="completionDate" required onChange={handleChange} value={project.completionDate}/>
           </Form.Group>
           <Form.Group>
-            <Form.Label htmlFor="goal-amount">Goal Amount</Form.Label>
+            <Form.Label htmlFor="goalAmount">Goal Amount</Form.Label>
             <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text>$</InputGroup.Text>
               </InputGroup.Prepend>
-            <Form.Control type="number" id="goal-amount" required onChange={handleChange} placeholder="350" value={Math.abs(project.goalAmount).toString()}/>
+            <Form.Control type="number" id="goalAmount" required onChange={handleChange} placeholder="350" value={Math.abs(project.goalAmount).toString()}/>
             </InputGroup>
           </Form.Group>
           <Form.Group>
@@ -65,7 +80,7 @@ const ProjectForm = props => {
           props.match.params.projectId ?
           <Button type="button" onClick={editProject}>Submit</Button>
           :
-          <Button type="button" onClick={e => addToTotalAmount(e, project)}>Submit</Button>
+          <Button type="button" onClick={createNewProject}>Submit</Button>
           }
         </Form>
       </Jumbotron>
