@@ -21,7 +21,8 @@ const FinanceList = props => {
   }, [props.userId]);
 
   const deleteFinance = obj => {
-    apiManager.getById('totalFinances', obj.totalFinanceId).then(totalFinance => {
+    apiManager.getTotalFinances(obj.totalFinanceId).then(totalFinance => {
+      console.log(totalFinance)
       if(obj.bill) {
         console.log(totalFinance)
         totalFinance.allBills = fixNum(totalFinance.allBills -= obj.amount)
@@ -29,13 +30,11 @@ const FinanceList = props => {
         totalFinance.allIncome = fixNum(totalFinance.allIncome -= obj.amount)
       }
       totalFinance.amountLeft = totalFinance.amountLeft - obj.amount
+      setFinances(totalFinance.finances)
+      delete totalFinance.finances
+      setTotalFinance(totalFinance)
       apiManager.put("totalFinances", totalFinance)
-    }).then(() => {
-      apiManager.delete("finances", obj.id).then(() => {
-        // getTotalFinance(totalFinance.month, totalFinance.year)
-        props.history.push('/finances')
-      })
-    })
+    }).then(() => apiManager.delete("finances", obj.id))
   }
 
   return (
