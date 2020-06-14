@@ -8,53 +8,53 @@ const CryptoList = props => {
   const [cryptosArr, setCryptosArr] = useState([]);
   const [searchedCrypto, setSearchedCrypto] = useState({});
   const [isSearched, setIsSearched] = useState(false);
+  let cryptos = []
   
   useEffect(() => {
-    apiManager.get('cryptos', props.userId).then(userCryptos => {
-      if(!userCryptos) return alert('nothing was found')
-      // may not need the code above or below this
-      // getCryptos(userCryptos)
-      let cryptos = []
-      console.log("hello", userCryptos)
-      for (let i = 0; i < userCryptos.length; i++) {
-        const crypto = userCryptos[i];
-        console.log(crypto)
-        cryptos.push(crypto)
-        console.log(cryptos)
-      }
-      console.log(cryptos)
-      console.log(cryptosArr)
-      return setCryptosArr(cryptos)
-    })
-  }, [props.userId])
-
-  const getCryptos = (userCryptos) => {
-    
-  }
+    settingCryptoArr()
+  }, [])
 
   const search = e => {
     e.preventDefault();
     if(crypto === '') return alert('no input was found');
     apiManager.searchForCrypto(crypto).then(cryptoData => {
-      console.log(cryptoData[0])
       if(!cryptoData[0]) return alert('nothing was found')
       setSearchedCrypto(cryptoData[0])
       setIsSearched(!isSearched)
     })
   }
 
+  const settingCryptoArr = () => {
+    console.log("accessing settingCryptoArr")
+    apiManager.get('cryptos', props.userId).then(userCryptos => {
+      for (let i = 0; i < userCryptos.length; i++) {
+        const crypto = userCryptos[i].name;
+        cryptos.push(crypto)
+      }
+      let cryptoString = cryptos.join(',')
+      apiManager.searchForCrypto(cryptoString).then(setCryptosArr)
+    })
+  }
+
   const saveCrypto = cryptoId => {
-    const savedCrpyto = {
+    const savedCrypto = {
       name: cryptoId,
       userId: props.userId,
     }
-    apiManager.post('cryptos', savedCrpyto).then(() => {
-      apiManager.get('cryptos', props.userId).then(getCryptos)
+    apiManager.post('cryptos', savedCrypto).then(() => {
+      apiManager.get('cryptos', props.userId).then(userCryptos => {
+        setIsSearched(!isSearched)
+        settingCryptoArr()
+      })
     })
   }
 
   const deleteCrypto = id => {
-
+    console.log(id)
+    apiManager.getByUserIdAndName('cryptos', id, props.userId).then(crypto => {
+      console.log(crypto)
+      apiManager.delete('cryptos', crypto[0].id).then(settingCryptoArr)
+    })
   }
 
   return (
@@ -82,10 +82,8 @@ const CryptoList = props => {
           <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
         </Container> : null
       }
-      <div>
-        {cryptosArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} deleteCrypto={deleteCrypto} {...props}/>)
+      {cryptosArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} deleteCrypto={deleteCrypto} {...props}/>)
         }
-      </div>
     </Container>
   )
 }

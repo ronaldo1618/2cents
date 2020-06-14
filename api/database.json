@@ -99,6 +99,11 @@
       "name": "ETH",
       "userId": 1,
       "id": 3
+    },
+    {
+      "name": "XRP",
+      "userId": 1,
+      "id": 4
     }
   ]
 }
