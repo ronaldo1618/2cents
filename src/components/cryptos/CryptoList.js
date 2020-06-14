@@ -63,7 +63,9 @@ const CryptoList = props => {
         <Form>
           <Form.Group>
             <Form.Label htmlFor="search">Crypto Name</Form.Label>
-            <Form.Control type="text" id="name" required onChange={e => setCrypto(e.target.value)} placeholder="BTC"/>
+            <Form.Control type="text" id="name" required onChange={e => {
+              setIsSearched(false)
+              setCrypto(e.target.value)}} placeholder="BTC"/>
           </Form.Group>
           <Button type="button" onClick={search}>Search</Button>
         </Form>

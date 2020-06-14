@@ -105,5 +105,17 @@
       "userId": 1,
       "id": 4
     }
+  ],
+  "stocks": [
+    {
+      "name": "TSLA",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "name": "AAPL",
+      "userId": 1,
+      "id": 2
+    }
   ]
 }
