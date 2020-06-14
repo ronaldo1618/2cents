@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import { MonthNameMaker } from '../../modules/helpers';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import './Home.css'
+
 
 const Home = props => {
-  // const [finances, setFinances] = useState([]);
   const [totalFinance, setTotalFinance] = useState({});
   const [projects, setProjects] = useState([]);
 
@@ -17,7 +19,7 @@ const Home = props => {
       // setFinances(totalFinance[0].finances)
     })
     apiManager.get('projects', props.userId).then(setProjects)
-  }, [props.userId]);  
+  }, [props.userId]); 
 
   return (
     <>
@@ -30,10 +32,15 @@ const Home = props => {
       <div>
       {
         projects.map(project => 
-        <div key={project.id}>
+        <div className="project-home" key={project.id}>
           <h1>{project.name}</h1>
-          {/* Show a percentage graph here */}
-          <h3>{(project.amountIn/project.goalAmount * 100).toFixed(1)}%</h3>
+          <CircularProgressbar 
+            value={(project.amountIn/project.goalAmount * 100).toFixed(1)} 
+            text={`${(project.amountIn/project.goalAmount * 100).toFixed(0)}%`}
+            styles={buildStyles({
+              pathColor: `#4BB187`,
+              textColor: '#4BB187'
+            })} />
         </div>)
       }
       </div>

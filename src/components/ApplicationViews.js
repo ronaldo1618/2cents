@@ -7,6 +7,7 @@ import FinanceList from './finances/FinanceList';
 import Home from './home/Home';
 import FinanceForm from './finances/FinanceForm';
 import ProjectForm from './projects/ProjectForm';
+import StockList from './stocks/StockList';
 
 const ApplicationViews = props => {
   const hasUser = props.hasUser;
@@ -30,9 +31,17 @@ const ApplicationViews = props => {
         }
       }}
       />
-      <Route path="/crypto" render={props => {
+      <Route path="/cryptos" render={props => {
         if(hasUser) {
-          return <CryptoList hasUser={hasUser} userId={userId} {...props}/>
+          return <CryptoList objURL={'cryptos'} hasUser={hasUser} userId={userId} {...props}/>
+        } else {
+          return <Redirect to="/Login"/>
+        }
+      }}
+      />
+      <Route path="/stocks" render={props => {
+        if(hasUser) {
+          return <StockList objURL={'stocks'} hasUser={hasUser} userId={userId} {...props}/>
         } else {
           return <Redirect to="/Login"/>
         }

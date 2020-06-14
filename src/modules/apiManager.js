@@ -1,4 +1,7 @@
+import key from './APIkeys';
 const remoteURL = 'http://localhost:5002'
+const nomicsKey = key.nomicsKey
+const alphaVantageKey = key.alphaVantageKey
 
 export default {
   get(collection) {
@@ -9,6 +12,9 @@ export default {
   },
   getByUserId(collection, id) {
     return fetch(`${remoteURL}/${collection}/?userId=${id}`).then(result => result.json());
+  },
+  getByUserIdAndName(collection, name, userId) {
+    return fetch(`${remoteURL}/${collection}/?userId=${userId}&name=${name}`).then(result => result.json());
   },
   post(collection, obj) {
     return fetch(`${remoteURL}/${collection}`, {
@@ -31,12 +37,24 @@ export default {
   delete(collection, id) {
     return fetch(`${remoteURL}/${collection}/${id}`, {
       method: 'DELETE'
-    }).then(result => result.json());
+    }).then(result => result.json())
+  },
+  deleteByName(collection, name, userId) {
+    console.log(name, userId)
+    return fetch(`${remoteURL}/${collection}/?userId=${userId}&name=${name}`, {
+      method: 'DELETE'
+    }).then(result => result.json())
   },
   getTotalFinancesWithAllFinances(year, month, userId) {
     return fetch(`${remoteURL}/totalFinances/?userId=${userId}&month=${month}&year=${year}&_embed=finances`).then(result => result.json())
   },
   getTotalFinances(id) {
     return fetch(`${remoteURL}/totalFinances/${id}?_embed=finances`).then(result => result.json())
+  },
+  searchForCrypto(name) {
+    return fetch(`https://api.nomics.com/v1/currencies/ticker?key=${nomicsKey}&ids=${name}&interval=1d&convert=USD`).then(result => result.json())
+  },
+  searchForStock(name) {
+    return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${name}&apikey=${alphaVantageKey}`).then(result => result.json());
   }
 }

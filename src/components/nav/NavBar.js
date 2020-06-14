@@ -20,7 +20,12 @@ const NavBar = props => {
         </li>
         {props.hasUser
         ? <li>
-            <Link className="nav-link" to="/crypto"> Crypto </Link>
+            <Link className="nav-link" to="/cryptos"> Cryptos </Link>
+          </li>
+        : null}
+        {props.hasUser
+        ? <li>
+            <Link className="nav-link" to="/stocks"> Stocks </Link>
           </li>
         : null}
         {props.hasUser

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-circular-progressbar/dist/styles.css';
 import TwoCents from './components/TwoCents';
 import './index.css';
 
