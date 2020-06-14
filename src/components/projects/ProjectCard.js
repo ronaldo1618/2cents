@@ -34,6 +34,7 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
             </InputGroup>
           </Form.Group>
           </Form>
+          <Button variant="outline-danger" type="button" onClick={() => setIsOpen(false)}>Cancel</Button>
           <Button variant="primary" type="button" onClick={() => {
             setIsOpen(false)
             addAmountIn(amountIn, projectObj)}}>Add Contribution</Button>

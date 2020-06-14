@@ -30,7 +30,7 @@ const ApplicationViews = props => {
         }
       }}
       />
-      <Route path="/crypto" render={props => {
+      <Route path="/cryptos" render={props => {
         if(hasUser) {
           return <CryptoList hasUser={hasUser} userId={userId} {...props}/>
         } else {

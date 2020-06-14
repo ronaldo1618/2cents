@@ -88,5 +88,17 @@
       "amountIn": 3600,
       "userId": 1
     }
+  ],
+  "cryptos": [
+    {
+      "name": "BTC",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "name": "BTC",
+      "userId": 1,
+      "id": 3
+    }
   ]
 }
