@@ -91,19 +91,19 @@
   ],
   "cryptos": [
     {
-      "name": "BTC",
-      "userId": 1,
-      "id": 2
-    },
-    {
       "name": "ETH",
       "userId": 1,
       "id": 3
     },
     {
+      "name": "BTC",
+      "userId": 1,
+      "id": 5
+    },
+    {
       "name": "XRP",
       "userId": 1,
-      "id": 4
+      "id": 6
     }
   ],
   "stocks": [
@@ -111,6 +111,11 @@
       "name": "TSLA",
       "userId": 1,
       "id": 1
+    },
+    {
+      "name": "AAPL",
+      "userId": 1,
+      "id": 2
     }
   ]
 }

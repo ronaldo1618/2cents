@@ -1,6 +1,7 @@
 import key from './APIkeys';
 const remoteURL = 'http://localhost:5002'
 const nomicsKey = key.nomicsKey
+const finnhubKey = key.finnhubKey
 const alphaVantageKey = key.alphaVantageKey
 
 export default {
@@ -54,7 +55,13 @@ export default {
   searchForCrypto(name) {
     return fetch(`https://api.nomics.com/v1/currencies/ticker?key=${nomicsKey}&ids=${name}&interval=1d&convert=USD`).then(result => result.json())
   },
+  // searchForStock(name) {
+  //   return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${name}&apikey=${alphaVantageKey}`).then(result => result.json());
+  // },
+  searchForStockProfile(name) {
+    return fetch(`https://finnhub.io/api/v1/stock/profile2?symbol=${name}&token=${finnhubKey}`).then(result => result.json())
+  },
   searchForStock(name) {
-    return fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${name}&apikey=${alphaVantageKey}`).then(result => result.json());
+    return fetch(`https://finnhub.io/api/v1/quote?symbol=${name}&token=${finnhubKey}`).then(result => result.json())
   }
 }
