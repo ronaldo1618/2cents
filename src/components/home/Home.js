@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
+import StockCard from '../stocks&cryptos/StockCard';
+import CryptoCard from '../stocks&cryptos/CryptoCard';
 import { MonthNameMaker } from '../../modules/helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import './Home.css'
@@ -8,6 +10,11 @@ import './Home.css'
 const Home = props => {
   const [totalFinance, setTotalFinance] = useState({});
   const [projects, setProjects] = useState([]);
+  const [cryptoArr, setCryptoArr] = useState([]);
+  const [stockArr, setStockArr] = useState([]);
+  let cryptoNamesArr = []
+  let stockNamesArr = []
+  let objData = []
 
   useEffect(() => {
     let date = new Date().toISOString()
@@ -16,16 +23,63 @@ const Home = props => {
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
       if(totalFinance === '') return
       setTotalFinance(totalFinance[0])
-      // setFinances(totalFinance[0].finances)
     })
     apiManager.get('projects', props.userId).then(setProjects)
-    apiManager.getByHomePage('stocks', props.userId).then(stocks => {
-      console.log(stocks)
+    settingStockArr()
+    settingCryptoArr()
+  }, [props.userId]);
+
+  const settingStockArr = () => {
+    apiManager.getByHomePage('stocks', props.userId).then(userObjs => {
+      for (let i = 0; i < userObjs.length; i++) {
+        const name = userObjs[i].name;
+        stockNamesArr.push(name)
+      }
+      getStocks(stockNamesArr).then(() => {
+        setStockArr(objData)
+      })
     })
-    apiManager.getByHomePage('cryptos', props.userId).then(cryptos => {
-      console.log(cryptos)
-    })
-  }, [props.userId]); 
+  }
+
+  const settingCryptoArr = () => {
+    apiManager.getByHomePage('cryptos', props.userId).then(userObjs => {
+      for (let i = 0; i < userObjs.length; i++) {
+        const name = userObjs[i].name;
+        cryptoNamesArr.push(name)
+      }
+      let nameString = cryptoNamesArr.join(',')
+      apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
+        getStocks(arrOfCryptos)
+        for (let i = 0; i < arrOfCryptos.length; i++) {
+          const crypto = arrOfCryptos[i];
+        }
+        setCryptoArr(arrOfCryptos)
+      })
+    }
+    )}
+
+  async function getStocks(namesArr) {
+    for (let i = 0; i < namesArr.length; i++) {
+      const name = namesArr[i];
+      try {
+        await apiManager.searchForStock(name).then(stockData => {
+          const stockObj = {
+            name: name,
+            price: stockData.c,
+            high: stockData.h,
+            low: stockData.l,
+            previousClose: stockData.pc,
+            difference: (stockData.c - stockData.pc).toFixed(2),
+            percentDifference: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
+          }
+          objData.push(stockObj)
+        })
+      }
+      catch (e) {
+        console.error(e.message);
+      }
+    }
+  }
 
   return (
     <>
@@ -49,6 +103,14 @@ const Home = props => {
             })} />
         </div>)
       }
+      </div>
+      <div>
+        <h2>Stocks</h2>
+        {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
+      </div>
+      <div>
+        <h2>Cryptos</h2>
+        {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
       </div>
     </>
   )
