@@ -9,6 +9,7 @@ const StockList = props => {
   const [arr, setArr] = useState([]);
   const [searchedObj, setSearchedObj] = useState({})
   const [isSearched, setIsSearched] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   let namesArr = []
   let objData = []
 
@@ -30,51 +31,61 @@ const StockList = props => {
     }
   }
 
-  const saveObj = objId => {
+  const saveObj = (e, objId) => {
+    e.preventDefault();
     const savedObj = {
       name: objId,
       userId: props.userId
     }
     apiManager.post(props.objURL, savedObj).then(() => {
-      apiManager.get(props.objURL.then(() => {
-          setIsSearched(!isSearched)
-          settingStrArr()
+        setIsSearched(!isSearched)
+      }).then(() => {
+        apiManager.get(props.objURL, props.userId).then(userObjs => {
+          settingStrArr(userObjs)
+        })
       })
-      )
-    })
   }
 
-  const settingStrArr = () => {
-    apiManager.get(props.objURL, props.userId).then(userObjs => {
-      for (let i = 0; i < userObjs.length; i++) {
-        const name = userObjs[i].name;
-        namesArr.push(name)
+  const settingStrArr = (userObjs) => {
+    for (let i = 0; i < userObjs.length; i++) {
+      const name = userObjs[i].name;
+      namesArr.push(name)
+    }
+    if(props.objURL === 'stocks') {
+      getStocks(namesArr).then(() => {
+        setArr(objData)
+        setIsDone(!isDone)
+      })
+    } else {
+      let nameString = namesArr.join(',')
+      apiManager.searchForCrypto(nameString).then(setArr)
+    }
+  }
+
+  async function getStocks(namesArr) {
+    for (let i = 0; i < namesArr.length; i++) {
+      const name = namesArr[i];
+      try {
+        await apiManager.searchForStock(name).then(obj => {
+          console.log("async function", obj)
+          objData.push(obj["Global Quote"])
+        })
       }
-      if(props.objURL === 'stocks') {
-        for (let i = 0; i < namesArr.length; i++) {
-          const name = namesArr[i];
-          apiManager.searchForStock(name).then(data => {
-            objData.push(data["Global Quote"])
-            console.log("data", data["Global Quote"])
-            console.log(objData, "objData now")
-          })
-        }
-        console.log("objData", objData)
-      } else {
-        let nameString = namesArr.join(',')
-        apiManager.searchForCrypto(nameString).then(setArr)
+      catch (e) {
+        console.error(e.message);
       }
-    })
+    }
   }
 
   useEffect(() => {
-    settingStrArr()
-  }, [])
+    apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+  }, [props.userId])
 
   const deleteObj = id  => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
-      console.log(obj)
-      // apiManager.delete(props.objURL, )
+      apiManager.delete(props.objURL, obj[0].id).then(() => {
+        apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+      })
     })
   }
 
@@ -102,7 +113,7 @@ const StockList = props => {
           <p>Low: ${searchedObj["04. low"]}</p>
           <p>Volume: ${searchedObj["06. volume"]}</p>
           <p>Prvious Close: ${searchedObj["08. previous close"]}</p>
-          <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Stock</Button>
+          <Button type="button" onClick={(e) => saveObj(e, searchedObj["01. symbol"])}>Save Stock</Button>
           <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
         </Container> 
         : null
@@ -127,11 +138,14 @@ const StockList = props => {
         {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} deleteCrypto={deleteObj} {...props}/>)
         }
         </>
-        :
+        : null
+      }
+      {
+        props.objURL === 'stocks' ?
         <>
-        {console.log("entered", objData)}
-        {objData.map(stock => <StockCard key={stock["01. symbol"]} searchedObj={stock} deleteObj={deleteObj} {...props}/>)}
+        {arr.map(stock => <StockCard key={stock["01. symbol"]} searchedObj={stock} deleteObj={deleteObj} {...props}/>)}
         </>
+        : null
       }
     </Container>
   )
