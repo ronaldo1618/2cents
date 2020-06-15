@@ -19,6 +19,12 @@ const Home = props => {
       // setFinances(totalFinance[0].finances)
     })
     apiManager.get('projects', props.userId).then(setProjects)
+    apiManager.getByHomePage('stocks', props.userId).then(stocks => {
+      console.log(stocks)
+    })
+    apiManager.getByHomePage('cryptos', props.userId).then(cryptos => {
+      console.log(cryptos)
+    })
   }, [props.userId]); 
 
   return (

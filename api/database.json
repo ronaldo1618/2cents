@@ -91,31 +91,30 @@
   ],
   "cryptos": [
     {
-      "name": "ETH",
-      "userId": 1,
-      "id": 3
-    },
-    {
       "name": "BTC",
       "userId": 1,
-      "id": 5
+      "id": 5,
+      "homePage": true
     },
     {
       "name": "XRP",
       "userId": 1,
-      "id": 6
+      "id": 6,
+      "homePage": true
     }
   ],
   "stocks": [
     {
-      "name": "TSLA",
-      "userId": 1,
-      "id": 1
-    },
-    {
       "name": "AAPL",
       "userId": 1,
-      "id": 2
+      "id": 2,
+      "homePage": true
+    },
+    {
+      "name": "TSLA",
+      "userId": 1,
+      "id": 3,
+      "homePage": false
     }
   ]
 }

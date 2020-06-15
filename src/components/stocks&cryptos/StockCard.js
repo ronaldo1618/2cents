@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 
-const StockCard = ({searchedObj, history, deleteObj}) => {
+const StockCard = ({searchedObj, history, deleteObj, saveToHomePage, unSaveFromHomePage}) => {
   return (
     <Card>
       <Card.Body>
@@ -11,6 +11,12 @@ const StockCard = ({searchedObj, history, deleteObj}) => {
         <Card.Text>Low: {searchedObj.low}</Card.Text>
         <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
         <Button type="button" onClick={() => deleteObj(searchedObj.name)}>Delete</Button>
+        {
+          searchedObj.homePage !== true ?
+          <Button type="button" onClick={() => saveToHomePage(searchedObj.name)}>Save To Home Page</Button>
+          :
+          <Button type="button" onClick={() => unSaveFromHomePage(searchedObj.name)}>Remove From Home Page</Button>
+        }
       </Card.Body>
     </Card>
   )

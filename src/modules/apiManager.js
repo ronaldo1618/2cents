@@ -63,5 +63,8 @@ export default {
   },
   searchForStock(name) {
     return fetch(`https://finnhub.io/api/v1/quote?symbol=${name}&token=${finnhubKey}`).then(result => result.json())
+  },
+  getByHomePage(collection, userId) {
+    return fetch(`${remoteURL}/${collection}/?userId=${userId}&homePage=true`).then(result => result.json());
   }
 }

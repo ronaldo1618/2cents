@@ -1,7 +1,6 @@
 import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import Login from './auth/Login';
-import CryptoList from './cryptos/CryptoList';
 import ProjectList from './projects/ProjectList';
 import FinanceList from './finances/FinanceList';
 import Home from './home/Home';

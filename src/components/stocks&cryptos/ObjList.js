@@ -12,6 +12,7 @@ const ObjList = props => {
   const [isDone, setIsDone] = useState(false);
   let namesArr = []
   let objData = []
+  let homePageValue = []
 
   const search = e => {
     e.preventDefault();
@@ -55,8 +56,10 @@ const ObjList = props => {
 
   const settingStrArr = (userObjs) => {
     for (let i = 0; i < userObjs.length; i++) {
+      const trueOrFalse = userObjs[i].homePage
       const name = userObjs[i].name;
       namesArr.push(name)
+      homePageValue.push(trueOrFalse)
     }
     if(props.objURL === 'stocks') {
       getStocks(namesArr).then(() => {
@@ -65,7 +68,14 @@ const ObjList = props => {
       })
     } else {
       let nameString = namesArr.join(',')
-      apiManager.searchForCrypto(nameString).then(setArr)
+      apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
+        getStocks(arrOfCryptos)
+        for (let i = 0; i < arrOfCryptos.length; i++) {
+          const crypto = arrOfCryptos[i];
+          crypto.homePage = homePageValue[i]
+        }
+        setArr(arrOfCryptos)
+      })
     }
   }
 
@@ -74,9 +84,9 @@ const ObjList = props => {
       const name = namesArr[i];
       try {
         await apiManager.searchForStock(name).then(stockData => {
-          
           const stockObj = {
             name: name,
+            homePage: homePageValue[i],
             price: stockData.c,
             high: stockData.h,
             low: stockData.l,
@@ -100,6 +110,31 @@ const ObjList = props => {
   const deleteObj = id  => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
       apiManager.delete(props.objURL, obj[0].id).then(() => {
+        apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+      })
+    })
+  }
+
+  const saveToHomePage = id => {
+    apiManager.getByUserId(props.objURL, props.userId).then(arrOfObjs => {
+      let trueArr = []
+      arrOfObjs.forEach(obj => {
+      if(obj.homePage === true) trueArr.push(obj.homePage)
+      });
+      apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
+        obj[0].homePage = true
+        apiManager.put(props.objURL, obj[0]).then(() => {
+          apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+        })
+      })
+      }
+    )
+  }
+
+  const unSaveFromHomePage = id => {
+    apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
+      obj[0].homePage = false
+      apiManager.put(props.objURL, obj[0]).then(obj => {
         apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
       })
     })
@@ -130,7 +165,7 @@ const ObjList = props => {
               <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
             </Card.Body>
           </Card>
-          <Button type="button" onClick={(e) => saveObj(e, str)}>Save Stock</Button>
+          <Button type="button" onClick={() => saveObj(str)}>Save Stock</Button>
           <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
         </Container> 
         : null
@@ -150,23 +185,9 @@ const ObjList = props => {
         </Container> : null
       }
       {
-        isSearched && props.objURL === 'cryptos' ?
-        <Container>
-          <h1>Name: {searchedObj.name} / {searchedObj.id}</h1>
-          <p>Market Cap:{searchedObj.market_cap}</p>
-          <p>Market Cap Change:{(searchedObj["1d"].market_cap_change_pct * 100).toFixed(2)}%</p>
-          <p>Volume: {searchedObj["1d"].volume}</p>
-          <p>Volume Change: {(searchedObj["1d"].volume_change_pct*100).toFixed(2)}%</p>
-          <p>Price: {searchedObj.price}</p>
-          <p>Price Change: {(searchedObj["1d"].price_change_pct * 100).toFixed(2)}%</p>
-          <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Stock</Button>
-          <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
-        </Container> : null
-      }
-      {
         props.objURL === 'cryptos' ?
         <>
-        {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} deleteCrypto={deleteObj} {...props}/>)
+        {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} homePage={crypto.homePage} deleteCrypto={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)
         }
         </>
         : null
@@ -174,7 +195,7 @@ const ObjList = props => {
       {
         props.objURL === 'stocks' ?
         <>
-        {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} {...props}/>)}
+        {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
         </>
         : null
       }
