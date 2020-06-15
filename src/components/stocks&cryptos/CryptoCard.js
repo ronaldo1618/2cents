@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 
-const CryptoCard = ({cryptoObj, history, deleteCrypto, savedCryptoId}) => {
+const CryptoCard = ({cryptoObj, deleteCrypto, homePage, saveToHomePage,unSaveFromHomePage}) => {
   return (
     <Card>
       <Card.Body>
@@ -12,7 +12,13 @@ const CryptoCard = ({cryptoObj, history, deleteCrypto, savedCryptoId}) => {
           <Card.Text>Volume Change: {(cryptoObj["1d"].volume_change_pct*100).toFixed(2)}%</Card.Text>
           <Card.Text>Price: {cryptoObj.price}</Card.Text>
           <Card.Text>Price Change: {(cryptoObj["1d"].price_change_pct * 100).toFixed(2)}%</Card.Text>
-          <Button onClick={() => deleteCrypto(cryptoObj.id)}>Delete</Button>
+          <Button type="button" onClick={() => deleteCrypto(cryptoObj.id)}>Delete</Button>
+          {
+            homePage !== true ?
+            <Button type="button" onClick={() => saveToHomePage(cryptoObj.id)}>Save To Home Page</Button>
+            :
+            <Button type="button" onClick={() => unSaveFromHomePage(cryptoObj.id)}>Remove From Home Page</Button>
+          }
       </Card.Body>
     </Card>
   )
