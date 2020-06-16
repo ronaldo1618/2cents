@@ -2,18 +2,29 @@ import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import ProjectCard from './ProjectCard';
 import { Button } from 'react-bootstrap';
+import { Bar, Radar } from 'react-chartjs-2';
 // import { MonthNameMaker } from '../../modules/helpers';
 
 const ProjectList = props => {
   const [projects, setProjects] = useState([]);
+  const toggle = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    apiManager.get('projects', props.userId).then(setProjects)
+    apiManager.getByUserId('projects', props.userId).then(projects => {
+      if(projects.length === 0) return
+      setProjects(projects)
+      combineAllProjects()
+    })
   },[props.userId])
 
   const deleteProject = obj => {
     apiManager.delete('projects', obj.id).then(() => {
-      apiManager.get('projects', props.userId).then(projects => setProjects(projects))
+      apiManager.getByUserId('projects', props.userId).then(projects => {
+        if(projects.length === 0) return
+        combineAllProjects()
+        setProjects(projects)
+      })
     })
   }
 
@@ -41,15 +52,53 @@ const ProjectList = props => {
     //     }
     //     apiManager.post('finances', contribution)
         apiManager.put('projects', obj).then(() => {
-          apiManager.get('projects', obj.userId).then(projects => setProjects(projects))
+          apiManager.getByUserId('projects', obj.userId).then(projects => {
+            if(projects.length === 0) return
+            combineAllProjects()
+            setProjects(projects)})
         })
     //   })
     // })
   }
 
+  const [chartData, setChartData] = useState({})
+
+  const combineAllProjects = () => {
+    apiManager.getByUserId('projects', props.userId).then(projects => {
+      if(projects.length === 0) return
+      let names = projects.map(project => project.name)
+      let values = projects.map(project => project.amountIn)
+      setChartData({
+        labels: names,
+        datasets: [
+          {
+            label: 'Project Contributions',
+            data: values,
+            backgroundColor: [
+              'rgba(195, 255, 240, 2)'
+            ],
+            borderWidth: 4
+          }
+        ]
+      })
+    })
+  }
+
   return (
     <>
       <Button type="button" className="btn" onClick={() => {props.history.push("./projects/form")}}>New Project</Button>
+      {
+        !isOpen ?
+      <div>
+        <Button type="button" className="btn" onClick={toggle}>Show Bar Graph</Button>
+        <Radar data={chartData}/>
+      </div>
+      :
+      <div>
+        <Button type="button" className="btn" onClick={toggle}>Show Line Graph</Button>
+        <Bar data={chartData}/>
+      </div>
+      }
       <div>
       {
         projects.map(project => <ProjectCard key={project.id} projectObj={project} deleteProject={deleteProject} addAmountIn={addAmountIn} {...props}/>)

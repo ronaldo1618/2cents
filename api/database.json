@@ -19,30 +19,21 @@
       "id": 2
     },
     {
-      "id": 3,
-      "name": "Side job",
-      "amount": 50,
-      "date": "2020-06-18",
+      "name": "Gas Bill #2",
+      "amount": -52.32,
       "totalFinanceId": 1,
+      "date": "2020-06-16",
+      "bill": true,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "name": "income",
+      "amount": 324.32,
+      "totalFinanceId": 2,
+      "date": "2020-06-16",
       "bill": false,
-      "userId": 1
-    },
-    {
-      "name": "College Fund Contribution",
-      "amount": -50,
-      "date": "2020-06-13",
-      "bill": true,
-      "userId": 1,
-      "totalFinanceId": 1,
-      "id": 4
-    },
-    {
-      "name": "College Fund Contribution",
-      "amount": -600,
-      "date": "2020-06-13",
-      "bill": true,
-      "userId": 1,
-      "totalFinanceId": 1,
+      "userId": 24,
       "id": 5
     }
   ],
@@ -56,6 +47,11 @@
       "id": 23,
       "email": "rol@gmail.com",
       "password": "word"
+    },
+    {
+      "email": "ron@gmail.com",
+      "password": "word",
+      "id": 24
     }
   ],
   "totalFinances": [
@@ -63,10 +59,19 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -700,
-      "allIncome": 100,
-      "amountLeft": -600,
+      "allBills": -102.32,
+      "allIncome": 50,
+      "amountLeft": -52.31999999999999,
       "id": 1
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "userId": 24,
+      "allBills": 0,
+      "allIncome": 324.32,
+      "amountLeft": 324.32,
+      "id": 2
     }
   ],
   "projects": [
@@ -76,7 +81,7 @@
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
       "goalAmount": 3000,
-      "amountIn": 1850,
+      "amountIn": 1600,
       "userId": 1
     },
     {
@@ -87,6 +92,24 @@
       "goalAmount": 5000,
       "amountIn": 3600,
       "userId": 1
+    },
+    {
+      "id": 3,
+      "name": "New Tools",
+      "startDate": "2020-06-18",
+      "completionDate": "2020-07-03",
+      "goalAmount": 3000,
+      "amountIn": 450,
+      "userId": 24
+    },
+    {
+      "name": "New Laptop",
+      "startDate": "2020-06-18",
+      "completionDate": "2020-07-09",
+      "goalAmount": 3200,
+      "amountIn": 800,
+      "userId": 1,
+      "id": 4
     }
   ],
   "cryptos": [
@@ -101,6 +124,12 @@
       "userId": 1,
       "id": 6,
       "homePage": true
+    },
+    {
+      "name": "BTC",
+      "userId": 24,
+      "id": 7,
+      "homePage": true
     }
   ],
   "stocks": [
@@ -114,6 +143,12 @@
       "name": "TSLA",
       "userId": 1,
       "id": 3,
+      "homePage": true
+    },
+    {
+      "name": "TSLA",
+      "userId": 24,
+      "id": 4,
       "homePage": true
     }
   ]
