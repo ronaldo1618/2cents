@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import apiManager from '../../modules/apiManager';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Jumbotron } from 'react-bootstrap';
+import './Login.css'
 
 const Login = props => {
   const [credentials, setCredentials] = useState();
@@ -47,46 +48,51 @@ const Login = props => {
   }
 
   return (
-    <Container>
+    <Container className="w-30 p-5 login-container">
+      <Jumbotron className="login-jumbotron">
       {
         registering ? 
         (
         <Form onSubmit={e => handleLoginAndRegister(e, 'register')}>
           <fieldset>
-            <h3>Register</h3>
-            <div>
-              <input onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required/>
-              <label htmlFor="inputEmail">Email address</label>
-
-              <input onChange={handleFieldChange} type="password" id="password" required placeholder="Password"/>
-              <label htmlFor="inputPassword">Password</label>
-
-              <input onChange={handleFieldChange} type="password" id="confirmPassword" required placeholder="Confirm Password"/>
-              <label htmlFor="confirmPassword">Confirm Password</label>
-            </div>
-            <Button type="submt">Register</Button>
+            <h2>Welcome to 2Cents!</h2>
+            <p className="login-question" onClick={toggle}>Already have an account? <a href="#">Sign In.</a></p>
+            <Form.Group>
+              <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required/>
+              {/* <label htmlFor="inputEmail">Email address</label> */}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control className="input" onChange={handleFieldChange} type="password" id="password" required placeholder="Password"/>
+              {/* <label htmlFor="inputPassword">Password</label> */}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control className="input" onChange={handleFieldChange} type="password" id="confirmPassword" required placeholder="Confirm Password"/>
+              {/* <label htmlFor="confirmPassword">Confirm Password</label> */}
+            </Form.Group>
+            <Button type="submt" block>Register</Button>
           </fieldset>
-            <p onClick={toggle}>Back to Login</p>
         </Form> 
         ) 
         : 
         (
         <Form onSubmit={e => handleLoginAndRegister(e, 'login')}>
           <fieldset>
-            <h3>Please Sign In</h3>
-            <div className="formgrid">
-              <input onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required="" autoFocus="" />
-              <label htmlFor="inputEmail">Email address</label>
-
-              <input onChange={handleFieldChange} type="password" id="password"  placeholder="Password" required="" />
-              <label htmlFor="inputPassword">Password</label>
-            </div>
-            <Button type="submit">Sign In</Button>
+            <h2>Welcome to 2Cents!</h2>
+            <p className="login-question" onClick={toggle}>New? <a href="#">Register Here.</a></p>
+            <Form.Group>
+              <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required="" autoFocus="" />
+              {/* <label htmlFor="inputEmail">Email address</label> */}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control className="input" onChange={handleFieldChange} type="password" id="password"  placeholder="Password" required="" />
+              {/* <label htmlFor="inputPassword">Password</label> */}
+            </Form.Group>
+            <Button type="submit" block>Sign In</Button>
           </fieldset>
-        <p onClick={toggle}>New? Register Here</p>
         </Form>
         )
       }
+      </Jumbotron>
     </Container>
   );
 };
