@@ -9,12 +9,13 @@ const FinanceList = props => {
   const [finances, setFinances] = useState([]);
   const [totalFinance, setTotalFinance] = useState({});
 
+  let date = new Date().toISOString()
+  const monthInput = MonthNameMaker("month", date)
+  const yearInput = MonthNameMaker("year", date)
+
   useEffect(() => {
-    let date = new Date().toISOString()
-    const monthInput = MonthNameMaker("month", date)
-    const yearInput = MonthNameMaker("year", date)
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
-      if(totalFinance === '') return
+      if(totalFinance.length === 0) return
       setTotalFinance(totalFinance[0])
       setFinances(totalFinance[0].finances)
     })
@@ -22,19 +23,23 @@ const FinanceList = props => {
 
   const deleteFinance = obj => {
     apiManager.getTotalFinances(obj.totalFinanceId).then(totalFinance => {
-      console.log(totalFinance)
       if(obj.bill) {
-        console.log(totalFinance)
         totalFinance.allBills = fixNum(totalFinance.allBills -= obj.amount)
       } else {
         totalFinance.allIncome = fixNum(totalFinance.allIncome -= obj.amount)
       }
       totalFinance.amountLeft = totalFinance.amountLeft - obj.amount
-      setFinances(totalFinance.finances)
       delete totalFinance.finances
       setTotalFinance(totalFinance)
       apiManager.put("totalFinances", totalFinance)
-    }).then(() => apiManager.delete("finances", obj.id))
+    }).then(() => apiManager.delete("finances", obj.id)).then(() => {
+      apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
+        console.log(totalFinance)
+        if(totalFinance.length === 0) return
+        setTotalFinance(totalFinance[0])
+        setFinances(totalFinance[0].finances)
+      })
+    })
   }
 
   return (

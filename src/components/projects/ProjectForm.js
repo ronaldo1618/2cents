@@ -14,7 +14,6 @@ const ProjectForm = props => {
   useEffect(() => {
     if(props.match.params.projectId) {
       apiManager.getById('projects', props.match.params.projectId).then(obj => {
-        console.log(obj)
         setProject(obj)
       })
     }
@@ -39,6 +38,7 @@ const ProjectForm = props => {
     // add catch clauses
     project.goalAmount = parseFloat(project.goalAmount)
     project.amountIn = parseFloat(project.amountIn)
+    project.userId = props.userId
     apiManager.post('projects', project).then(() => props.history.push("/projects"))
   }
 

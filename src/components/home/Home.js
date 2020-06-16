@@ -16,21 +16,29 @@ const Home = props => {
   let stockNamesArr = []
   let objData = []
 
+  let date = new Date().toISOString()
+  const monthInput = MonthNameMaker("month", date)
+  const yearInput = MonthNameMaker("year", date)
+
   useEffect(() => {
-    let date = new Date().toISOString()
-    const monthInput = MonthNameMaker("month", date)
-    const yearInput = MonthNameMaker("year", date)
-    apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
-      if(totalFinance === '') return
-      setTotalFinance(totalFinance[0])
-    })
-    apiManager.get('projects', props.userId).then(setProjects)
-    settingStockArr()
-    settingCryptoArr()
+    getTotalFinance(props.userId)
   }, [props.userId]);
+
+  const getTotalFinance = (userId) => {
+    return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, userId).then(totalFinance => {
+      if(totalFinance.length === 0) return
+      setTotalFinance(totalFinance[0])
+    }).then(() => {
+      apiManager.getByUserId('projects', userId).then(setProjects)
+      settingStockArr()
+      settingCryptoArr()
+    })
+
+  }
 
   const settingStockArr = () => {
     apiManager.getByHomePage('stocks', props.userId).then(userObjs => {
+      if(userObjs.length === 0) return
       for (let i = 0; i < userObjs.length; i++) {
         const name = userObjs[i].name;
         stockNamesArr.push(name)
@@ -43,6 +51,8 @@ const Home = props => {
 
   const settingCryptoArr = () => {
     apiManager.getByHomePage('cryptos', props.userId).then(userObjs => {
+      if(userObjs.length === 0) return
+
       for (let i = 0; i < userObjs.length; i++) {
         const name = userObjs[i].name;
         cryptoNamesArr.push(name)
@@ -85,9 +95,9 @@ const Home = props => {
     <>
       <h1>Home</h1>
       <div>
-          <h3>Amount left to spend this month {totalFinance.amountLeft}</h3>
-          <p>Total amount spent on bills this month {totalFinance.allBills}</p>
-          <p>Total amount of income this month {totalFinance.allIncome}</p>
+        <h3>Amount left to spend this month {totalFinance.amountLeft}</h3>
+        <p>Total amount spent on bills this month {totalFinance.allBills}</p>
+        <p>Total amount of income this month {totalFinance.allIncome}</p>
       </div>
       <div>
       {
@@ -104,14 +114,26 @@ const Home = props => {
         </div>)
       }
       </div>
+      {
+        stockArr.length > 0 ?
+        (
+          
       <div>
         <h2>Stocks</h2>
         {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
       </div>
+        ) : null
+      }
+      {
+        cryptoArr.length > 0 ?
+        (
+
       <div>
         <h2>Cryptos</h2>
         {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
       </div>
+        ) : null
+      }
     </>
   )
 }

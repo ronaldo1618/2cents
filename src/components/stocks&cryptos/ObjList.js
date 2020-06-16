@@ -48,13 +48,14 @@ const ObjList = props => {
     apiManager.post(props.objURL, savedObj).then(() => {
         setIsSearched(!isSearched)
       }).then(() => {
-        apiManager.get(props.objURL, props.userId).then(userObjs => {
+        apiManager.getByUserId(props.objURL, props.userId).then(userObjs => {
           settingStrArr(userObjs)
         })
       })
   }
 
   const settingStrArr = (userObjs) => {
+    if(userObjs.length === 0) return
     for (let i = 0; i < userObjs.length; i++) {
       const trueOrFalse = userObjs[i].homePage
       const name = userObjs[i].name;
@@ -104,13 +105,13 @@ const ObjList = props => {
   }
 
   useEffect(() => {
-    apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+    apiManager.getByUserId(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
   }, [props.userId])
 
   const deleteObj = id  => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
       apiManager.delete(props.objURL, obj[0].id).then(() => {
-        apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+        apiManager.getByUserId(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
       })
     })
   }
@@ -124,7 +125,7 @@ const ObjList = props => {
       apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
         obj[0].homePage = true
         apiManager.put(props.objURL, obj[0]).then(() => {
-          apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+          apiManager.getByUserId(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
         })
       })
       }
@@ -135,7 +136,7 @@ const ObjList = props => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
       obj[0].homePage = false
       apiManager.put(props.objURL, obj[0]).then(obj => {
-        apiManager.get(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
+        apiManager.getByUserId(props.objURL, props.userId).then(userObjs => settingStrArr(userObjs))
       })
     })
   }
