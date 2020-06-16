@@ -5,6 +5,7 @@ import CryptoCard from '../stocks&cryptos/CryptoCard';
 import { MonthNameMaker } from '../../modules/helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import './Home.css'
+import { Carousel } from 'react-bootstrap';
 
 
 const Home = props => {
@@ -40,7 +41,6 @@ const Home = props => {
   const getStockNews = () => {
     apiManager.getByHomePage('stocks', props.userId).then(userObjs => {
     let endDate = new Date().toISOString().split('T')[0]
-    console.log(endDate, endDate)
     if(userObjs.length === 0) {
       apiManager.getStockNews().then(setStockNews)
     } else {
@@ -51,10 +51,14 @@ const Home = props => {
           return x.datetime - y.datetime;
         })
         let newsNow = newsSortedByTime.slice(0, 5)
-        // newsNow.forEach(news => {
-        //   news.datetime = new Date(news.datetime*1000)
-        //   console.log(news.datetime)
-        // });
+        for (let i = 0; i < newsNow.length; i++) {
+          const news = new Date(newsNow[i].datetime * 1000);
+          let year = news.getFullYear()
+          let month = news.getMonth() + 1
+          let day = news.getDate()
+          let date = month + '-' + day + '-' + year
+          newsNow[i].datetime = date
+        }
         setStockNews(newsNow)
       })
     }})
@@ -83,9 +87,6 @@ const Home = props => {
       let nameString = cryptoNamesArr.join(',')
       apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
         getStocks(arrOfCryptos)
-        // for (let i = 0; i < arrOfCryptos.length; i++) {
-        //   const crypto = arrOfCryptos[i];
-        // }
         setCryptoArr(arrOfCryptos)
       })
     }
@@ -123,6 +124,7 @@ const Home = props => {
         <p>Total amount of income this month {totalFinance.allIncome}</p>
       </div>
       <div>
+      <div>
       {
         projects.map(project => 
         <div className="project-home" key={project.id}>
@@ -136,6 +138,7 @@ const Home = props => {
             })} />
         </div>)
       }
+      </div>
       </div>
       {
         stockArr.length > 0 ?
