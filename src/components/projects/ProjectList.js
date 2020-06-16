@@ -95,14 +95,12 @@ const ProjectList = props => {
       </div>
       :
       <div>
-        <Button type="button" className="btn" onClick={toggle}>Show Line Graph</Button>
+        <Button type="button" className="btn" onClick={toggle}>Show Radar Graph</Button>
         <Bar data={chartData}/>
       </div>
       }
       <div>
-      {
-        projects.map(project => <ProjectCard key={project.id} projectObj={project} deleteProject={deleteProject} addAmountIn={addAmountIn} {...props}/>)
-      }
+        {projects.map(project => <ProjectCard key={project.id} projectObj={project} deleteProject={deleteProject} addAmountIn={addAmountIn} {...props}/>)}
       </div>
     </>
   )

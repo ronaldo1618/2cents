@@ -12,6 +12,7 @@ const Home = props => {
   const [projects, setProjects] = useState([]);
   const [cryptoArr, setCryptoArr] = useState([]);
   const [stockArr, setStockArr] = useState([]);
+  const [stockNews, setStockNews] = useState([]);
   let cryptoNamesArr = []
   let stockNamesArr = []
   let objData = []
@@ -32,8 +33,31 @@ const Home = props => {
       apiManager.getByUserId('projects', userId).then(setProjects)
       settingStockArr()
       settingCryptoArr()
+      getStockNews()
     })
+  }
 
+  const getStockNews = () => {
+    apiManager.getByHomePage('stocks', props.userId).then(userObjs => {
+    let endDate = new Date().toISOString().split('T')[0]
+    console.log(endDate, endDate)
+    if(userObjs.length === 0) {
+      apiManager.getStockNews().then(setStockNews)
+    } else {
+      let name = userObjs[Math.floor(Math.random() * userObjs.length)].name
+      apiManager.getStockCompanyNews(name, endDate, endDate).then(news => {
+        let companyNewsSorted = news.filter(news => news.category === "company news")
+        let newsSortedByTime = companyNewsSorted.sort(function(x, y){
+          return x.datetime - y.datetime;
+        })
+        let newsNow = newsSortedByTime.slice(0, 5)
+        // newsNow.forEach(news => {
+        //   news.datetime = new Date(news.datetime*1000)
+        //   console.log(news.datetime)
+        // });
+        setStockNews(newsNow)
+      })
+    }})
   }
 
   const settingStockArr = () => {
@@ -52,7 +76,6 @@ const Home = props => {
   const settingCryptoArr = () => {
     apiManager.getByHomePage('cryptos', props.userId).then(userObjs => {
       if(userObjs.length === 0) return
-
       for (let i = 0; i < userObjs.length; i++) {
         const name = userObjs[i].name;
         cryptoNamesArr.push(name)
@@ -60,9 +83,9 @@ const Home = props => {
       let nameString = cryptoNamesArr.join(',')
       apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
         getStocks(arrOfCryptos)
-        for (let i = 0; i < arrOfCryptos.length; i++) {
-          const crypto = arrOfCryptos[i];
-        }
+        // for (let i = 0; i < arrOfCryptos.length; i++) {
+        //   const crypto = arrOfCryptos[i];
+        // }
         setCryptoArr(arrOfCryptos)
       })
     }
@@ -116,22 +139,26 @@ const Home = props => {
       </div>
       {
         stockArr.length > 0 ?
-        (
-          
-      <div>
-        <h2>Stocks</h2>
-        {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
-      </div>
+        (  
+        <div>
+          <h2>Stocks</h2>
+          {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
+        </div>
         ) : null
       }
+      {stockNews.map(news => 
+      <div key={news.id}>
+        <h3>{news.headline}</h3>
+        <p>{news.datetime}</p>
+        <p>{news.summary}</p>
+      </div>)}
       {
         cryptoArr.length > 0 ?
         (
-
-      <div>
-        <h2>Cryptos</h2>
-        {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
-      </div>
+        <div>
+          <h2>Cryptos</h2>
+          {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
+        </div>
         ) : null
       }
     </>
