@@ -3,6 +3,7 @@ import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
 import { Container, Jumbotron, Form, Button, Card } from 'react-bootstrap';
+// import { Line } from 'react-chartjs-2';
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -131,6 +132,39 @@ const ObjList = props => {
       }
     )
   }
+  const [chartData, setChartData] = useState({})
+
+  // const stockGraphMaker = id => {
+  //   // Come back and make this more accurate
+  //   let today = parseInt(Date.now() / 1000)
+  //   console.log(today)
+  //   let date = ''
+  //   date = parseInt(today - 86400)
+  //   apiManager.get1DGraphForStock(id, date, today).then(graphData => {
+  //     let labels = []
+  //     let count = 0
+  //     graphData.c.forEach(data => {
+  //       labels.push(count++)
+  //     });
+  //     // labels = ['10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM']
+  //     setChartData({
+  //       labels: labels,
+  //       datasets: [
+  //         {
+  //           label: 'One Day Graph',
+  //           data: graphData.c
+  //         }
+  //       ],
+  //       options: {
+  //         scales: {
+  //           yAxes: [{
+  //             stacked: true
+  //           }]
+  //         }
+  //       }
+  //     })
+  //   })
+  // }
 
   const unSaveFromHomePage = id => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
@@ -195,7 +229,9 @@ const ObjList = props => {
       {
         props.objURL === 'stocks' ?
         <>
-        {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
+        {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} 
+        // graphMaker={stockGraphMaker} 
+        saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} chartData={chartData} {...props}/>)}
         </>
         : null
       }

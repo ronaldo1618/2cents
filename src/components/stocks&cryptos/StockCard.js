@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+// import { Line } from 'react-chartjs-2';
 
-const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFromHomePage}) => {
+const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFromHomePage, graphMaker, chartData}) => {
   return (
     <Card>
       <Card.Body>
@@ -15,7 +16,6 @@ const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFr
           null
           :
           <>
-          <Button type="button" onClick={() => deleteObj(searchedObj.name)}>Delete</Button>
           {
             searchedObj.homePage !== true ?
             <Button type="button" onClick={() => saveToHomePage(searchedObj.name)}>Save To Home Page</Button>
@@ -24,6 +24,9 @@ const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFr
           }
           </>
         }
+        <Button type="button" onClick={() => deleteObj(searchedObj.name)}>Delete</Button>
+        {/* <Button type="button" onClick={() => graphMaker(searchedObj.name)}>Day Graph</Button>
+        <Line data={chartData}/> */}
       </Card.Body>
     </Card>
   )

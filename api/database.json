@@ -35,6 +35,15 @@
       "bill": false,
       "userId": 24,
       "id": 5
+    },
+    {
+      "name": "side job",
+      "amount": 300,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": false,
+      "userId": 1,
+      "id": 6
     }
   ],
   "users": [
@@ -60,8 +69,8 @@
       "year": "2020",
       "userId": 1,
       "allBills": -102.32,
-      "allIncome": 50,
-      "amountLeft": -52.31999999999999,
+      "allIncome": 350,
+      "amountLeft": 247.68,
       "id": 1
     },
     {

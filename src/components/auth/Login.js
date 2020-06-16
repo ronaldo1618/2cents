@@ -19,7 +19,7 @@ const Login = props => {
       .then(users => {
         let newUserId = users.length + 1
         const user = users.find(user => user.email === credentials.email && user.password === credentials.password)
-        let date = new Date()
+        // let date = new Date()
         if(!user && loginOrRegister !== 'register') return alert('user does not exist')
         if(!user && loginOrRegister === 'register') {
           if(credentials.confirmPassword !== credentials.password) return alert('passwords do not match')

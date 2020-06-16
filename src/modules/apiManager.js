@@ -2,7 +2,7 @@ import key from './APIkeys';
 const remoteURL = 'http://localhost:5002'
 const nomicsKey = key.nomicsKey
 const finnhubKey = key.finnhubKey
-const alphaVantageKey = key.alphaVantageKey
+// const alphaVantageKey = key.alphaVantageKey
 
 export default {
   get(collection) {
@@ -66,5 +66,20 @@ export default {
   },
   getByHomePage(collection, userId) {
     return fetch(`${remoteURL}/${collection}/?userId=${userId}&homePage=true`).then(result => result.json());
+  },
+  getStockNews() {
+    return fetch(`https://finnhub.io/api/v1/news?category=general&token=${finnhubKey}`).then(result => result.json());
+  },
+  getStockCompanyNews(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/company-news?symbol=${company}&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1DGraphForStock(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${company}&resolution=1&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1WGraphForStock(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${company}&resolution=5&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1MGraphForStock(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${company}&resolution=30&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
   }
 }
