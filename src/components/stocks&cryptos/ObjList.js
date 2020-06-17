@@ -196,7 +196,7 @@ const ObjList = props => {
       }
       {
         props.objURL === 'cryptos' ?
-        <div className="finance-cards">
+        <div className="">
         {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} homePage={crypto.homePage} deleteCrypto={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
         </div>
         : null
