@@ -1,3 +1,63 @@
-.project-home {
-  width: 30%;
+.progress-card {
+  margin: 0px 15px;
+  width: 20%;
+  transition: 0.3s;
+}
+
+.progress-card h1 {
+  font-size: 32px;
+}
+
+.progress-card:hover {
+  transform: translateY(-5px);
+}
+
+.progress-containers {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.stocks-and-cryptos {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.stocks-container {
+  margin: 0px 10px;
+  flex-basis: 45%;
+}
+
+.cryptos-container {
+  margin: 0px 10px;
+  flex-basis: 45%;
+}
+
+.stock-and-crypto-card {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 10px 15px;
+    text-align: center;
+}
+
+.stock-card {
+  margin: 10px;
+  height: 100%;
+  width: 100%;
+  flex-basis: 100%;
+}
+
+.stock-card:hover {
+  box-shadow: 0 5px 12px rgba(0,0,0,.5);
+
+}
+
+h2 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
 }

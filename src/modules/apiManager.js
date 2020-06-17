@@ -70,6 +70,9 @@ export default {
   getStockNews() {
     return fetch(`https://finnhub.io/api/v1/news?category=general&token=${finnhubKey}`).then(result => result.json());
   },
+  getCryptoNews() {
+    return fetch(`https://finnhub.io/api/v1/news?category=crypto&token=${finnhubKey}`).then(result => result.json());
+  },
   getStockCompanyNews(company, startDate, endDate) {
     return fetch(`https://finnhub.io/api/v1/company-news?symbol=${company}&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
   },

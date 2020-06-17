@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 
-const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePage,unSaveFromHomePage}) => {
+const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePage,unSaveFromHomePage, history}) => {
   return (
-    <Card>
+    <Card onClick={() => isHomePage ? history.push("/cryptos") : null} className={`${isHomePage ? "stock-card clickable" : "finance-card"}`}>
       <Card.Body>
         <Card.Title>{cryptoObj.name} / {cryptoObj.id}</Card.Title>
           <Card.Text>Market Cap:{cryptoObj.market_cap}</Card.Text>
@@ -17,12 +17,12 @@ const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePa
             null
             :
             <>
-              <Button type="button" onClick={() => deleteCrypto(cryptoObj.id)}>Delete</Button>
+              <Button variant="danger" type="button" onClick={() => deleteCrypto(cryptoObj.id)}>Delete</Button>
               {
                 homePage !== true ?
-                <Button type="button" onClick={() => saveToHomePage(cryptoObj.id)}>Save To Home Page</Button>
+                <Button className="m-2" variant="outline-primary" type="button" onClick={() => saveToHomePage(cryptoObj.id)}>Save To Home</Button>
                 :
-                <Button type="button" onClick={() => unSaveFromHomePage(cryptoObj.id)}>Remove From Home Page</Button>
+                <Button className="m-2" variant="outline-danger" type="button" onClick={() => unSaveFromHomePage(cryptoObj.id)}>Remove From Home</Button>
               }
             </>
           }

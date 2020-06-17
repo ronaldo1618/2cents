@@ -1,0 +1,14 @@
+.finance-card {
+  margin: 10px 15px;
+  text-align: center;
+  flex-basis: 25%;
+}
+
+.finance-card:hover {
+  box-shadow: 0 5px 12px rgba(0,0,0,.5)
+}
+
+.finance-btn {
+  margin: 3px;
+  padding: 5px 10px;
+}

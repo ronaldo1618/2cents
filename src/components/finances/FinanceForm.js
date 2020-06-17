@@ -137,7 +137,7 @@ const FinanceForm = props => {
 
   return (
     <Container className="d-flex justify-content-center">
-        <Jumbotron className="w-50 d-flex justify-content-center">
+        <Jumbotron className="w-50 d-flex justify-content-center ta-jumbotron">
           <Form>
             <Form.Group>
               <Form.Label htmlFor="name">Name</Form.Label>

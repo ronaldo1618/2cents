@@ -150,15 +150,21 @@
     },
     {
       "name": "TSLA",
-      "userId": 1,
-      "id": 3,
+      "userId": 24,
+      "id": 4,
       "homePage": true
     },
     {
       "name": "TSLA",
-      "userId": 24,
-      "id": 4,
+      "userId": 1,
+      "id": 5,
       "homePage": true
+    },
+    {
+      "name": "AMZN",
+      "userId": 1,
+      "id": 6,
+      "homePage": false
     }
   ]
 }
