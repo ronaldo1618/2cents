@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
 
 const NavBar = props => {
@@ -8,16 +9,25 @@ const NavBar = props => {
     props.clearUser();
     props.history.push('/');
   }
+
+  const [toggle, setToggle] = useState(false);
   return (
-    <header>
-      <h1 className="site-title">
-        2cents
-      </h1>
+    <header className="navBar">
+    {
+      props.hasUser ?
+      <>
       <nav>
-        <ul className="container">
-        <li>
-          <Link className="nav-link" to="/">Home</Link>
-        </li>
+        <ul className={`container-nav ${toggle ? 'responsive' : ''}`}>
+          <h1 className="site-title">
+            2cents
+          </h1>
+        {
+          props.hasUser ?
+          <li>
+            <Link className="nav-link" to="/">Home</Link>
+          </li>
+          : null
+        }
         {props.hasUser
         ? <li>
             <Link className="nav-link" to="/cryptos"> Cryptos </Link>
@@ -41,13 +51,21 @@ const NavBar = props => {
         {props.hasUser
         ? 
           <li>
-            <span className="nav-link" onClick={handleLogout}> Logout </span>
+            <a href="#" className="nav-link logout" onClick={handleLogout}> Logout </a>
           </li>
         : <li>
             <Link className="nav-link" to="/login"> Login </Link>
           </li>}
+        {props.hasUser
+        ? 
+        <a onClick={() => setToggle(!toggle)} className="icon">
+          <i className="fa fa-bars"></i>
+        </a>
+        : null}
         </ul>
       </nav>
+      </> : null
+    }
     </header>
   );
 }

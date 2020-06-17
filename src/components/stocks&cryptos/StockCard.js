@@ -11,6 +11,7 @@ const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFr
         <Card.Text>High: {searchedObj.high}</Card.Text>
         <Card.Text>Low: {searchedObj.low}</Card.Text>
         <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
+        <Button type="button" onClick={() => deleteObj(searchedObj.name)}>Delete</Button>
         {
           isHomePage === true ?
           null
@@ -24,7 +25,6 @@ const StockCard = ({searchedObj, isHomePage, deleteObj, saveToHomePage, unSaveFr
           }
           </>
         }
-        <Button type="button" onClick={() => deleteObj(searchedObj.name)}>Delete</Button>
         {/* <Button type="button" onClick={() => graphMaker(searchedObj.name)}>Day Graph</Button>
         <Line data={chartData}/> */}
       </Card.Body>
