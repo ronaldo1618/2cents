@@ -5,7 +5,7 @@ import CryptoCard from '../stocks&cryptos/CryptoCard';
 import { MonthNameMaker } from '../../modules/helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import './Home.css'
-import { Carousel } from 'react-bootstrap';
+import { Carousel, Jumbotron } from 'react-bootstrap';
 
 
 const Home = props => {
@@ -14,6 +14,7 @@ const Home = props => {
   const [cryptoArr, setCryptoArr] = useState([]);
   const [stockArr, setStockArr] = useState([]);
   const [stockNews, setStockNews] = useState([]);
+  const [cryptoNews, setCryptoNews] = useState([]);
   let cryptoNamesArr = []
   let stockNamesArr = []
   let objData = []
@@ -35,6 +36,7 @@ const Home = props => {
       settingStockArr()
       settingCryptoArr()
       getStockNews()
+      getCryptoNews()
     })
   }
 
@@ -62,6 +64,24 @@ const Home = props => {
         setStockNews(newsNow)
       })
     }})
+  }
+
+  const getCryptoNews = () => {
+    apiManager.getCryptoNews().then(news => {
+      let cryptoNewsSorted = news.sort(function(x,y){
+        return x.dateimte - y.datetime;
+      })
+      let cryptoNewsNow = cryptoNewsSorted.slice(0, 5)
+      for (let i = 0; i < cryptoNewsNow.length; i++) {
+        const cryptoNews = new Date(cryptoNewsNow[i].datetime * 1000);
+        let year = cryptoNews.getFullYear()
+        let month = cryptoNews.getMonth() + 1
+        let day = cryptoNews.getDate()
+        let date = month + '-' + day + '-' + year
+        cryptoNewsNow[i].datetime = date
+      }
+      setCryptoNews(cryptoNewsNow)
+    })
   }
 
   const settingStockArr = () => {
@@ -117,53 +137,80 @@ const Home = props => {
 
   return (
     <>
-      <h1>Home</h1>
-      <div>
-        <h3>Amount left to spend this month {totalFinance.amountLeft}</h3>
-        <p>Total amount spent on bills this month {totalFinance.allBills}</p>
-        <p>Total amount of income this month {totalFinance.allIncome}</p>
+      <div className="ta-container">
+        <Jumbotron className="ta-jumbotron">
+          <h1>Home</h1>
+        </Jumbotron>
       </div>
-      <div>
-      <div>
-      {
-        projects.map(project => 
-        <div className="project-home" key={project.id}>
-          <h1>{project.name}</h1>
-          <CircularProgressbar 
-            value={(project.amountIn/project.goalAmount * 100).toFixed(1)} 
-            text={`${(project.amountIn/project.goalAmount * 100).toFixed(0)}%`}
-            styles={buildStyles({
-              pathColor: `#4BB187`,
-              textColor: '#4BB187'
-            })} />
-        </div>)
-      }
-      </div>
-      </div>
-      {
-        stockArr.length > 0 ?
-        (  
-        <div>
-          <h2>Stocks</h2>
-          {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
+      <div className="ta-container">
+          <div onClick={() => props.history.push("/finances")} className="ta-jumbotron clickable">
+            <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${totalFinance.amountLeft}</span></p>
+            <hr/>
+            <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${totalFinance.allBills}</span></p>
+            <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
+          </div>
         </div>
-        ) : null
-      }
-      {stockNews.map(news => 
-      <div key={news.id}>
-        <h3>{news.headline}</h3>
-        <p>{news.datetime}</p>
-        <p>{news.summary}</p>
-      </div>)}
-      {
-        cryptoArr.length > 0 ?
-        (
-        <div>
-          <h2>Cryptos</h2>
-          {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
+      <div>
+      <div className="progress-containers">
+        {
+          projects.map(project =>
+          <div onClick={() => props.history.push("/projects")} className="progress-card clickable" key={project.id}>
+            <h1>{project.name}</h1>
+            <CircularProgressbar 
+              value={(project.amountIn/project.goalAmount * 100).toFixed(1)} 
+              text={`${(project.amountIn/project.goalAmount * 100).toFixed(0)}%`}
+              styles={buildStyles({
+                pathColor: `#4BB187`,
+                textColor: '#4BB187'
+              })} />
+          </div>)
+        }
+      </div>
+      </div>
+      <div className="stocks-and-cryptos">
+        <div className="stocks-container">
+          {
+            stockArr.length > 0 ?
+            (  
+              <>
+                <h2>Stocks</h2>
+                <div className="stock-and-crypto-card">
+                  {stockArr.map(stock => <StockCard key={stock.name} searchedObj={stock} isHomePage={true} {...props}/>)}
+                </div>
+              </>
+            ) : null
+          }
+          <div>
+          {stockNews.map(news => 
+          <div key={news.id}>
+            <h3>{news.headline}</h3>
+            <p>{news.datetime}</p>
+            <p>{news.summary}</p>
+          </div>)}
+          </div>
         </div>
-        ) : null
-      }
+        <div className="cryptos-container">
+          {
+            cryptoArr.length > 0 ?
+            (
+              <>
+                <h2>Cryptos</h2>
+                <div className="stock-and-crypto-card">
+                  {cryptoArr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} isHomePage={true} homePage={crypto.homePage} {...props}/>)}
+                </div>
+              </>
+            ) : null
+          }
+          <div>
+          {cryptoNews.map(news => 
+          <div key={news.id}>
+            <h3>{news.headline}</h3>
+            <p>{news.datetime}</p>
+            <p>{news.summary}</p>
+          </div>)}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

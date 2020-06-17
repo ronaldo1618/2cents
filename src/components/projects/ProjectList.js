@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import ProjectCard from './ProjectCard';
-import { Button } from 'react-bootstrap';
+import { Button, Jumbotron, Container } from 'react-bootstrap';
 import { Bar, Radar } from 'react-chartjs-2';
 // import { MonthNameMaker } from '../../modules/helpers';
 
@@ -85,24 +85,41 @@ const ProjectList = props => {
   }
 
   return (
-    <>
-      <Button type="button" className="btn" onClick={() => {props.history.push("./projects/form")}}>New Project</Button>
-      {
-        !isOpen ?
-      <div>
-        <Button type="button" className="btn" onClick={toggle}>Show Bar Graph</Button>
-        <Radar data={chartData}/>
+    <Container>
+      <div className="ta-container">
+        <Jumbotron className="ta-jumbotron">
+          <h1>Project Overview</h1>
+        </Jumbotron>
       </div>
-      :
-      <div>
-        <Button type="button" className="btn" onClick={toggle}>Show Radar Graph</Button>
-        <Bar data={chartData}/>
+      <hr className="pb-2"/>
+      <div className="ta-container">
+        <input type="button" className="m-3 btn-new" onClick={() => {props.history.push("./projects/form")}} value="New Project"/>
       </div>
-      }
-      <div>
+      <hr className="pb-2"/>
+      <div className="ta-container">
+        <div className="w-50 p-5 ta-card ta-jumbotron">
+        {
+          !isOpen ?
+          <>
+          <div className="ta-container">
+            <input className="m-2 btn-new" value="Show Bar Graph" type="button" onClick={toggle}/>
+          </div>
+          <Radar data={chartData}/>
+          </>
+        :
+        <>
+          <div className="ta-container">
+            <input className="m-2 btn-new" value="Show Line Graph" type="button" onClick={toggle}/>
+          </div>
+          <Bar data={chartData}/>
+        </>
+        }
+        </div>
+      </div>
+      <div className="finance-cards">
         {projects.map(project => <ProjectCard key={project.id} projectObj={project} deleteProject={deleteProject} addAmountIn={addAmountIn} {...props}/>)}
       </div>
-    </>
+    </Container>
   )
 }
 

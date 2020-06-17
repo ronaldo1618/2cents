@@ -6,13 +6,13 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
   const [amountIn, setAmountIn] = useState({amountIn: ''});
   const toggle = () => setIsOpen(!isOpen);
   return (
-    <div>
+    <div className="finance-card ta-jumbotron">
       <h3>{projectObj.name}</h3>
       <p>Start Date: {projectObj.startDate}</p>
       <p>Completion Date: {projectObj.completionDate}</p>
       <p>Goal Amount: ${projectObj.goalAmount}</p>
       <p>Total Contributions: ${projectObj.amountIn}</p>
-      <Button type="button" onClick={toggle}>
+      <Button className="finance-btn" type="button" onClick={toggle}>
         Details
       </Button>
       {isOpen ? (

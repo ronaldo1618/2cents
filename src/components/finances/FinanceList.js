@@ -3,7 +3,7 @@ import apiManager from '../../modules/apiManager';
 import './FinanceList.css'
 import FinanceCard from './FinanceCard';
 import { fixNum, MonthNameMaker } from '../../modules/helpers';
-import { Button } from 'react-bootstrap'
+import { Button, Jumbotron, Card } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2'
 
 const FinanceList = props => {
@@ -83,17 +83,26 @@ const FinanceList = props => {
   return (
     <>
       <section className="section-content">
-        <div>
-          <h3>Amount left to spend this month {totalFinance.amountLeft}</h3>
-          <p>Total amount spent on bills this month {totalFinance.allBills}</p>
-          <p>Total amount of income this month {totalFinance.allIncome}</p>
+        <div className="ta-container">
+          <div className="ta-jumbotron">
+            <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${totalFinance.amountLeft}</span></p>
+            <hr/>
+            <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${totalFinance.allBills}</span></p>
+            <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
+          </div>
         </div>
-        <div>
-          <Doughnut data={chartData}/>
+        <div className="ta-container">
+          <div className="w-50 ta-card ta-jumbotron">
+            <Doughnut className="doughnut-data" data={chartData}/>
+          </div>
         </div>
-        <Button type="button" className="btn" onClick={() => {props.history.push("./finances/form")}}>New Entry</Button>
+        <hr/>
+        <div className="ta-container">
+          <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
+        </div>
+        <hr/>
       </section>
-      <div>
+      <div className="finance-cards">
         {finances.map(finance => <FinanceCard key={finance.id} financeObj={finance} deleteFinance={deleteFinance} objURL="finances" {...props}/>)}
       </div>
     </>

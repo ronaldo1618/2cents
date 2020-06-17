@@ -3,7 +3,7 @@ import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
 import { Container, Jumbotron, Form, Button, Card } from 'react-bootstrap';
-// import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -132,39 +132,6 @@ const ObjList = props => {
       }
     )
   }
-  const [chartData, setChartData] = useState({})
-
-  // const stockGraphMaker = id => {
-  //   // Come back and make this more accurate
-  //   let today = parseInt(Date.now() / 1000)
-  //   console.log(today)
-  //   let date = ''
-  //   date = parseInt(today - 86400)
-  //   apiManager.get1DGraphForStock(id, date, today).then(graphData => {
-  //     let labels = []
-  //     let count = 0
-  //     graphData.c.forEach(data => {
-  //       labels.push(count++)
-  //     });
-  //     // labels = ['10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM']
-  //     setChartData({
-  //       labels: labels,
-  //       datasets: [
-  //         {
-  //           label: 'One Day Graph',
-  //           data: graphData.c
-  //         }
-  //       ],
-  //       options: {
-  //         scales: {
-  //           yAxes: [{
-  //             stacked: true
-  //           }]
-  //         }
-  //       }
-  //     })
-  //   })
-  // }
 
   const unSaveFromHomePage = id => {
     apiManager.getByUserIdAndName(props.objURL, id, props.userId).then(obj => {
@@ -199,40 +166,47 @@ const ObjList = props => {
               <Card.Text>Low: {searchedObj.low}</Card.Text>
               <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
             </Card.Body>
+            <div>
+              <Button type="button" onClick={() => saveObj(str)}>Save Stock</Button>
+              <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
+            </div>
           </Card>
-          <Button type="button" onClick={() => saveObj(str)}>Save Stock</Button>
-          <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
         </Container> 
         : null
       }
       {
         isSearched && props.objURL === 'cryptos' ?
         <Container>
-          <h1>Name: {searchedObj.name} / {searchedObj.id}</h1>
-          <p>Market Cap:{searchedObj.market_cap}</p>
-          <p>Market Cap Change:{(searchedObj["1d"].market_cap_change_pct * 100).toFixed(2)}%</p>
-          <p>Volume: {searchedObj["1d"].volume}</p>
-          <p>Volume Change: {(searchedObj["1d"].volume_change_pct*100).toFixed(2)}%</p>
-          <p>Price: {searchedObj.price}</p>
-          <p>Price Change: {(searchedObj["1d"].price_change_pct * 100).toFixed(2)}%</p>
-          <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Crypto</Button>
-          <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
+          <Card>
+            <Card.Body>
+              <Card.Title>Name: {searchedObj.name} / {searchedObj.id}</Card.Title>
+              <Card.Text>Market Cap:{searchedObj.market_cap}</Card.Text>
+              <Card.Text>Market Cap Change:{(searchedObj["1d"].market_cap_change_pct * 100).toFixed(2)}%</Card.Text>
+              <Card.Text>Volume: {searchedObj["1d"].volume}</Card.Text>
+              <Card.Text>Volume Change: {(searchedObj["1d"].volume_change_pct*100).toFixed(2)}%</Card.Text>
+              <Card.Text>Price: {searchedObj.price}</Card.Text>
+              <Card.Text>Price Change: {(searchedObj["1d"].price_change_pct * 100).toFixed(2)}%</Card.Text>
+              <div>
+                <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Crypto</Button>
+                <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
+              </div>
+            </Card.Body>
+          </Card>
         </Container> : null
       }
       {
         props.objURL === 'cryptos' ?
-        <>
+        <div className="">
         {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} homePage={crypto.homePage} deleteCrypto={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
-        </>
+        </div>
         : null
       }
       {
         props.objURL === 'stocks' ?
-        <>
+        <div className="">
         {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} 
-        // graphMaker={stockGraphMaker} 
-        saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} chartData={chartData} {...props}/>)}
-        </>
+        saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
+        </div>
         : null
       }
     </Container>

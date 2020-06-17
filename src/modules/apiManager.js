@@ -70,6 +70,9 @@ export default {
   getStockNews() {
     return fetch(`https://finnhub.io/api/v1/news?category=general&token=${finnhubKey}`).then(result => result.json());
   },
+  getCryptoNews() {
+    return fetch(`https://finnhub.io/api/v1/news?category=crypto&token=${finnhubKey}`).then(result => result.json());
+  },
   getStockCompanyNews(company, startDate, endDate) {
     return fetch(`https://finnhub.io/api/v1/company-news?symbol=${company}&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
   },
@@ -81,5 +84,14 @@ export default {
   },
   get1MGraphForStock(company, startDate, endDate) {
     return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${company}&resolution=30&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1DGraphForCrypto(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=BINANCE:${company}USDT&resolution=1&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1WGraphForCrypto(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=BINANCE:${company}USDT&resolution=5&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  get1MGraphForCrypto(company, startDate, endDate) {
+    return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=BINANCE:${company}USDT&resolution=30&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
   }
 }

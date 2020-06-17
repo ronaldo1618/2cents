@@ -1,10 +1,61 @@
+.ta-container {
+  display: flex;
+  justify-content: center;
+}
+
+.ta-jumbotron {
+  background: #fff;
+  /* background: #333; */
+  box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  color: #333;
+  width: 50%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.btn-new {
+  border: 1px solid #4BB187;
+  width: 50%;
+  color: #4BB187;
+  outline: none;
+}
+
+.btn-new:hover {
+  border: 1px solid #4BB187;
+  color: #fff;
+  background: #4BB187;
+}
+
+.ta-jumbotron p, hr {
+  margin: 10px 30px;
+}
+
+.ta-jumbotron:hover {
+  box-shadow: 0 5px 12px rgba(0,0,0,.5);
+}
+
+.number-is-positive {
+  color: #4BB187;
+}
+
+.number-is-negative {
+  color: red;
+}
+
+.finance-cards {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
+
+
 /* div {
   display: flex;
   justify-content: center;
   flex-flow: column wrap;
 } */
 
-fieldset {
+/* fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,4 +68,4 @@ fieldset {
 
 img {
   height: 100px;
-}
+} */
