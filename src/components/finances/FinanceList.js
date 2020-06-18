@@ -32,6 +32,7 @@ const FinanceList = props => {
         totalFinance.allIncome = fixNum(totalFinance.allIncome -= obj.amount)
       }
       totalFinance.amountLeft = totalFinance.amountLeft - obj.amount
+      totalFinance.amountLeft = fixNum(totalFinance.amountLeft)
       delete totalFinance.finances
       setTotalFinance(totalFinance)
       apiManager.put("totalFinances", totalFinance)

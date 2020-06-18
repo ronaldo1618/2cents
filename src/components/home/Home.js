@@ -18,6 +18,7 @@ const Home = props => {
   let cryptoNamesArr = []
   let stockNamesArr = []
   let objData = []
+  let cryptoArray = ''
 
   let date = new Date().toISOString()
   const monthInput = MonthNameMaker("month", date)
@@ -48,6 +49,23 @@ const Home = props => {
     } else {
       let name = userObjs[Math.floor(Math.random() * userObjs.length)].name
       apiManager.getStockCompanyNews(name, endDate, endDate).then(news => {
+        if(news.length === 0) {
+          apiManager.getStockNews().then(news => {
+            let newsSortedByTime = news.sort(function(x, y){
+              return x.datetime - y.datetime;
+            })
+            let newsNow = newsSortedByTime.slice(0, 5)
+            for (let i = 0; i < newsNow.length; i++) {
+              const news = new Date(newsNow[i].datetime * 1000);
+              let year = news.getFullYear()
+              let month = news.getMonth() + 1
+              let day = news.getDate()
+              let date = month + '-' + day + '-' + year
+              newsNow[i].datetime = date
+            }
+            setStockNews(newsNow)
+          })
+        }
         let companyNewsSorted = news.filter(news => news.category === "company news")
         let newsSortedByTime = companyNewsSorted.sort(function(x, y){
           return x.datetime - y.datetime;
@@ -105,34 +123,45 @@ const Home = props => {
         cryptoNamesArr.push(name)
       }
       let nameString = cryptoNamesArr.join(',')
-      apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
-        getStocks(arrOfCryptos)
-        setCryptoArr(arrOfCryptos)
+      getCryptos(nameString).then(() => {
+        setCryptoArr(cryptoArray)
       })
     }
-    )}
+  )}
+
+  async function getCryptos(nameString) {
+    try {
+      await apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
+        cryptoArray = arrOfCryptos
+      })
+    }
+    catch(e) {
+      console.error(e.message)
+    }
+  }
 
   async function getStocks(namesArr) {
-    for (let i = 0; i < namesArr.length; i++) {
-      const name = namesArr[i];
-      try {
-        await apiManager.searchForStock(name).then(stockData => {
-          const stockObj = {
-            name: name,
-            price: stockData.c,
-            high: stockData.h,
-            low: stockData.l,
-            previousClose: stockData.pc,
-            difference: (stockData.c - stockData.pc).toFixed(2),
-            percentDifference: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
-          }
-          objData.push(stockObj)
-        })
-      }
-      catch (e) {
-        console.error(e.message);
-      }
+      for (let i = 0; i < namesArr.length; i++) {
+        const name = namesArr[i];
+        try {
+          await apiManager.searchForStock(name).then(stockData => {
+            const stockObj = {
+              name: name,
+              price: stockData.c,
+              high: stockData.h,
+              low: stockData.l,
+              previousClose: stockData.pc,
+              difference: (stockData.c - stockData.pc).toFixed(2),
+              percentDifference: ((stockData.c - stockData.pc) / stockData.pc * 100).toFixed(2)
+            }
+            objData.push(stockObj)
+          })
+        }
+        catch (e) {
+          console.error(e.message);
+        }
     }
+      
   }
 
   return (
