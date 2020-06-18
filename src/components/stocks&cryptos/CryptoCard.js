@@ -97,12 +97,9 @@ const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePa
     <Card onClick={() => isHomePage ? history.push("/cryptos") : null} className={`${isHomePage ? "stock-card clickable" : ""}`}>
       <Card.Body>
         <Card.Title>{cryptoObj.name} / {cryptoObj.id}</Card.Title>
-          <Card.Text>Market Cap:{cryptoObj.market_cap}</Card.Text>
-          <Card.Text>Market Cap Change:{(cryptoObj["1d"].market_cap_change_pct * 100).toFixed(2)}%</Card.Text>
-          <Card.Text>Volume: {cryptoObj["1d"].volume}</Card.Text>
-          <Card.Text>Volume Change: {(cryptoObj["1d"].volume_change_pct*100).toFixed(2)}%</Card.Text>
-          <Card.Text>Price: {cryptoObj.price}</Card.Text>
-          <Card.Text>Price Change: {(cryptoObj["1d"].price_change_pct * 100).toFixed(2)}%</Card.Text>
+          <Card.Text>Market Cap:{cryptoObj.market_cap} ({(cryptoObj["1d"].market_cap_change_pct * 100).toFixed(2)}%)</Card.Text>
+          <Card.Text>Volume: {cryptoObj["1d"].volume} ({(cryptoObj["1d"].volume_change_pct*100).toFixed(2)}%)</Card.Text>
+          <Card.Text>Price: {cryptoObj.price} ({(cryptoObj["1d"].price_change_pct * 100).toFixed(2)}%)</Card.Text>
           {
             isHomePage === true ?
             null
