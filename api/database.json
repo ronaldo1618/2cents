@@ -1,49 +1,22 @@
 {
   "finances": [
     {
-      "name": "Gas Bill",
-      "amount": -50,
-      "totalFinanceId": 1,
-      "date": "2020-06-18",
-      "bill": true,
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "name": "Income",
-      "amount": 50,
-      "totalFinanceId": 1,
-      "date": "2020-06-18",
-      "bill": false,
-      "userId": 1,
-      "id": 2
-    },
-    {
-      "name": "Gas Bill #2",
-      "amount": -52.32,
-      "totalFinanceId": 1,
-      "date": "2020-06-16",
-      "bill": true,
-      "userId": 1,
-      "id": 3
-    },
-    {
-      "name": "income",
-      "amount": 324.32,
-      "totalFinanceId": 2,
-      "date": "2020-06-16",
-      "bill": false,
-      "userId": 24,
-      "id": 5
-    },
-    {
-      "name": "side job",
-      "amount": 300,
+      "name": "Side Job",
+      "amount": 143.32,
       "totalFinanceId": 1,
       "date": "2020-06-17",
       "bill": false,
       "userId": 1,
-      "id": 6
+      "id": 8
+    },
+    {
+      "name": "Gas Bill",
+      "amount": -43.321,
+      "totalFinanceId": 1,
+      "date": "2020-06-15",
+      "bill": true,
+      "userId": 1,
+      "id": 9
     }
   ],
   "users": [
@@ -68,19 +41,10 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -102.32,
-      "allIncome": 350,
-      "amountLeft": 247.68,
+      "allIncome": 143.32,
+      "allBills": -43.32,
+      "amountLeft": 100,
       "id": 1
-    },
-    {
-      "month": "June",
-      "year": "2020",
-      "userId": 24,
-      "allBills": 0,
-      "allIncome": 324.32,
-      "amountLeft": 324.32,
-      "id": 2
     }
   ],
   "projects": [
