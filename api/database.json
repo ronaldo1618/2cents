@@ -1,49 +1,57 @@
 {
   "finances": [
     {
-      "name": "Side Job",
-      "amount": 143.32,
+      "name": "Income",
+      "amount": 651.23,
       "totalFinanceId": 1,
       "date": "2020-06-17",
       "bill": false,
       "userId": 1,
-      "id": 8
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Gas Bill",
+      "amount": -43.32,
+      "date": "2020-06-17",
+      "totalFinanceId": 1,
+      "bill": true,
+      "userId": 1
+    },
+    {
+      "name": "Internet Bill",
+      "amount": -72.34,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": true,
+      "userId": 1,
+      "id": 4
     },
     {
       "name": "Gas Bill",
-      "amount": -43.321,
-      "totalFinanceId": 1,
-      "date": "2020-06-15",
+      "amount": -123.3,
+      "totalFinanceId": 2,
+      "date": "2020-06-10",
       "bill": true,
-      "userId": 1,
-      "id": 9
+      "id": 5
     },
     {
-      "name": "Bill #3",
-      "amount": -132.342,
-      "totalFinanceId": 1,
-      "date": "2020-06-16",
+      "name": "jn",
+      "amount": -23,
+      "totalFinanceId": 3,
+      "date": "2020-06-02",
       "bill": true,
-      "userId": 1,
-      "id": 10
+      "userId": 25,
+      "id": 6
     },
     {
-      "name": "Side job",
-      "amount": 123.21,
-      "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": false,
-      "userId": 1,
-      "id": 11
-    },
-    {
-      "name": "bill",
-      "amount": -23.432,
-      "totalFinanceId": 1,
-      "date": "2020-06-19",
+      "name": "Gas Bill",
+      "amount": -123.32,
+      "totalFinanceId": 4,
+      "date": "2020-06-24",
       "bill": true,
-      "userId": 1,
-      "id": 12
+      "userId": 6,
+      "id": 7
     }
   ],
   "users": [
@@ -58,15 +66,24 @@
       "password": "word"
     },
     {
-      "email": "ron@gmail.com",
-      "password": "word",
-      "id": 24
+      "email": "random@gmail.com",
+      "password": "1234",
+      "id": 25
     },
     {
-      "email": "ron@gmail.com",
-      "password": "123",
-      "userId": 4,
-      "id": 25
+      "email": "newone@gmail.com",
+      "password": "1234",
+      "id": 26
+    },
+    {
+      "email": "Another@gmail.com",
+      "password": "1234",
+      "id": 28
+    },
+    {
+      "email": "wordidk@gmail.com",
+      "password": "1234",
+      "id": 6
     }
   ],
   "totalFinances": [
@@ -74,10 +91,36 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allIncome": 266.53,
-      "allBills": -199.09,
-      "amountLeft": 67.44,
+      "allIncome": 651.23,
+      "allBills": -115.66,
+      "amountLeft": 535.57,
       "id": 1
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "allBills": -123.3,
+      "allIncome": 0,
+      "amountLeft": -123.3,
+      "id": 2
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "userId": 25,
+      "allBills": -23,
+      "allIncome": 0,
+      "amountLeft": -23,
+      "id": 3
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "userId": 6,
+      "allBills": -123.32,
+      "allIncome": 0,
+      "amountLeft": -123.32,
+      "id": 4
     }
   ],
   "projects": [
@@ -86,8 +129,8 @@
       "name": "New Car",
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
-      "goalAmount": 3000,
-      "amountIn": "2100.00",
+      "goalAmount": 3200,
+      "amountIn": 400,
       "userId": 1
     },
     {
@@ -96,7 +139,7 @@
       "startDate": "2020-06-12",
       "completionDate": "2020-07-10",
       "goalAmount": 5000,
-      "amountIn": 3600,
+      "amountIn": 3800,
       "userId": 1
     },
     {
@@ -130,6 +173,18 @@
       "userId": 1,
       "id": 2,
       "homePage": true
+    },
+    {
+      "name": "BTC",
+      "userId": 25,
+      "id": 5,
+      "homePage": false
+    },
+    {
+      "name": "BTC",
+      "userId": 6,
+      "homePage": true,
+      "id": 6
     }
   ],
   "stocks": [
@@ -149,13 +204,19 @@
       "name": "TSLA",
       "userId": 1,
       "id": 5,
-      "homePage": false
+      "homePage": true
     },
     {
       "name": "AMZN",
       "userId": 1,
       "id": 6,
       "homePage": true
+    },
+    {
+      "name": "TSLA",
+      "userId": 6,
+      "homePage": true,
+      "id": 7
     }
   ]
 }

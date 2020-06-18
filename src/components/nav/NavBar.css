@@ -3,10 +3,17 @@ nav {
   /* background: #fff; */
 }
 
-h1 {
+.site-title {
   text-align: center;
   color: #4BB187;
   margin: 0 10px 0 0;
+  font-size: 36px;
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: #4BB187;
+  text-decoration: none;
 }
 
 .container-nav {

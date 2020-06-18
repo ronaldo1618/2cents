@@ -26,8 +26,8 @@ const ProjectForm = props => {
       name: project.name,
       startDate: project.startDate,
       completionDate: project.completionDate,
-      goalAmount: parseFloat(project.goalAmount).toFixed(2),
-      amountIn: parseFloat(project.amountIn).toFixed(2),
+      goalAmount: Number(parseFloat(project.goalAmount).toFixed(2)),
+      amountIn: Number(parseFloat(project.amountIn).toFixed(2)),
       userId: props.userId
     }
     apiManager.put('projects', editedProject).then(() => props.history.push("/projects"))
@@ -36,8 +36,8 @@ const ProjectForm = props => {
   const createNewProject = e => {
     e.preventDefault();
     // add catch clauses
-    project.goalAmount = parseFloat(project.goalAmount).toFixed(2)
-    project.amountIn = parseFloat(project.amountIn).toFixed(2)
+    project.goalAmount = Number(parseFloat(project.goalAmount).toFixed(2))
+    project.amountIn = Number(parseFloat(project.amountIn).toFixed(2))
     project.userId = props.userId
     apiManager.post('projects', project).then(() => props.history.push("/projects"))
   }

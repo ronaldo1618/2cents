@@ -10,6 +10,7 @@ const FinanceList = props => {
   const [finances, setFinances] = useState([]);
   const [totalFinance, setTotalFinance] = useState({});
   const [chartData, setChartData] = useState({})
+  const [newUser, setNewUser] = useState(false)
 
   let date = new Date().toISOString()
   const monthInput = MonthNameMaker("month", date)
@@ -17,7 +18,7 @@ const FinanceList = props => {
 
   useEffect(() => {
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
-      if(totalFinance.length === 0) return
+      if(totalFinance.length === 0) return setNewUser(!newUser)
       setTotalFinance(totalFinance[0])
       setFinances(totalFinance[0].finances)
       combineAllFinances()
@@ -27,12 +28,12 @@ const FinanceList = props => {
   const deleteFinance = obj => {
     apiManager.getTotalFinances(obj.totalFinanceId).then(totalFinance => {
       if(obj.bill) {
-        totalFinance.allBills = fixNum(totalFinance.allBills -= obj.amount)
+        totalFinance.allBills = Number(fixNum(totalFinance.allBills -= obj.amount))
       } else {
-        totalFinance.allIncome = fixNum(totalFinance.allIncome -= obj.amount)
+        totalFinance.allIncome = Number(fixNum(totalFinance.allIncome -= obj.amount))
       }
       totalFinance.amountLeft = totalFinance.amountLeft - obj.amount
-      totalFinance.amountLeft = fixNum(totalFinance.amountLeft)
+      totalFinance.amountLeft = Number(fixNum(totalFinance.amountLeft))
       delete totalFinance.finances
       setTotalFinance(totalFinance)
       apiManager.put("totalFinances", totalFinance)
@@ -84,14 +85,21 @@ const FinanceList = props => {
   return (
     <>
       <section className="section-content">
-        <div className="ta-container">
-          <div className="ta-jumbotron">
-            <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${totalFinance.amountLeft}</span></p>
-            <hr/>
-            <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${totalFinance.allBills}</span></p>
-            <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
+        {
+          newUser ?
+          <div className="ta-container">
+            <h1>Get Started Tracking Your Expenses Today!</h1>
           </div>
-        </div>
+          :
+          <div className="ta-container">
+            <div className="ta-jumbotron">
+              <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
+              <hr/>
+              <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
+              <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allIncome)}</span></p>
+            </div>
+          </div>
+        }
         <div className="ta-container">
           <div className="w-50 ta-card ta-jumbotron">
             <Doughnut className="doughnut-data" data={chartData}/>

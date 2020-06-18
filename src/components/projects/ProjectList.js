@@ -30,7 +30,7 @@ const ProjectList = props => {
 
   const addAmountIn = (cont, obj) => {
     obj.amountIn += cont.amountIn
-    obj.amountIn = parseFloat(obj.amountIn).toFixed(2)
+    obj.amountIn = Number(parseFloat(obj.amountIn).toFixed(2))
 
     // Come back to this if I want to add more complexity
 
