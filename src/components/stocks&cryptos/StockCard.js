@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import apiManager from '../../modules/apiManager';
 import { Button, Card, ButtonGroup } from 'react-bootstrap';
-import { Line, Bar } from 'react-chartjs-2';
-import * as Zoom from 'chartjs-plugin-zoom';
+import { Bar } from 'react-chartjs-2';
+// import * as Zoom from 'chartjs-plugin-zoom';
 
 const StockCard = ({searchedObj, history, isHomePage, deleteObj, saveToHomePage, unSaveFromHomePage}) => {
   const [chartData, setChartData] = useState({})

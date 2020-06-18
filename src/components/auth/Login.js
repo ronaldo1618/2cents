@@ -56,7 +56,7 @@ const Login = props => {
         <Form onSubmit={e => handleLoginAndRegister(e, 'register')}>
           <fieldset>
             <h2>Welcome to 2Cents!</h2>
-            <p className="login-question" onClick={toggle}>Already have an account? <a href="#">Sign In.</a></p>
+            <p className="login-question" onClick={toggle}>Already have an account? <span className="btn-nomore">Sign In.</span></p>
             <Form.Group>
               <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required/>
               {/* <label htmlFor="inputEmail">Email address</label> */}
@@ -78,7 +78,7 @@ const Login = props => {
         <Form onSubmit={e => handleLoginAndRegister(e, 'login')}>
           <fieldset>
             <h2>Welcome to 2Cents!</h2>
-            <p className="login-question" onClick={toggle}>New? <a href="#">Register Here.</a></p>
+            <p className="login-question" onClick={toggle}>New? <span className="btn-nomore">Register Here.</span></p>
             <Form.Group>
               <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required="" autoFocus="" />
               {/* <label htmlFor="inputEmail">Email address</label> */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+// import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
 
 const NavBar = props => {
@@ -24,43 +24,43 @@ const NavBar = props => {
         {
           props.hasUser ?
           <li>
-            <Link className="nav-link" to="/">Home</Link>
+            <Link className={`nav-link ${props.location.pathname === "/" ? 'active' : ''}`} to="/">Home</Link>
           </li>
           : null
         }
         {props.hasUser
         ? <li>
-            <Link className="nav-link" to="/cryptos"> Cryptos </Link>
+            <Link className={`nav-link ${props.location.pathname === "/cryptos" ? 'active' : ''}`} to="/cryptos"> Cryptos </Link>
           </li>
         : null}
         {props.hasUser
         ? <li>
-            <Link className="nav-link" to="/stocks"> Stocks </Link>
+            <Link className={`nav-link ${props.location.pathname === "/stocks" ? 'active' : ''}`} to="/stocks"> Stocks </Link>
           </li>
         : null}
         {props.hasUser
         ? <li>
-            <Link className="nav-link" to="/finances"> Finances </Link>
+            <Link className={`nav-link ${props.location.pathname === "/finances" ? 'active' : ''}`} to="/finances"> Expenses </Link>
           </li>
         : null}
         {props.hasUser
         ? <li>
-            <Link className="nav-link" to="/projects"> Projects </Link>
+            <Link className={`nav-link ${props.location.pathname === "/projects" ? 'active' : ''}`} to="/projects"> Projects </Link>
           </li>
         : null}
         {props.hasUser
         ? 
           <li>
-            <a href="#" className="nav-link logout" onClick={handleLogout}> Logout </a>
+            <span className="nav-link logout btn-nomore" onClick={handleLogout}> Logout </span>
           </li>
         : <li>
             <Link className="nav-link" to="/login"> Login </Link>
           </li>}
         {props.hasUser
         ? 
-        <a onClick={() => setToggle(!toggle)} className="icon">
+        <span onClick={() => setToggle(!toggle)} className="icon btn-nomore">
           <i className="fa fa-bars"></i>
-        </a>
+        </span>
         : null}
         </ul>
       </nav>
