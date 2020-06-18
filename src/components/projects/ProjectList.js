@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import ProjectCard from './ProjectCard';
-import { Button, Jumbotron, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Bar, Radar } from 'react-chartjs-2';
 // import { MonthNameMaker } from '../../modules/helpers';
 
@@ -87,11 +87,6 @@ const ProjectList = props => {
 
   return (
     <Container>
-      <div className="ta-container">
-        <Jumbotron className="ta-jumbotron">
-          <h1>Project Overview</h1>
-        </Jumbotron>
-      </div>
       <hr className="pb-2"/>
       <div className="ta-container">
         <input type="button" className="m-3 btn-new" onClick={() => {props.history.push("./projects/form")}} value="New Project"/>

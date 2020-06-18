@@ -5,7 +5,7 @@ import CryptoCard from '../stocks&cryptos/CryptoCard';
 import { MonthNameMaker } from '../../modules/helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import './Home.css'
-import { Carousel, Jumbotron } from 'react-bootstrap';
+// import { Carousel, Jumbotron } from 'react-bootstrap';
 
 
 const Home = props => {
@@ -166,11 +166,6 @@ const Home = props => {
 
   return (
     <>
-      <div className="ta-container">
-        <Jumbotron className="ta-jumbotron">
-          <h1>Home</h1>
-        </Jumbotron>
-      </div>
       <div className="ta-container">
           <div onClick={() => props.history.push("/finances")} className="ta-jumbotron clickable">
             <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${totalFinance.amountLeft}</span></p>

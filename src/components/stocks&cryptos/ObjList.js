@@ -3,7 +3,6 @@ import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
 import { Container, Jumbotron, Form, Button, Card } from 'react-bootstrap';
-import { Line } from 'react-chartjs-2';
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -147,7 +146,7 @@ const ObjList = props => {
       <Jumbotron>
         <Form>
           <Form.Group>
-            <Form.Label htmlFor="search">Stock Name</Form.Label>
+            <Form.Label htmlFor="search">search for {props.objURL}</Form.Label>
             <Form.Control type="text" id="name" required onChange={e => {
               setIsSearched(false)
               setStr(e.target.value)}} placeholder={`Search for ${props.objURL}`}/>

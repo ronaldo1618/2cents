@@ -17,6 +17,33 @@
       "bill": true,
       "userId": 1,
       "id": 9
+    },
+    {
+      "name": "Bill #3",
+      "amount": -132.342,
+      "totalFinanceId": 1,
+      "date": "2020-06-16",
+      "bill": true,
+      "userId": 1,
+      "id": 10
+    },
+    {
+      "name": "Side job",
+      "amount": 123.21,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": false,
+      "userId": 1,
+      "id": 11
+    },
+    {
+      "name": "bill",
+      "amount": -23.432,
+      "totalFinanceId": 1,
+      "date": "2020-06-19",
+      "bill": true,
+      "userId": 1,
+      "id": 12
     }
   ],
   "users": [
@@ -34,6 +61,12 @@
       "email": "ron@gmail.com",
       "password": "word",
       "id": 24
+    },
+    {
+      "email": "ron@gmail.com",
+      "password": "123",
+      "userId": 4,
+      "id": 25
     }
   ],
   "totalFinances": [
@@ -41,9 +74,9 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allIncome": 143.32,
-      "allBills": -43.32,
-      "amountLeft": 100,
+      "allIncome": 266.53,
+      "allBills": -199.09,
+      "amountLeft": 67.44,
       "id": 1
     }
   ],
@@ -54,7 +87,7 @@
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
       "goalAmount": 3000,
-      "amountIn": 1600,
+      "amountIn": "2100.00",
       "userId": 1
     },
     {
@@ -89,19 +122,13 @@
     {
       "name": "BTC",
       "userId": 1,
-      "id": 5,
+      "id": 1,
       "homePage": true
     },
     {
       "name": "XRP",
       "userId": 1,
-      "id": 6,
-      "homePage": true
-    },
-    {
-      "name": "BTC",
-      "userId": 24,
-      "id": 7,
+      "id": 2,
       "homePage": true
     }
   ],
@@ -122,13 +149,13 @@
       "name": "TSLA",
       "userId": 1,
       "id": 5,
-      "homePage": true
+      "homePage": false
     },
     {
       "name": "AMZN",
       "userId": 1,
       "id": 6,
-      "homePage": false
+      "homePage": true
     }
   ]
 }

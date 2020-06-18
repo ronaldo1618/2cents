@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+.btn-nomore {
+  color: #4BB187;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  /* text-decoration: underline; */
+  background: none;
+}
+
 /* ul {
   list-style: none;
 } */

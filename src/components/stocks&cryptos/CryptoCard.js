@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Card } from 'react-bootstrap';
-import { Line, Bar } from 'react-chartjs-2';
-import * as Zoom from 'chartjs-plugin-zoom';
+import { Bar } from 'react-chartjs-2';
+// import * as Zoom from 'chartjs-plugin-zoom';
 import apiManager from '../../modules/apiManager';
-import { graphMaker } from '../../modules/helpers';
 
 const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePage,unSaveFromHomePage, history}) => {
   const [chartData, setChartData] = useState({})

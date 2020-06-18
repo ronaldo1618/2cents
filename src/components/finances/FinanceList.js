@@ -3,7 +3,7 @@ import apiManager from '../../modules/apiManager';
 import './FinanceList.css'
 import FinanceCard from './FinanceCard';
 import { fixNum, MonthNameMaker } from '../../modules/helpers';
-import { Button, Jumbotron, Card } from 'react-bootstrap'
+// import { Button, Jumbotron, Card } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2'
 
 const FinanceList = props => {
