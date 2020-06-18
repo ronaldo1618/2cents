@@ -10,7 +10,7 @@ const FinanceForm = props => {
 
   const addToTotalAmount = (e, expenseObj) => {    
     e.preventDefault();
-    expenseObj.amount = Math.abs(parseFloat(expenseObj.amount))
+    expenseObj.amount = Math.abs(parseFloat(expenseObj.amount).toFixed(2))
     expenseObj.userId = props.userId
     expenseObj.bill = bill
     if(bill === true) expenseObj.amount *= -1
@@ -46,7 +46,7 @@ const FinanceForm = props => {
       const existingTotalFinance = results.find(result => result.year === yearInput && result.month === monthInput && result.userId === props.userId)
       if(!existingTotalFinance) {
         // Create a new totalFinance and do all the calculations 
-        expenseObj.amount = fixNum(expenseObj.amount)
+        // expenseObj.amount = fixNum(expenseObj.amount)
         const totalExpenseObj = {
           month: monthInput,
           year: yearInput,
@@ -54,16 +54,16 @@ const FinanceForm = props => {
         }
         if(expenseObj.amount < 0) {
           totalExpenseObj.allBills = expenseObj.amount
-          totalExpenseObj.allBills = fixNum(totalExpenseObj.allBills)
+          // totalExpenseObj.allBills = fixNum(totalExpenseObj.allBills)
           totalExpenseObj.allIncome = 0
         }
         if(expenseObj.amount > 0) {
           totalExpenseObj.allIncome = expenseObj.amount
-          totalExpenseObj.allIncome = fixNum(totalExpenseObj.allIncome)
+          // totalExpenseObj.allIncome = fixNum(totalExpenseObj.allIncome)
           totalExpenseObj.allBills = 0
         }
         totalExpenseObj.amountLeft = totalExpenseObj.allIncome + totalExpenseObj.allBills
-        totalExpenseObj.amountLeft = fixNum(totalExpenseObj.amountLeft)
+        // totalExpenseObj.amountLeft = fixNum(totalExpenseObj.amountLeft)
         apiManager.post("totalFinances", totalExpenseObj).then(newTotalFinance => {
           expenseObj.totalFinanceId = newTotalFinance.id
           if(props.match.params.financeId) {
@@ -75,45 +75,43 @@ const FinanceForm = props => {
       } else {
         // Update existing totalFinance and do all the calculations
         if(props.match.params.financeId && monthInput === oldMonthInput && yearInput === oldYearInput) {
-          expenseObj.amount = expenseObj.amount.toFixed(2)
+          oldExpenseObj.amount = Number(fixNum(oldExpenseObj.amount))
           if(oldExpenseObj.bill === true) {
             if(expenseObj.bill === true && oldExpenseObj.amount !== expenseObj.amount) {
               existingTotalFinance.allBills -= oldExpenseObj.amount
               existingTotalFinance.allBills += expenseObj.amount
-              existingTotalFinance.allBills = fixNum(existingTotalFinance.allBills)
+              existingTotalFinance.allBills = Number(fixNum(existingTotalFinance.allBills))
             }
             if(expenseObj.bill === false && oldExpenseObj.amount !== expenseObj.amount) {
               existingTotalFinance.allBills -= oldExpenseObj.amount
-              existingTotalFinance.allBills = fixNum(existingTotalFinance.allBills)
+              existingTotalFinance.allBills = Number(fixNum(existingTotalFinance.allBills))
               existingTotalFinance.allIncome += expenseObj.amount
-              existingTotalFinance.allIncome = fixNum(existingTotalFinance.allIncome)
+              existingTotalFinance.allIncome = Number(fixNum(existingTotalFinance.allIncome))
             }
           }
           if(oldExpenseObj.bill === false) {
             if(expenseObj.bill === false && oldExpenseObj.amount !== expenseObj.amount) {
               existingTotalFinance.allIncome -= oldExpenseObj.amount 
               existingTotalFinance.allIncome += expenseObj.amount
-              existingTotalFinance.allIncome = fixNum(existingTotalFinance.allIncome)
+              existingTotalFinance.allIncome = Number(fixNum(existingTotalFinance.allIncome))
             }
             if(expenseObj.bill === true) {
               existingTotalFinance.allIncome -= oldExpenseObj.amount
-              existingTotalFinance.allBills = fixNum(existingTotalFinance.allBills)
               existingTotalFinance.allBills += expenseObj.amount
-              existingTotalFinance.allIncome = fixNum(existingTotalFinance.allIncome)
+              existingTotalFinance.allBills = Number(fixNum(existingTotalFinance.allBills))
+              existingTotalFinance.allIncome = Number(fixNum(existingTotalFinance.allIncome))
             }
           }
         }
         if(expenseObj.amount < 0 && monthInput !== oldMonthInput) {
           existingTotalFinance.allBills += expenseObj.amount
-          existingTotalFinance.allBills = fixNum(existingTotalFinance.allBills)
-
+          existingTotalFinance.allBills = Number(fixNum(existingTotalFinance.allBills))
         } 
         if(expenseObj.amount > 0 && monthInput !== oldMonthInput) {
           existingTotalFinance.allIncome += expenseObj.amount
-          existingTotalFinance.allIncome = fixNum(existingTotalFinance.allIncome)
+          existingTotalFinance.allIncome = Number(fixNum(existingTotalFinance.allIncome))
         } 
-        if(oldExpenseObj.amount !== expenseObj.amount || monthInput !== oldMonthInput) existingTotalFinance.amountLeft = existingTotalFinance.allIncome + existingTotalFinance.allBills
-        existingTotalFinance.amountLeft = fixNum(existingTotalFinance.amountLeft)
+        if(oldExpenseObj.amount !== expenseObj.amount || monthInput !== oldMonthInput) existingTotalFinance.amountLeft = Number(fixNum(existingTotalFinance.allIncome + existingTotalFinance.allBills))
         delete existingTotalFinance.finances
         //  Create currency calculator so values dont go lower than two decimal places
         apiManager.put("totalFinances", existingTotalFinance).then(existingTotalFinance => {

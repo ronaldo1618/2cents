@@ -25,19 +25,23 @@ const Login = props => {
         if(!user && loginOrRegister === 'register') {
           if(credentials.confirmPassword !== credentials.password) return alert('passwords do not match')
           console.log(credentials)
+          credentials.id = newUserId
           delete credentials.confirmPassword
-          credentials.userId = newUserId
+          // credentials.userId = newUserId
           apiManager.post('users', credentials).then(() => {
-            apiManager.getByUserId('users', credentials.userId).then(user => {
+            apiManager.getById('users', credentials.id).then(newUser => {
+              console.log(newUser)
+              delete credentials.id
               const stateToChange = { ...credentials }
-              stateToChange.userId = user.id
+              stateToChange.userId = newUser.id
               setCredentials(stateToChange)
               console.log(credentials)
-              props.setUser(user)
+              props.setUser(newUser)
               props.history.push("/");
             })
           })
         } else {
+          delete credentials.id
           const stateToChange = { ...credentials }
           stateToChange.userId = user.id
           setCredentials(stateToChange)

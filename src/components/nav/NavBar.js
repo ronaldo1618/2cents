@@ -18,9 +18,9 @@ const NavBar = props => {
       <>
       <nav>
         <ul className={`container-nav ${toggle ? 'responsive' : ''}`}>
-          <h1 className="site-title">
+          <a href="/" className="site-title">
             2cents
-          </h1>
+          </a>
         {
           props.hasUser ?
           <li>

@@ -67,10 +67,12 @@ const StockCard = ({searchedObj, history, isHomePage, deleteObj, saveToHomePage,
     <Card onClick={() => isHomePage ? history.push("/stocks") : null} className={`${isHomePage ? "stock-card clickable" : ""}`}>
       <Card.Body>
         <Card.Title>{searchedObj.name}</Card.Title>
-        <Card.Text>Price: {searchedObj.price} {searchedObj.difference}({searchedObj.percentDifference}%)</Card.Text>
-        <Card.Text>High: {searchedObj.high}</Card.Text>
-        <Card.Text>Low: {searchedObj.low}</Card.Text>
-        <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
+        <Card.Text>Price: ${searchedObj.price} <span className={`number-is-${searchedObj.difference > 0 ? 'positive' : 'negative'}`}>{searchedObj.difference}</span>(<span className={`number-is-${searchedObj.percentDifference > 0 ? 'positive' : 'negative'}`}>
+          {searchedObj.percentDifference}
+        </span>%)</Card.Text>
+        <Card.Text>High: ${searchedObj.high}</Card.Text>
+        <Card.Text>Low: ${searchedObj.low}</Card.Text>
+        <Card.Text>Previous Closing Price: ${searchedObj.previousClose}</Card.Text>
         {
           isHomePage === true ?
           null

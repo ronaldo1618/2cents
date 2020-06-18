@@ -41,9 +41,11 @@ const ObjList = props => {
   }
 
   const saveObj = objId => {
+    console.log(objId)
     const savedObj = {
       name: objId,
-      userId: props.userId
+      userId: props.userId,
+      homePage: false
     }
     apiManager.post(props.objURL, savedObj).then(() => {
         setIsSearched(!isSearched)

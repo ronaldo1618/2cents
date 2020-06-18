@@ -15,6 +15,7 @@ const Home = props => {
   const [stockArr, setStockArr] = useState([]);
   const [stockNews, setStockNews] = useState([]);
   const [cryptoNews, setCryptoNews] = useState([]);
+  const [newUser, setNewUser] = useState(false)
   let cryptoNamesArr = []
   let stockNamesArr = []
   let objData = []
@@ -30,7 +31,7 @@ const Home = props => {
 
   const getTotalFinance = (userId) => {
     return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, userId).then(totalFinance => {
-      if(totalFinance.length === 0) return
+      if(totalFinance.length === 0) return setNewUser(!newUser)
       setTotalFinance(totalFinance[0])
     }).then(() => {
       apiManager.getByUserId('projects', userId).then(setProjects)
@@ -166,30 +167,37 @@ const Home = props => {
 
   return (
     <>
-      <div className="ta-container">
-          <div onClick={() => props.history.push("/finances")} className="ta-jumbotron clickable">
-            <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${totalFinance.amountLeft}</span></p>
-            <hr/>
-            <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${totalFinance.allBills}</span></p>
-            <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
-          </div>
+      {
+        newUser ?
+        <div className="ta-container">
+          <h1>Get Started Tracking Your Expenses Today!</h1>
         </div>
+        :
+        <div className="ta-container">
+            <div onClick={() => props.history.push("/finances")} className="ta-jumbotron clickable">
+              <p className="display-4">Amount to spend this month: <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
+              <hr/>
+              <p>Total amount spent on expenses this month: <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
+              <p>Total amount of income this month: <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
+            </div>
+          </div>
+      }
       <div>
-      <div className="progress-containers">
-        {
-          projects.map(project =>
-          <div onClick={() => props.history.push("/projects")} className="progress-card clickable" key={project.id}>
-            <h1>{project.name}</h1>
-            <CircularProgressbar 
-              value={(project.amountIn/project.goalAmount * 100).toFixed(1)} 
-              text={`${(project.amountIn/project.goalAmount * 100).toFixed(0)}%`}
-              styles={buildStyles({
-                pathColor: `#4BB187`,
-                textColor: '#4BB187'
-              })} />
-          </div>)
-        }
-      </div>
+        <div className="progress-containers">
+          {
+            projects.map(project =>
+            <div onClick={() => props.history.push("/projects")} className="progress-card clickable" key={project.id}>
+              <h1>{project.name}</h1>
+              <CircularProgressbar 
+                value={(project.amountIn/project.goalAmount * 100).toFixed(1)} 
+                text={`${(project.amountIn/project.goalAmount * 100).toFixed(0)}%`}
+                styles={buildStyles({
+                  pathColor: `#4BB187`,
+                  textColor: '#4BB187'
+                })} />
+            </div>)
+          }
+        </div>
       </div>
       <div className="stocks-and-cryptos">
         <div className="stocks-container">

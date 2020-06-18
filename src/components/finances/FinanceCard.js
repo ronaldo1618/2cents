@@ -7,7 +7,7 @@ const FinanceCard = ({financeObj, history, deleteFinance, toggleTrueFalse, isTog
     <Card className="finance-card ta-jumbotron">
       <Card.Body>
         <Card.Title>{financeObj.name}</Card.Title>
-        <Card.Text className={`number-is-${financeObj.amount > 0 ? 'positive' : 'negative'}`}>${financeObj.amount}</Card.Text>
+        <Card.Text className={`number-is-${financeObj.amount > 0 ? 'positive' : 'negative'}`}>${Math.abs(financeObj.amount)}</Card.Text>
         <Card.Text>{financeObj.date}</Card.Text>
         <hr/>
         {/* <Button variant="outline-info" type="button" onClick={() => {
