@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import { Container, Jumbotron, Form, InputGroup, Button } from 'react-bootstrap'
+import { fixNum } from '../../modules/helpers';
 
 const ProjectForm = props => {
   const [project, setProject] = useState({name: "", startDate: "", completionDate: "", goalAmount: 0, amountIn: 0})
@@ -26,8 +27,8 @@ const ProjectForm = props => {
       name: project.name,
       startDate: project.startDate,
       completionDate: project.completionDate,
-      goalAmount: Number(parseFloat(project.goalAmount).toFixed(2)),
-      amountIn: Number(parseFloat(project.amountIn).toFixed(2)),
+      goalAmount: fixNum(project.goalAmount),
+      amountIn: fixNum(project.amountIn),
       userId: props.userId
     }
     apiManager.put('projects', editedProject).then(() => props.history.push("/projects"))
@@ -36,8 +37,8 @@ const ProjectForm = props => {
   const createNewProject = e => {
     e.preventDefault();
     // add catch clauses
-    project.goalAmount = Number(parseFloat(project.goalAmount).toFixed(2))
-    project.amountIn = Number(parseFloat(project.amountIn).toFixed(2))
+    project.goalAmount = fixNum(project.goalAmount)
+    project.amountIn = fixNum(project.amountIn)
     project.userId = props.userId
     apiManager.post('projects', project).then(() => props.history.push("/projects"))
   }

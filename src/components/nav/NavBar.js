@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
-// import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import './NavBar.css';
 
 const NavBar = props => {

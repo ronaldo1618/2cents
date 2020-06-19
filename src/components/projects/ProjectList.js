@@ -3,7 +3,6 @@ import apiManager from '../../modules/apiManager';
 import ProjectCard from './ProjectCard';
 import { Container } from 'react-bootstrap';
 import { Bar, Radar } from 'react-chartjs-2';
-// import { MonthNameMaker } from '../../modules/helpers';
 
 const ProjectList = props => {
   const [projects, setProjects] = useState([]);
@@ -30,36 +29,13 @@ const ProjectList = props => {
 
   const addAmountIn = (cont, obj) => {
     obj.amountIn += cont.amountIn
-    obj.amountIn = Number(parseFloat(obj.amountIn).toFixed(2))
-
-    // Come back to this if I want to add more complexity
-
-    // let date = new Date().toISOString()
-    // const monthInput = MonthNameMaker("month", date)
-    // const yearInput = MonthNameMaker("year", date)
-    // apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, obj.userId).then(results => {
-    //   // will need to check if this actually exists
-    //   results[0].allBills -= cont.amountIn
-    //   results[0].amountLeft = results[0].allIncome + results[0].allBills
-    //   delete results[0].finances
-    //   apiManager.put('totalFinances', results[0]).then(totalFinance => {
-    //     const contribution = {
-    //       name: obj.name + " Contribution",
-    //       amount: -cont.amountIn,
-    //       date: date.split('T')[0],
-    //       bill: true,
-    //       userId: obj.userId,
-    //       totalFinanceId: totalFinance.id
-    //     }
-    //     apiManager.post('finances', contribution)
-        apiManager.put('projects', obj).then(() => {
-          apiManager.getByUserId('projects', obj.userId).then(projects => {
-            if(projects.length === 0) return
-            combineAllProjects()
-            setProjects(projects)})
-        })
-    //   })
-    // })
+    obj.amountIn = Number(obj.amountIn.toFixed(2))
+    apiManager.put('projects', obj).then(() => {
+      apiManager.getByUserId('projects', obj.userId).then(projects => {
+        if(projects.length === 0) return
+        combineAllProjects()
+        setProjects(projects)})
+    })
   }
 
   const [chartData, setChartData] = useState({})

@@ -5,6 +5,7 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [amountIn, setAmountIn] = useState({amountIn: ''});
   const toggle = () => setIsOpen(!isOpen);
+  
   return (
     <div className="finance-card ta-jumbotron">
       <h3>{projectObj.name}</h3>
