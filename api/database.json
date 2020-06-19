@@ -1,57 +1,22 @@
 {
   "finances": [
     {
-      "name": "Income",
-      "amount": 651.23,
-      "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": false,
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "id": 2,
+      "id": 1,
       "name": "Gas Bill",
-      "amount": -43.32,
-      "date": "2020-06-17",
+      "amount": -50.32,
+      "date": "2020-06-19",
       "totalFinanceId": 1,
       "bill": true,
       "userId": 1
     },
     {
-      "name": "Internet Bill",
-      "amount": -72.34,
+      "id": 2,
+      "name": "Income",
+      "amount": 400.43,
+      "date": "2020-06-19",
       "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": true,
-      "userId": 1,
-      "id": 4
-    },
-    {
-      "name": "Gas Bill",
-      "amount": -123.3,
-      "totalFinanceId": 2,
-      "date": "2020-06-10",
-      "bill": true,
-      "id": 5
-    },
-    {
-      "name": "jn",
-      "amount": -23,
-      "totalFinanceId": 3,
-      "date": "2020-06-02",
-      "bill": true,
-      "userId": 25,
-      "id": 6
-    },
-    {
-      "name": "Gas Bill",
-      "amount": -123.32,
-      "totalFinanceId": 4,
-      "date": "2020-06-24",
-      "bill": true,
-      "userId": 6,
-      "id": 7
+      "bill": false,
+      "userId": 1
     }
   ],
   "users": [
@@ -91,36 +56,10 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allIncome": 651.23,
-      "allBills": -115.66,
-      "amountLeft": 535.57,
+      "allBills": -50.32,
+      "allIncome": 400.43,
+      "amountLeft": 350.11,
       "id": 1
-    },
-    {
-      "month": "June",
-      "year": "2020",
-      "allBills": -123.3,
-      "allIncome": 0,
-      "amountLeft": -123.3,
-      "id": 2
-    },
-    {
-      "month": "June",
-      "year": "2020",
-      "userId": 25,
-      "allBills": -23,
-      "allIncome": 0,
-      "amountLeft": -23,
-      "id": 3
-    },
-    {
-      "month": "June",
-      "year": "2020",
-      "userId": 6,
-      "allBills": -123.32,
-      "allIncome": 0,
-      "amountLeft": -123.32,
-      "id": 4
     }
   ],
   "projects": [

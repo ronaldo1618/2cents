@@ -52,52 +52,61 @@ const Login = props => {
   }
 
   return (
-    <Container className="w-30 p-5 login-container">
-      <Jumbotron className="login-jumbotron">
-      {
-        registering ? 
-        (
-        <Form onSubmit={e => handleLoginAndRegister(e, 'register')}>
-          <fieldset>
-            <h2>Welcome to 2Cents!</h2>
-            <p className="login-question" onClick={toggle}>Already have an account? <span className="btn-nomore">Sign In.</span></p>
-            <Form.Group>
-              <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required/>
-              {/* <label htmlFor="inputEmail">Email address</label> */}
-            </Form.Group>
-            <Form.Group>
-              <Form.Control className="input" onChange={handleFieldChange} type="password" id="password" required placeholder="Password"/>
-              {/* <label htmlFor="inputPassword">Password</label> */}
-            </Form.Group>
-            <Form.Group>
-              <Form.Control className="input" onChange={handleFieldChange} type="password" id="confirmPassword" required placeholder="Confirm Password"/>
-              {/* <label htmlFor="confirmPassword">Confirm Password</label> */}
-            </Form.Group>
-            <Button type="submt" block>Register</Button>
-          </fieldset>
-        </Form> 
-        ) 
-        : 
-        (
-        <Form onSubmit={e => handleLoginAndRegister(e, 'login')}>
-          <fieldset>
-            <h2>Welcome to 2Cents!</h2>
-            <p className="login-question" onClick={toggle}>New? <span className="btn-nomore">Register Here.</span></p>
-            <Form.Group>
-              <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required="" autoFocus="" />
-              {/* <label htmlFor="inputEmail">Email address</label> */}
-            </Form.Group>
-            <Form.Group>
-              <Form.Control className="input" onChange={handleFieldChange} type="password" id="password"  placeholder="Password" required="" />
-              {/* <label htmlFor="inputPassword">Password</label> */}
-            </Form.Group>
-            <Button type="submit" block>Sign In</Button>
-          </fieldset>
-        </Form>
-        )
-      }
-      </Jumbotron>
-    </Container>
+    <>
+      <img className="img" src={require('../nav/img.jpg')}/>
+      <Container className="w-30 p-5 login-container">
+        <Jumbotron className="login-jumbotron">
+        {
+          registering ? 
+          (
+          <Form onSubmit={e => handleLoginAndRegister(e, 'register')}>
+            <fieldset>
+              <div className="logo-container">
+                <img className="logo" src={require('../nav/2cents.png')}></img>
+              </div>
+              <h2>Welcome to 2Cents!</h2>
+              <p className="login-question" onClick={toggle}>Already have an account? <span className="btn-nomore">Sign In.</span></p>
+              <Form.Group>
+                <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required/>
+                {/* <label htmlFor="inputEmail">Email address</label> */}
+              </Form.Group>
+              <Form.Group>
+                <Form.Control className="input" onChange={handleFieldChange} type="password" id="password" required placeholder="Password"/>
+                {/* <label htmlFor="inputPassword">Password</label> */}
+              {/* </Form.Group>
+              <Form.Group> */}
+                <Form.Control className="input" onChange={handleFieldChange} type="password" id="confirmPassword" required placeholder="Confirm Password"/>
+                {/* <label htmlFor="confirmPassword">Confirm Password</label> */}
+              </Form.Group>
+              <Button type="submt" block>Register</Button>
+            </fieldset>
+          </Form> 
+          ) 
+          : 
+          (
+          <Form onSubmit={e => handleLoginAndRegister(e, 'login')}>
+            <fieldset>
+              <div className="logo-container">
+                <img className="logo" src={require('../nav/2cents.png')}></img>
+              </div>
+              <h2>Welcome to 2Cents!</h2>
+              <p className="login-question" onClick={toggle}>New? <span className="btn-nomore">Register Here.</span></p>
+              <Form.Group>
+                <Form.Control className="input" onChange={handleFieldChange} type="email" id="email" placeholder="Email Address" required="" autoFocus="" />
+                {/* <label htmlFor="inputEmail">Email address</label> */}
+              </Form.Group>
+              <Form.Group>
+                <Form.Control className="input" onChange={handleFieldChange} type="password" id="password"  placeholder="Password" required="" />
+                {/* <label htmlFor="inputPassword">Password</label> */}
+              </Form.Group>
+              <Button type="submit" block>Sign In</Button>
+            </fieldset>
+          </Form>
+          )
+        }
+        </Jumbotron>
+      </Container>
+    </>
   );
 };
 

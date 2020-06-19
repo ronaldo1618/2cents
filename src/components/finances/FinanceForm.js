@@ -27,15 +27,15 @@ const FinanceForm = props => {
       if(oldMonthInput !== monthInput || oldYearInput !== yearInput) {
         apiManager.getTotalFinancesWithAllFinances(oldYearInput, oldMonthInput, props.userId).then(results => {
           let oldTotalFinance = results[0];
-          if(expenseObj.bill === true) {
-            oldTotalFinance.allBills -= expenseObj.amount;
-            oldTotalFinance.allBills = oldTotalFinance.allBills.toFixed(2)
+          if(oldExpenseObj.bill === true) {
+            oldTotalFinance.allBills -= oldExpenseObj.amount;
+            oldTotalFinance.allBills = Number(fixNum(oldTotalFinance.allBills))
           } else {
-            oldTotalFinance.allIncome -= expenseObj.amount;
-            oldTotalFinance.allIncome -= oldTotalFinance.allIncome.toFixed(2)
+            oldTotalFinance.allIncome -= oldExpenseObj.amount;
+            oldTotalFinance.allIncome = Number(fixNum(oldTotalFinance.allIncome))
           }
           oldTotalFinance.amountLeft = oldTotalFinance.allIncome + oldTotalFinance.allBills
-          oldTotalFinance.amountLeft = oldTotalFinance.amountLeft.toFixed(2)
+          oldTotalFinance.amountLeft = Number(fixNum(oldTotalFinance.amountLeft))
           delete oldTotalFinance.finances
           apiManager.put("totalFinances", oldTotalFinance).then(() => {
           })

@@ -4,6 +4,22 @@
   align-items: center;
 }
 
+.img {
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+  /* background-image: url(../nav/2cents.png); */
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 80px;
+}
+
 .login-jumbotron {
   /* background: rgba(2, 112, 146, 0.8); */
   background: #fff;

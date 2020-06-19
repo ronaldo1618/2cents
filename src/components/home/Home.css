@@ -4,6 +4,19 @@
   transition: 0.3s;
 }
 
+.img {
+  width: 100%;
+}
+
+.big-circle {
+  position: absolute;  
+  right: 50%;
+  top: 98%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  z-index: -1;
+}
+
 .progress-card h1 {
   text-align: center;
   font-size: 32px;
@@ -17,29 +30,58 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  padding-bottom: 35px;
+  animation: across 1.5s ease;
 }
 
 .stocks-and-cryptos {
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  animation: drop 4.5s ease;
+  /* justify-content: center;
+  flex-direction: row; */
 }
 
+.news-container {
+  /* text-align: center; */
+  width: 50%;
+  margin: 50px;
+  /* margin-top: 15px;
+  margin-left: 15px; */
+}
+
+.news-container h3, h2, .date {
+  text-align: center;
+}
+
+/* .news-container h2 {
+  margin-top: 20px;
+} */
+
+.news-container .summary {
+  margin: 10px 50px;
+}
+
+/* .hr-title {
+  border: 3px solid black;
+  border-radius: 100%;
+} */
+
 .stocks-container {
-  margin: 0px 10px;
-  flex-basis: 45%;
+  border-right: 1px solid black;
+  margin-right: 10px;
+  padding-right: 20px;
 }
 
 .cryptos-container {
-  margin: 0px 10px;
-  flex-basis: 45%;
+  border-left: 1px solid black;
+  /* margin-left: 20px;
+  padding-left: 10px; */
 }
 
 .stock-and-crypto-card {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 10px 15px;
-    text-align: center;
+  font-size: 15px;
+  margin: 10px 15px;
+  text-align: center;
 }
 
 .stock-card {
@@ -61,4 +103,26 @@ h2 {
 
 .clickable {
   cursor: pointer;
+}
+
+@keyframes across {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
