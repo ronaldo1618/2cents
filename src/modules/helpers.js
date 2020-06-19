@@ -13,6 +13,5 @@ export function MonthNameMaker(setTimeStamp, fullDate) {
 
 export function fixNum(value) {
   console.log(value)
-  let num = parseFloat(value).toFixed(2)
-  return num
+  return Number(parseFloat(value).toFixed(2))
 }

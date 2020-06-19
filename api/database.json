@@ -1,21 +1,39 @@
 {
   "finances": [
     {
-      "id": 1,
+      "name": "imlk",
+      "amount": -320,
+      "totalFinanceId": 2,
+      "date": "2020-07-09",
+      "bill": true,
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "id": 4,
       "name": "Gas Bill",
-      "amount": -50.32,
+      "amount": -50.34,
       "date": "2020-06-19",
       "totalFinanceId": 1,
       "bill": true,
       "userId": 1
     },
     {
-      "id": 2,
+      "id": 5,
       "name": "Income",
-      "amount": 400.43,
-      "date": "2020-06-19",
+      "amount": 600.34,
+      "date": "2020-06-20",
       "totalFinanceId": 1,
       "bill": false,
+      "userId": 1
+    },
+    {
+      "id": 6,
+      "name": "Internet Bill",
+      "amount": -65.32,
+      "date": "2020-06-25",
+      "totalFinanceId": 1,
+      "bill": true,
       "userId": 1
     }
   ],
@@ -26,29 +44,9 @@
       "password": "1234"
     },
     {
-      "id": 23,
+      "id": 2,
       "email": "rol@gmail.com",
       "password": "word"
-    },
-    {
-      "email": "random@gmail.com",
-      "password": "1234",
-      "id": 25
-    },
-    {
-      "email": "newone@gmail.com",
-      "password": "1234",
-      "id": 26
-    },
-    {
-      "email": "Another@gmail.com",
-      "password": "1234",
-      "id": 28
-    },
-    {
-      "email": "wordidk@gmail.com",
-      "password": "1234",
-      "id": 6
     }
   ],
   "totalFinances": [
@@ -56,10 +54,19 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -50.32,
-      "allIncome": 400.43,
-      "amountLeft": 350.11,
+      "allBills": -115.66,
+      "allIncome": 600.34,
+      "amountLeft": 484.68,
       "id": 1
+    },
+    {
+      "month": "July",
+      "year": "2020",
+      "userId": 1,
+      "allBills": -320,
+      "allIncome": 0,
+      "amountLeft": -320,
+      "id": 2
     }
   ],
   "projects": [
@@ -69,7 +76,7 @@
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
       "goalAmount": 3200,
-      "amountIn": 400,
+      "amountIn": 700.43,
       "userId": 1
     },
     {
@@ -80,15 +87,6 @@
       "goalAmount": 5000,
       "amountIn": 3800,
       "userId": 1
-    },
-    {
-      "id": 3,
-      "name": "New Tools",
-      "startDate": "2020-06-18",
-      "completionDate": "2020-07-03",
-      "goalAmount": 3000,
-      "amountIn": 450,
-      "userId": 24
     },
     {
       "name": "New Laptop",
@@ -111,19 +109,7 @@
       "name": "XRP",
       "userId": 1,
       "id": 2,
-      "homePage": true
-    },
-    {
-      "name": "BTC",
-      "userId": 25,
-      "id": 5,
       "homePage": false
-    },
-    {
-      "name": "BTC",
-      "userId": 6,
-      "homePage": true,
-      "id": 6
     }
   ],
   "stocks": [
@@ -131,12 +117,6 @@
       "name": "AAPL",
       "userId": 1,
       "id": 2,
-      "homePage": true
-    },
-    {
-      "name": "TSLA",
-      "userId": 24,
-      "id": 4,
       "homePage": true
     },
     {
@@ -150,12 +130,6 @@
       "userId": 1,
       "id": 6,
       "homePage": true
-    },
-    {
-      "name": "TSLA",
-      "userId": 6,
-      "homePage": true,
-      "id": 7
     }
   ]
 }

@@ -16,7 +16,6 @@ const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePa
   }
 
   const graphMaker = (isCrypto, graphType, id) => {
-    // Come back and make this more accurate
     let today = parseInt(Date.now() / 1000)
     let data = []
     let labels = []

@@ -37,34 +37,20 @@
 .stocks-and-cryptos {
   display: flex;
   animation: drop 4.5s ease;
-  /* justify-content: center;
-  flex-direction: row; */
 }
 
 .news-container {
-  /* text-align: center; */
   width: 50%;
   margin: 50px;
-  /* margin-top: 15px;
-  margin-left: 15px; */
 }
 
 .news-container h3, h2, .date {
   text-align: center;
 }
 
-/* .news-container h2 {
-  margin-top: 20px;
-} */
-
 .news-container .summary {
   margin: 10px 50px;
 }
-
-/* .hr-title {
-  border: 3px solid black;
-  border-radius: 100%;
-} */
 
 .stocks-container {
   border-right: 1px solid black;
@@ -74,8 +60,6 @@
 
 .cryptos-container {
   border-left: 1px solid black;
-  /* margin-left: 20px;
-  padding-left: 10px; */
 }
 
 .stock-and-crypto-card {

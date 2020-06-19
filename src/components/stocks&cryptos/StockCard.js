@@ -16,7 +16,6 @@ const StockCard = ({searchedObj, history, isHomePage, deleteObj, saveToHomePage,
   }
 
   const stockGraphMaker = (graphType, id) => {
-    // Come back and make this more accurate
     let today = parseInt(Date.now() / 1000)
     let data = []
     let labels = []

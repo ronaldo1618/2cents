@@ -5,7 +5,6 @@ import CryptoCard from '../stocks&cryptos/CryptoCard';
 import { MonthNameMaker } from '../../modules/helpers';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import './Home.css'
-// import { Carousel, Jumbotron } from 'react-bootstrap';
 
 
 const Home = props => {
@@ -16,6 +15,7 @@ const Home = props => {
   const [stockNews, setStockNews] = useState([]);
   const [cryptoNews, setCryptoNews] = useState([]);
   const [newUser, setNewUser] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   let cryptoNamesArr = []
   let stockNamesArr = []
   let objData = []
@@ -33,6 +33,7 @@ const Home = props => {
     return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, userId).then(totalFinance => {
       if(totalFinance.length === 0) return setNewUser(!newUser)
       setTotalFinance(totalFinance[0])
+      setIsLoading(!isLoading)
     }).then(() => {
       apiManager.getByUserId('projects', userId).then(setProjects)
       settingStockArr()
@@ -174,13 +175,17 @@ const Home = props => {
         </div>
         :
         <div className="ta-container">
+        {
+          isLoading ?
             <div onClick={() => props.history.push("/finances")} className="ta-jumbotron clickable">
               <p className="display-4">Amount to spend this month: <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
               <hr/>
               <p>Total amount spent on expenses this month: <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
               <p>Total amount of income this month: <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${totalFinance.allIncome}</span></p>
             </div>
-          </div>
+          : null
+        }
+        </div>
       }
       <div>
         <div className="progress-containers">

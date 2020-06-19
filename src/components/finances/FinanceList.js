@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
-import './FinanceList.css'
 import FinanceCard from './FinanceCard';
 import { fixNum, MonthNameMaker } from '../../modules/helpers';
-// import { Button, Jumbotron, Card } from 'react-bootstrap'
 import { Doughnut } from 'react-chartjs-2'
+import './FinanceList.css'
 
 const FinanceList = props => {
   const [finances, setFinances] = useState([]);
   const [totalFinance, setTotalFinance] = useState({});
   const [chartData, setChartData] = useState({})
   const [newUser, setNewUser] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false)
   let date = new Date().toISOString()
   const monthInput = MonthNameMaker("month", date)
   const yearInput = MonthNameMaker("year", date)
@@ -20,8 +19,9 @@ const FinanceList = props => {
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
       if(totalFinance.length === 0) return setNewUser(!newUser)
       setTotalFinance(totalFinance[0])
+      setIsLoading(!isLoading)
       setFinances(totalFinance[0].finances)
-      combineAllFinances()
+      combineAllFinances(totalFinance[0].finances)
     })
   }, [props.userId]);
 
@@ -39,46 +39,39 @@ const FinanceList = props => {
       apiManager.put("totalFinances", totalFinance)
     }).then(() => apiManager.delete("finances", obj.id)).then(() => {
       apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
-        console.log(totalFinance)
         if(totalFinance.length === 0) return
         setTotalFinance(totalFinance[0])
+        setIsLoading(true)
         setFinances(totalFinance[0].finances)
-        combineAllFinances()
+        combineAllFinances(totalFinance[0].finances)
       })
     })
   }
 
-  const combineAllFinances = () => {
-    apiManager.getByUserId('finances', props.userId).then(finances => {
-      if(finances.length === 0) return
-      let names = finances.map(finance => finance.name);
-      let values = finances.map(finance => finance.amount);
-      let colors = []
-      for (let i = 0; i < values.length; i++) {
-        // maybe do a specific color for expense and income
-        // so a user can see money coming in and out
-        // const value = values[i];
-        let color = ''
-        // if(value < 0) color = `#4BB187`
-        // if(value > 0) color = `#EF3B3B`
-        let aValue = Math.floor(Math.random() * 256)        
-        let bValue = Math.floor(Math.random() * 256)        
-        let cValue = Math.floor(Math.random() * 256)
-        let dValue = Math.floor(Math.random() * 256)
-        color = `rgba(${aValue}, ${bValue}, ${cValue}, ${dValue})`
-        colors.push(color)     
-      }
-      setChartData({
-        labels: names,
-        datasets: [
-          {
-            label: `all expenses and income for the month of ${monthInput}`,
-            data: values,
-            backgroundColor : colors,
-            borderWidth: 4
-          }
-        ]
-      })
+  const combineAllFinances = (finances) => {
+    if(finances.length === 0) return
+    let names = finances.map(finance => finance.name);
+    let values = finances.map(finance => finance.amount);
+    let colors = []
+    for (let i = 0; i < values.length; i++) {
+      // maybe do a specific color for expense and income
+      let aValue = Math.floor(Math.random() * 256)        
+      let bValue = Math.floor(Math.random() * 256)        
+      let cValue = Math.floor(Math.random() * 256)
+      let dValue = Math.floor(Math.random() * 256)
+      let color = `rgba(${aValue}, ${bValue}, ${cValue}, ${dValue})`
+      colors.push(color)     
+    }
+    setChartData({
+      labels: names,
+      datasets: [
+        {
+          label: `all expenses and income for the month of ${monthInput}`,
+          data: values,
+          backgroundColor : colors,
+          borderWidth: 4
+        }
+      ]
     })
   }
 
@@ -92,12 +85,16 @@ const FinanceList = props => {
           </div>
           :
           <div className="ta-container">
+          {
+            isLoading ?
             <div className="ta-jumbotron">
               <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
               <hr/>
               <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
               <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allIncome)}</span></p>
             </div>
+            : null
+          }
           </div>
         }
         <div className="ta-container">
