@@ -97,7 +97,7 @@ const FinanceList = props => {
           }
           </div>
         }
-        <div className="ta-container">
+        <div className="chart-container">
           <div className="w-50 ta-card ta-jumbotron">
             <Doughnut className="doughnut-data" data={chartData}/>
           </div>

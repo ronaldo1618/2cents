@@ -56,7 +56,8 @@ const StockCard = ({searchedObj, history, isHomePage, deleteObj, saveToHomePage,
         {
           label: `${graphType}`,
           fill: false,
-          data: data.c
+          data: data.c,
+          backgroundColor: '#4BB187'
         }
       ],
     })

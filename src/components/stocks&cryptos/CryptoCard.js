@@ -85,7 +85,8 @@ const CryptoCard = ({cryptoObj, isHomePage, deleteCrypto, homePage, saveToHomePa
         {
           label: `${graphType}`,
           fill: false,
-          data: data.c
+          data: data.c,
+          backgroundColor: '#4BB187'
         }
       ],
     })
