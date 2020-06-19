@@ -212,15 +212,31 @@ const Home = props => {
               </>
             ) : null
           }
-          <div>
-          {stockNews.map(news => 
-          <div key={news.id}>
-            <h3>{news.headline}</h3>
-            <p>{news.datetime}</p>
-            <p>{news.summary}</p>
-          </div>)}
-          </div>
         </div>
+          <div className="news-container">
+            <div>
+              <h2>Crypto News</h2>
+              <hr className="hr-title"/>
+              {cryptoNews.map(news => 
+              <div key={news.id}>
+                <h3>{news.headline}</h3>
+                <p className="date">{news.datetime}</p>
+                <p className="summary">{news.summary}</p>
+                <hr/>
+              </div>)}
+            </div>
+            <div>
+              <h2>Stock News</h2>
+              <hr className="hr-title"/>
+              {stockNews.map(news => 
+              <div key={news.id}>
+                <h3>{news.headline}</h3>
+                <p className="date">{news.datetime}</p>
+                <p className="summary">{news.summary}</p>
+                <hr/>
+              </div>)}
+            </div>
+          </div>
         <div className="cryptos-container">
           {
             cryptoArr.length > 0 ?
@@ -233,14 +249,6 @@ const Home = props => {
               </>
             ) : null
           }
-          <div>
-          {cryptoNews.map(news => 
-          <div key={news.id}>
-            <h3>{news.headline}</h3>
-            <p>{news.datetime}</p>
-            <p>{news.summary}</p>
-          </div>)}
-          </div>
         </div>
       </div>
     </>
