@@ -10,6 +10,7 @@ const FinanceForm = props => {
 
   const addToTotalAmount = (e, expenseObj) => {    
     e.preventDefault();
+    if(!expenseObj.amount || !expenseObj.name || !expenseObj.date) return alert('must fill out all fields')
     expenseObj.amount = Math.abs(parseFloat(expenseObj.amount).toFixed(2))
     expenseObj.userId = props.userId
     expenseObj.bill = bill

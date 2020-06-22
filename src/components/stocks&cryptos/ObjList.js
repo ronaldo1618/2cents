@@ -19,6 +19,8 @@ const ObjList = props => {
     if(str === '') return alert('no input was found')
     if(props.objURL === 'stocks') {
       apiManager.searchForStock(str).then(stockData => {
+        console.log(stockData)
+        if(!stockData.c) return alert('nothing was found for stocks')
         const newSearchedStock = {
           name: str,
           price: stockData.c,

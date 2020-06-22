@@ -62,6 +62,10 @@
   border-left: 1px solid black;
 }
 
+.news-div {
+  text-align: center;
+}
+
 .stock-and-crypto-card {
   font-size: 15px;
   margin: 10px 15px;
