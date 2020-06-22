@@ -31,12 +31,13 @@ const ProjectForm = props => {
       amountIn: fixNum(project.amountIn),
       userId: props.userId
     }
+    if(!project.name || !project.goalAmount || !project.amountIn || !project.completionDate || !project.startDate) return alert('must fill out all fields')
     apiManager.put('projects', editedProject).then(() => props.history.push("/projects"))
   }
 
   const createNewProject = e => {
     e.preventDefault();
-    // add catch clauses
+    if(!project.name || !project.goalAmount || !project.amountIn || !project.completionDate || !project.startDate) return alert('must fill out all fields')
     project.goalAmount = fixNum(project.goalAmount)
     project.amountIn = fixNum(project.amountIn)
     project.userId = props.userId

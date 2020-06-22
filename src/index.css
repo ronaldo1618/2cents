@@ -17,10 +17,29 @@ code {
   outline: none;
   border: none;
   cursor: pointer;
-  /* text-decoration: underline; */
   background: none;
 }
 
-/* ul {
-  list-style: none;
-} */
+.icon-click {
+  cursor: pointer;
+  size: 100px;
+}
+
+.icon-click:hover {
+  cursor: pointer;
+  color: #4BB187;
+}
+
+.arrow-down {
+  padding-left: 4px;
+  color: red;
+}
+
+.arrow-up {
+  padding-left: 4px;
+  color: green
+}
+
+.link {
+  text-align: center;
+}

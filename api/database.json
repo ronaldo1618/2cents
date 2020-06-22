@@ -35,6 +35,24 @@
       "totalFinanceId": 1,
       "bill": true,
       "userId": 1
+    },
+    {
+      "name": "",
+      "amount": -123,
+      "totalFinanceId": 2,
+      "date": "2020-07-15",
+      "bill": true,
+      "userId": 1,
+      "id": 8
+    },
+    {
+      "name": "Side Job",
+      "amount": 58.43,
+      "totalFinanceId": 1,
+      "date": "2020-06-23",
+      "bill": false,
+      "userId": 1,
+      "id": 9
     }
   ],
   "users": [
@@ -55,18 +73,24 @@
       "year": "2020",
       "userId": 1,
       "allBills": -115.66,
-      "allIncome": 600.34,
-      "amountLeft": 484.68,
+      "allIncome": 658.77,
+      "amountLeft": 543.11,
       "id": 1
     },
     {
       "month": "July",
       "year": "2020",
       "userId": 1,
-      "allBills": -320,
+      "allBills": -443,
       "allIncome": 0,
-      "amountLeft": -320,
+      "amountLeft": -443,
       "id": 2
+    },
+    {
+      "year": "",
+      "userId": 1,
+      "amountLeft": null,
+      "id": 3
     }
   ],
   "projects": [
@@ -109,7 +133,7 @@
       "name": "XRP",
       "userId": 1,
       "id": 2,
-      "homePage": false
+      "homePage": true
     }
   ],
   "stocks": [

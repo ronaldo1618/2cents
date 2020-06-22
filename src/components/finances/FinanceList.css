@@ -1,6 +1,14 @@
 .ta-container {
   display: flex;
   justify-content: center;
+  animation: drop 1.5s ease;
+  overflow: hidden;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  animation: rightToLeft 1.5s ease;
 }
 
 .ta-jumbotron {
@@ -14,7 +22,14 @@
 
 .btn-new {
   border: 1px solid #4BB187;
-  width: 50%;
+  width: 10%;
+  color: #4BB187;
+  outline: none;
+}
+
+.btn-graph {
+  border: 1px solid #4BB187;
+  width: 33%;
   color: #4BB187;
   outline: none;
 }

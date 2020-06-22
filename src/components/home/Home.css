@@ -31,12 +31,12 @@
   flex-flow: row wrap;
   justify-content: center;
   padding-bottom: 35px;
-  animation: across 1.5s ease;
+  animation: rightToLeft 1.5s ease;
 }
 
 .stocks-and-cryptos {
   display: flex;
-  animation: drop 4.5s ease;
+  animation: rise 4.5s ease;
 }
 
 .news-container {
@@ -60,6 +60,10 @@
 
 .cryptos-container {
   border-left: 1px solid black;
+}
+
+.news-div {
+  text-align: center;
 }
 
 .stock-and-crypto-card {
@@ -89,7 +93,7 @@ h2 {
   cursor: pointer;
 }
 
-@keyframes across {
+@keyframes rightToLeft {
   0% {
     opacity: 0;
     transform: translateX(-80px);
@@ -100,10 +104,32 @@ h2 {
   }
 }
 
-@keyframes drop {
+@keyframes leftToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+@keyframes rise {
   0% {
     opacity: 0;
     transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
   }
   100% {
     opacity: 1;

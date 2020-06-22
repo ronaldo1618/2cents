@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import { Dimmer, Icon, Image } from 'semantic-ui-react';
 
 const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,20 +8,18 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
   const toggle = () => setIsOpen(!isOpen);
   
   return (
-    <div className="finance-card ta-jumbotron">
-      <h3>{projectObj.name}</h3>
-      <p>Start Date: {projectObj.startDate}</p>
-      <p>Completion Date: {projectObj.completionDate}</p>
-      <p>Goal Amount: ${projectObj.goalAmount}</p>
-      <p>Total Contributions: ${projectObj.amountIn}</p>
-      <Button className="finance-btn" type="button" onClick={toggle}>
-        Details
-      </Button>
+    <div className="project-card ta-jumbotron">
+      <Icon className="icon-click" onClick={toggle} name="ellipsis horizontal"/>
       {isOpen ? (
         <>
+          <h3>{projectObj.name}</h3>
+          <p>Goal Amount: ${projectObj.goalAmount}</p>
+          <p>Total Contributions: ${projectObj.amountIn}</p>
+          <hr/>
           <Button variant="outline-secondary" type="button" onClick={() => history.push(`/projects/form/${projectObj.id}/`)}>Edit</Button>
           <Button type="button" variant="danger" onClick={() => deleteProject(projectObj)}>Delete</Button>
           <Form>
+          <hr/>
           <Form.Group>
             <Form.Label htmlFor="amountIn">Amount To Contribute</Form.Label>
             <InputGroup>
@@ -40,7 +39,14 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
             setIsOpen(false)
             addAmountIn(amountIn, projectObj)}}>Add Contribution</Button>
         </>
-      ) : null}
+      ) : 
+      <>
+        <h3>{projectObj.name}</h3>
+        <p>Start Date: {projectObj.startDate}</p>
+        <p>Completion Date: {projectObj.completionDate}</p>
+        <p>Goal Amount: ${projectObj.goalAmount}</p>
+        <p>Total Contributions: ${projectObj.amountIn}</p>
+      </>}
     </div>
   );
 };

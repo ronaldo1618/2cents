@@ -51,9 +51,7 @@ const ProjectList = props => {
           {
             label: 'Project Contributions',
             data: values,
-            backgroundColor: [
-              'rgba(195, 255, 240, 2)'
-            ],
+            backgroundColor: '#4BB187',
             borderWidth: 4
           }
         ]
@@ -63,31 +61,31 @@ const ProjectList = props => {
 
   return (
     <Container>
-      <hr className="pb-2"/>
-      <div className="ta-container">
-        <input type="button" className="m-3 btn-new" onClick={() => {props.history.push("./projects/form")}} value="New Project"/>
-      </div>
-      <hr className="pb-2"/>
       <div className="ta-container">
         <div className="w-50 p-5 ta-card ta-jumbotron">
         {
           !isOpen ?
           <>
           <div className="ta-container">
-            <input className="m-2 btn-new" value="Show Bar Graph" type="button" onClick={toggle}/>
+            <input className="m-2 btn-graph" value="Show Bar Graph" type="button" onClick={toggle}/>
           </div>
           <Radar data={chartData}/>
           </>
         :
         <>
           <div className="ta-container">
-            <input className="m-2 btn-new" value="Show Line Graph" type="button" onClick={toggle}/>
+            <input className="m-2 btn-graph" value="Show Radar Graph" type="button" onClick={toggle}/>
           </div>
           <Bar data={chartData}/>
         </>
         }
         </div>
       </div>
+      <hr className="pb-2"/>
+      <div className="ta-container">
+        <input type="button" className="m-3 btn-new" onClick={() => {props.history.push("./projects/form")}} value="New Project"/>
+      </div>
+      <hr className="pb-2"/>
       <div className="finance-cards">
         {projects.map(project => <ProjectCard key={project.id} projectObj={project} deleteProject={deleteProject} addAmountIn={addAmountIn} {...props}/>)}
       </div>
