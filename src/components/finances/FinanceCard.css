@@ -2,6 +2,8 @@
   margin: 10px 15px;
   text-align: center;
   flex-basis: 20%;
+  background: #e6e6e6;
+  border: none;
 }
 
 .finance-card:hover {

@@ -5,7 +5,7 @@ import { Icon } from "semantic-ui-react";
 // import * as Zoom from 'chartjs-plugin-zoom';
 import apiManager from "../../modules/apiManager";
 import "./Stocks&Cryptos.css";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 const CryptoCard = ({
   cryptoObj,
@@ -37,6 +37,7 @@ const CryptoCard = ({
         apiManager
           .get1DGraphForCrypto(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -47,6 +48,7 @@ const CryptoCard = ({
         apiManager
           .get1DGraphForStock(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -61,6 +63,7 @@ const CryptoCard = ({
         apiManager
           .get1WGraphForCrypto(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -72,6 +75,7 @@ const CryptoCard = ({
         apiManager
           .get1WGraphForStock(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -86,6 +90,7 @@ const CryptoCard = ({
         apiManager
           .get1MGraphForCrypto(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -97,6 +102,7 @@ const CryptoCard = ({
         apiManager
           .get1MGraphForStock(id, date, today)
           .then((graphData) => {
+            if(!graphData) return
             data = graphData;
             data.c.forEach((data) => {
               labels.push("");
@@ -125,7 +131,7 @@ const CryptoCard = ({
   return (
     <Card
       onClick={() => (isHomePage ? history.push("/cryptos") : null)}
-      className={`${isHomePage ? "stock-card clickable" : ""}`}
+      className={`${isHomePage ? "stock-card clickable" : "stock-card-inverted"}`}
     >
       <Card.Body className="stock-crypto-card">
         <Card.Title>

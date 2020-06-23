@@ -182,7 +182,7 @@ const Home = (props) => {
           {isLoading ? (
             <div
               onClick={() => props.history.push("/finances")}
-              className="ta-jumbotron clickable"
+              className="ta-jumbotron-homepage clickable"
             >
               <p className="display-4">
                 Amount to spend this month:{" "}
@@ -273,7 +273,7 @@ const Home = (props) => {
                 {/* <img src={news.image}/> */}
                 <p className="date">{news.datetime}</p>
                 <p className="summary">{news.summary}</p>
-                <a className="link" href={news.url} target="_blank">Click To Read More</a>
+                <a className="link" href={news.url} rel="noopener noreferrer" target="_blank">Click To Read More</a>
                 <hr />
               </div>
             ))}
@@ -286,7 +286,7 @@ const Home = (props) => {
                 <h3>{news.headline}</h3>
                 <p className="date">{news.datetime}</p>
                 <p className="summary" maxLength="20">{news.summary}</p>
-                <a className="link" href={news.url} target="_blank">Click To Read More</a>
+                <a className="link" href={news.url} rel="noopener noreferrer" target="_blank">Click To Read More</a>
                 <hr />
               </div>
             ))}

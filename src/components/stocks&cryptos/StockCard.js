@@ -33,6 +33,7 @@ const StockCard = ({
       apiManager
         .get1DGraphForStock(id, date, today)
         .then((graphData) => {
+          if(!graphData) return
           data = graphData;
           data.c.forEach((data) => {
             labels.push("");
@@ -45,6 +46,7 @@ const StockCard = ({
       apiManager
         .get1WGraphForStock(id, date, today)
         .then((graphData) => {
+          if(!graphData) return
           data = graphData;
           data.c.forEach((data) => {
             labels.push("");
@@ -57,6 +59,7 @@ const StockCard = ({
       apiManager
         .get1MGraphForStock(id, date, today)
         .then((graphData) => {
+          if(!graphData) return
           data = graphData;
           data.c.forEach((data) => {
             labels.push("");
@@ -84,7 +87,7 @@ const StockCard = ({
     <>
       <Card
         onClick={() => (isHomePage ? history.push("/stocks") : null)}
-        className={`${isHomePage ? "stock-card clickable" : ""}`}
+        className={`${isHomePage ? "stock-card clickable" : "stock-card-inverted"}`}
       >
         <Card.Body className="stock-crypto-card">
           <Card.Title>{searchedObj.name}</Card.Title>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
-import { Dimmer, Icon, Image } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 
 const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
   const [isOpen, setIsOpen] = useState(false);

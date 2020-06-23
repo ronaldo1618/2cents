@@ -48,7 +48,7 @@ const Login = props => {
 
   return (
     <>
-      <img className="img" src={require('../nav/img.jpg')}/>
+      <img className="img" alt="" src={require('../nav/img.jpg')}/>
       <Container className="w-30 p-5 login-container">
         <Jumbotron className="login-jumbotron">
         {
@@ -57,7 +57,7 @@ const Login = props => {
           <Form onSubmit={e => handleLoginAndRegister(e, 'register')}>
             <fieldset>
               <div className="logo-container">
-                <img className="logo" src={require('../nav/2cents.png')}></img>
+                <img alt="" className="logo" src={require('../nav/2cents.png')}></img>
               </div>
               <h2>Welcome to 2Cents!</h2>
               <p className="login-question" onClick={toggle}>Already have an account? <span className="btn-nomore">Sign In.</span></p>
@@ -77,7 +77,7 @@ const Login = props => {
           <Form onSubmit={e => handleLoginAndRegister(e, 'login')}>
             <fieldset>
               <div className="logo-container">
-                <img className="logo" src={require('../nav/2cents.png')}></img>
+                <img alt="" className="logo" src={require('../nav/2cents.png')}></img>
               </div>
               <h2>Welcome to 2Cents!</h2>
               <p className="login-question" onClick={toggle}>New? <span className="btn-nomore">Register Here.</span></p>

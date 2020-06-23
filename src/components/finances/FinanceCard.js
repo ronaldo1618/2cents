@@ -13,7 +13,7 @@ const FinanceCard = ({financeObj, history, deleteFinance, toggleTrueFalse, isTog
         <Button className="finance-btn" variant="outline-primary" type="button" onClick={() => {
           history.push(`/finances/form/${financeObj.id}/`)
         }}>Edit</Button>
-        <Button className="finance-btn" type="button" variant="danger" onClick={() => {
+        <Button className="finance-btn" type="button" variant="outline-danger" onClick={() => {
           deleteFinance(financeObj)
         }}>Delete</Button>
       </Card.Body>
