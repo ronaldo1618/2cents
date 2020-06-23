@@ -3,4 +3,5 @@
   justify-content: center;
   flex-flow: column wrap;
   align-items: center;
+  border: none;
 }

@@ -42,6 +42,10 @@
 .news-container {
   width: 50%;
   margin: 50px;
+  /* padding: 20px;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 10px #b8b8b8, 
+              inset -5px -5px 10px #ffffff; */
 }
 
 .news-container h3, h2, .date {
@@ -77,6 +81,32 @@
   height: 100%;
   width: 100%;
   flex-basis: 100%;
+  box-shadow:  5px 5px 10px #b8b8b8, 
+             -5px -5px 10px #ffffff;
+  border: none;
+  background: #e6e6e6;
+}
+
+.stock-card:hover {
+  margin: 10px;
+  height: 100%;
+  width: 100%;
+  flex-basis: 100%;
+  box-shadow: inset 5px 5px 10px #b8b8b8, 
+              inset -5px -5px 10px #ffffff;
+  border: none;
+  background: #e6e6e6;
+}
+
+.stock-card-inverted {
+  margin: 10px;
+  height: 100%;
+  width: 100%;
+  flex-basis: 100%;
+  box-shadow: inset 5px 5px 10px #b8b8b8, 
+              inset -5px -5px 10px #ffffff;
+  border: none;
+  background: #e6e6e6;
 }
 
 .stock-card:hover {
@@ -91,6 +121,21 @@ h2 {
 
 .clickable {
   cursor: pointer;
+}
+
+.ta-jumbotron-homepage {
+  margin-top: 5px;
+  padding: 5px;
+  box-shadow: inset 5px 5px 10px #b8b8b8, 
+              inset -5px -5px 10px #ffffff;
+  color: #333;
+  width: 50%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.ta-jumbotron-homepage p, hr {
+  margin: 10px 30px;
 }
 
 @keyframes rightToLeft {

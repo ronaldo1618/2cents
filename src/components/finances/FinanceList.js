@@ -75,6 +75,20 @@ const FinanceList = props => {
     })
   }
 
+  const [budget, setBudget] = useState({})
+  const [checkBudgetRule, setCheckBudgetRule] = useState(false)
+
+  const budgetRule = () => {
+    apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
+      if(totalFinance.length === 0) return
+      setBudget({
+        expenses: totalFinance[0].allIncome * .50,
+        wants: totalFinance[0].allIncome * .30,
+        savings: totalFinance[0].allIncome * .20
+      })
+    })
+  }
+
   return (
     <>
       <section className="section-content">
@@ -87,7 +101,7 @@ const FinanceList = props => {
           <div className="ta-container">
           {
             isLoading ?
-            <div className="ta-jumbotron">
+            <div className="ta-jumbotron-homepage">
               <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
               <hr/>
               <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
@@ -103,10 +117,29 @@ const FinanceList = props => {
           </div>
         </div>
         <hr/>
-        <div className="ta-container">
-          <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
+        <div className="budget-container">
+          <h4>Are you following the 50/30/20 budget rule?</h4>
+          <input type="button" value="Check" className="btn-new" onClick={() => {
+            let result = budgetRule()
+            setCheckBudgetRule(!checkBudgetRule)
+            }}/>
+          {
+            checkBudgetRule ?
+            <div>
+              <h4>Based on your income, you should be putting:</h4>
+              <ul>
+                <li>${budget.expenses} towards your needs</li>
+                <li>${budget.wants} towards things you want</li>
+                <li>${budget.savings} towards savings</li>
+              </ul>
+            </div>
+            : null
+          }
         </div>
         <hr/>
+        <div className="budget-container">
+          <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
+        </div>
       </section>
       <div className="finance-cards">
         {finances.map(finance => <FinanceCard key={finance.id} financeObj={finance} deleteFinance={deleteFinance} objURL="finances" {...props}/>)}
