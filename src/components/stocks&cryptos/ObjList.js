@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
-import { Container, Jumbotron, Form, Button, Card } from 'react-bootstrap';
+import { Container, Jumbotron, Form, Button, Card, InputGroup } from 'react-bootstrap';
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -146,21 +146,22 @@ const ObjList = props => {
 
   return (
     <Container>
-      <Jumbotron>
-        <Form>
-          <Form.Group>
-            <Form.Label htmlFor="search">search for {props.objURL}</Form.Label>
+      <div className="d-flex justify-content-center">
+        <div className="search-jumbotron">
+          <InputGroup className="mb-3">
             <Form.Control type="text" id="name" required onChange={e => {
               setIsSearched(false)
               setStr(e.target.value)}} placeholder={`Search for ${props.objURL}`}/>
-          </Form.Group>
-          <Button type="button" onClick={search}>Search</Button>
-        </Form>
-      </Jumbotron>
+            <InputGroup.Append>
+              <Button type="button" onClick={search}>Search</Button>
+            </InputGroup.Append>
+          </InputGroup>
+        </div>
+      </div>
       {
         isSearched && props.objURL === 'stocks' ?
-        <Container>
-          <Card>
+        <Container className="search-result-container">
+          <Card className="search-result-card">
             <Card.Body>
               <Card.Title>{searchedObj.name}</Card.Title>
               <Card.Text>Price: {searchedObj.price} {searchedObj.difference}({searchedObj.percentDifference}%)</Card.Text>
@@ -178,8 +179,8 @@ const ObjList = props => {
       }
       {
         isSearched && props.objURL === 'cryptos' ?
-        <Container>
-          <Card>
+        <Container className="search-result-container">
+          <Card className="search-result-card">
             <Card.Body>
               <Card.Title>Name: {searchedObj.name} / {searchedObj.id}</Card.Title>
               <Card.Text>Market Cap:{searchedObj.market_cap}</Card.Text>
