@@ -5,3 +5,25 @@
   align-items: center;
   border: none;
 }
+
+.search-jumbotron {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.search-result-card {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+}
+
+.search-result-card button {
+  margin: 2px;
+}
+
+.search-result-container {
+  display: flex;
+  justify-content: center;
+}

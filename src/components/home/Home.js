@@ -229,6 +229,7 @@ const Home = (props) => {
             >
               <h1>{project.name}</h1>
               <CircularProgressbar
+              className="progress-bar-container"
                 value={((project.amountIn / project.goalAmount) * 100).toFixed(
                   1
                 )}

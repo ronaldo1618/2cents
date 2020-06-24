@@ -74,8 +74,13 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  animation: rise 4.5s ease;
 }
 
 #new-entry {
   align-self: center;
+}
+
+#bill {
+  margin-left: 4px;
 }

@@ -162,7 +162,7 @@ const FinanceForm = props => {
               </InputGroup>
             </Form.Group>
             <Form.Group>
-              <Form.Label htmlFor="date">date</Form.Label>
+              <Form.Label htmlFor="date">Date</Form.Label>
               <input type="date" id="date" required onChange={handleChange} value={expenseObj.date}/>
             </Form.Group>
             <div>
