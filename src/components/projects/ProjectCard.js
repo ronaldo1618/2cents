@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from 'moment';
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { Icon } from 'semantic-ui-react';
 
@@ -42,8 +43,8 @@ const ProjectCard = ({ projectObj, history, deleteProject, addAmountIn }) => {
       ) : 
       <>
         <h3>{projectObj.name}</h3>
-        <p>Start Date: {projectObj.startDate}</p>
-        <p>Completion Date: {projectObj.completionDate}</p>
+        <p>Start Date: {moment(projectObj.startDate, "YYYY-MM-DD").format("MMM Do YYYY")}</p>
+        <p>Completion Date: {moment(projectObj.completionDate, "YYYY-MM-DD").format("MMM Do YYYY")}</p>
         <p>Goal Amount: ${projectObj.goalAmount}</p>
         <p>Total Contributions: ${projectObj.amountIn}</p>
       </>}

@@ -21,7 +21,9 @@ const FinanceList = props => {
       if(totalFinance.length === 0) return setNewUser(!newUser)
       setTotalFinance(totalFinance[0])
       setIsLoading(!isLoading)
-      setFinances(totalFinance[0].finances)
+      setFinances(totalFinance[0].finances.sort(function (x, y) {
+        return Date.parse(x.date) - Date.parse(y.date);
+      }))
       combineAllFinances(totalFinance[0].finances)
     })
   }, [props.userId]);
