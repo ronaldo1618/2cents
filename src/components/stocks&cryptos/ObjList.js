@@ -3,6 +3,7 @@ import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
 import { Container, Form, Button, Card, InputGroup } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react'
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -161,12 +162,23 @@ const ObjList = props => {
         isSearched && props.objURL === 'stocks' ?
         <Container className="search-result-container">
           <Card className="search-result-card">
-            <Card.Body>
-              <Card.Title>{searchedObj.name}</Card.Title>
-              <Card.Text>Price: {searchedObj.price} {searchedObj.difference}({searchedObj.percentDifference}%)</Card.Text>
-              <Card.Text>High: {searchedObj.high}</Card.Text>
-              <Card.Text>Low: {searchedObj.low}</Card.Text>
-              <Card.Text>Previous Closing Price: {searchedObj.previousClose}</Card.Text>
+          <Card.Body className="stock-crypto-card">
+            <Card.Title>{searchedObj.name}</Card.Title>
+            <Card.Text>
+              Price:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.price)}
+              <Icon name={`${searchedObj.difference > 0 ? "arrow up" : "arrow down"}`} className={`${searchedObj.difference > 0 ? "arrow-up" : "arrow-down"}`}/>
+              <span className={`number-is-${searchedObj.difference > 0 ? "positive" : "negative"}`}>{searchedObj.difference}</span>
+              (<span className={`number-is-${searchedObj.percentDifference > 0 ? "positive" : "negative"}`}>{searchedObj.percentDifference}</span>%)
+            </Card.Text>
+            <Card.Text>
+              High:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.high)}
+            </Card.Text>
+            <Card.Text>
+              Low:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.low)}
+            </Card.Text>
+            <Card.Text>
+              Previous Closing Price:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.previousClose)}
+            </Card.Text>
             </Card.Body>
             <div>
               <Button type="button" onClick={() => saveObj(str)}>Save Stock</Button>
@@ -180,14 +192,26 @@ const ObjList = props => {
         isSearched && props.objURL === 'cryptos' ?
         <Container className="search-result-container">
           <Card className="search-result-card">
-            <Card.Body>
-              <Card.Title>Name: {searchedObj.name} / {searchedObj.id}</Card.Title>
-              <Card.Text>Market Cap:{searchedObj.market_cap}</Card.Text>
-              <Card.Text>Market Cap Change:{(searchedObj["1d"].market_cap_change_pct * 100).toFixed(2)}%</Card.Text>
-              <Card.Text>Volume: {searchedObj["1d"].volume}</Card.Text>
-              <Card.Text>Volume Change: {(searchedObj["1d"].volume_change_pct*100).toFixed(2)}%</Card.Text>
-              <Card.Text>Price: {searchedObj.price}</Card.Text>
-              <Card.Text>Price Change: {(searchedObj["1d"].price_change_pct * 100).toFixed(2)}%</Card.Text>
+          <Card.Body className="stock-crypto-card">
+            <Card.Title>
+              {searchedObj.name} / {searchedObj.id}
+            </Card.Title>
+            <Card.Text>
+              Market Cap:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.market_cap)}
+              <Icon name={`${searchedObj["1d"].market_cap_change_pct * 100 > 0 ? "arrow up" : "arrow down"}`} className={`${searchedObj["1d"].market_cap_change_pct * 100 > 0 ? "arrow-up" : "arrow-down"}`}/>
+              <span className={`number-is-${searchedObj["1d"].market_cap_change_pct * 100 > 0 ? "positive" : "negative"}`}>{(searchedObj["1d"].market_cap_change_pct * 100).toFixed(2)}</span>%
+            </Card.Text>
+            <Card.Text>
+              Volume:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj["1d"].volume)}
+              <Icon name={`${searchedObj["1d"].volume_change_pct * 100 > 0 ? "arrow up" : "arrow down"}`} className={`${searchedObj["1d"].volume_change_pct * 100 > 0 ? "arrow-up" : "arrow-down"}`}/>
+              <span className={`number-is-${searchedObj["1d"].volume_change_pct * 100 > 0 ? "positive" : "negative"}`}>{(searchedObj["1d"].volume_change_pct * 100).toFixed(2)}</span>%
+            </Card.Text>
+            <Card.Text>
+              Price:{" "} {new Intl.NumberFormat("eng", {style: "currency", currency: "USd"}).format(searchedObj.price)}
+              <Icon name={`${searchedObj["1d"].price_change_pct * 100 > 0 ? "arrow up" : "arrow down"}`} className={`${searchedObj["1d"].price_change_pct * 100 > 0 ? "arrow-up" : "arrow-down"}`}/>
+              <span className={`number-is-${searchedObj["1d"].price_change_pct * 100 > 0 ? "positive" : "negative"}`}></span>
+              <span className={`number-is-${searchedObj["1d"].price_change_pct * 100 > 0 ? "positive" : "negative"}`}>{(searchedObj["1d"].price_change_pct * 100).toFixed(2)}</span>%
+              </Card.Text>
               <div>
                 <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Crypto</Button>
                 <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
