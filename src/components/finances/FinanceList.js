@@ -3,6 +3,7 @@ import apiManager from '../../modules/apiManager';
 import FinanceCard from './FinanceCard';
 import { fixNum, MonthNameMaker } from '../../modules/helpers';
 import { Doughnut } from 'react-chartjs-2'
+import { Modal, Button } from 'react-bootstrap'
 import './FinanceList.css'
 
 const FinanceList = props => {
@@ -76,18 +77,22 @@ const FinanceList = props => {
   }
 
   const [budget, setBudget] = useState({})
-  const [checkBudgetRule, setCheckBudgetRule] = useState(false)
 
   const budgetRule = () => {
     apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
       if(totalFinance.length === 0) return
       setBudget({
-        expenses: totalFinance[0].allIncome * .50,
-        wants: totalFinance[0].allIncome * .30,
-        savings: totalFinance[0].allIncome * .20
+        expenses: (totalFinance[0].allIncome * .50).toFixed(2),
+        wants: (totalFinance[0].allIncome * .30).toFixed(2),
+        savings: (totalFinance[0].allIncome * .20).toFixed(2)
       })
     })
   }
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -102,7 +107,7 @@ const FinanceList = props => {
           {
             isLoading ?
             <div className="ta-jumbotron-homepage">
-              <p className="display-4">Amount to spend this month <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
+              <p className="display-4">Amount to spend for {totalFinance.month} <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
               <hr/>
               <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
               <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allIncome)}</span></p>
@@ -120,21 +125,27 @@ const FinanceList = props => {
         <div className="budget-container">
           <h4>Are you following the 50/30/20 budget rule?</h4>
           <input type="button" value="Check" className="btn-new" onClick={() => {
-            let result = budgetRule()
-            setCheckBudgetRule(!checkBudgetRule)
+            handleShow()
+            budgetRule()
             }}/>
-          {
-            checkBudgetRule ?
-            <div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>50/30/20 Budget Rule for {totalFinance.month}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
               <h4>Based on your income, you should be putting:</h4>
               <ul>
-                <li>${budget.expenses} towards your needs</li>
+                <li>${budget.expenses} towards necessities</li>
                 <li>${budget.wants} towards things you want</li>
                 <li>${budget.savings} towards savings</li>
               </ul>
-            </div>
-            : null
-          }
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
         <hr/>
         <div className="budget-container">
