@@ -200,12 +200,6 @@
       "id": 2
     },
     {
-      "year": "",
-      "userId": 1,
-      "amountLeft": null,
-      "id": 3
-    },
-    {
       "month": "June",
       "year": "2020",
       "userId": 3,
@@ -222,7 +216,7 @@
       "startDate": "2020-06-10",
       "completionDate": "2020-07-10",
       "goalAmount": 3200,
-      "amountIn": 700.43,
+      "amountIn": 900.43,
       "userId": 1
     },
     {
@@ -287,12 +281,6 @@
       "name": "AAPL",
       "userId": 1,
       "id": 2,
-      "homePage": true
-    },
-    {
-      "name": "TSLA",
-      "userId": 1,
-      "id": 5,
       "homePage": false
     },
     {
@@ -306,6 +294,12 @@
       "userId": 3,
       "homePage": true,
       "id": 7
+    },
+    {
+      "name": "TSLA",
+      "userId": 1,
+      "homePage": true,
+      "id": 8
     }
   ]
 }
