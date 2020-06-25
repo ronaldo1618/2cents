@@ -19,105 +19,6 @@
       "id": 8
     },
     {
-      "name": "Car Insurance",
-      "amount": -170,
-      "totalFinanceId": 1,
-      "date": "2020-06-30",
-      "bill": true,
-      "userId": 1,
-      "id": 9
-    },
-    {
-      "id": 10,
-      "name": "Electric Bill",
-      "amount": -134.32,
-      "date": "2020-06-30",
-      "totalFinanceId": 1,
-      "bill": true,
-      "userId": 1
-    },
-    {
-      "name": "Income",
-      "amount": 800,
-      "totalFinanceId": 1,
-      "date": "2020-06-23",
-      "bill": false,
-      "userId": 1,
-      "id": 11
-    },
-    {
-      "name": "Water Bill",
-      "amount": -32.43,
-      "totalFinanceId": 1,
-      "date": "2020-06-03",
-      "bill": true,
-      "userId": 1,
-      "id": 12
-    },
-    {
-      "name": "Phone Bill",
-      "amount": -78,
-      "totalFinanceId": 1,
-      "date": "2020-06-24",
-      "bill": true,
-      "userId": 1,
-      "id": 13
-    },
-    {
-      "name": "Credit Card",
-      "amount": -55.43,
-      "totalFinanceId": 1,
-      "date": "2020-06-11",
-      "bill": true,
-      "userId": 1,
-      "id": 14
-    },
-    {
-      "name": "Chick-fil-A",
-      "amount": -150,
-      "totalFinanceId": 1,
-      "date": "2020-06-16",
-      "bill": true,
-      "userId": 1,
-      "id": 15
-    },
-    {
-      "name": "Income #2",
-      "amount": 800,
-      "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": false,
-      "userId": 1,
-      "id": 16
-    },
-    {
-      "name": "Internet",
-      "amount": -94.32,
-      "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": true,
-      "userId": 1,
-      "id": 17
-    },
-    {
-      "id": 18,
-      "name": "Gas Bill",
-      "amount": -43.23,
-      "date": "2020-06-17",
-      "totalFinanceId": 1,
-      "bill": true,
-      "userId": 1
-    },
-    {
-      "name": "Car payment",
-      "amount": -279,
-      "totalFinanceId": 1,
-      "date": "2020-06-17",
-      "bill": true,
-      "userId": 1,
-      "id": 19
-    },
-    {
       "name": "New One",
       "amount": -123,
       "totalFinanceId": 2,
@@ -125,15 +26,6 @@
       "bill": true,
       "userId": 1,
       "id": 20
-    },
-    {
-      "name": "Side Job",
-      "amount": 232.32,
-      "totalFinanceId": 1,
-      "date": "2020-06-25",
-      "bill": false,
-      "userId": 1,
-      "id": 21
     },
     {
       "name": "car payment",
@@ -161,6 +53,114 @@
       "bill": false,
       "userId": 3,
       "id": 24
+    },
+    {
+      "name": "Car Insurance",
+      "amount": -170,
+      "totalFinanceId": 1,
+      "date": "2020-06-29",
+      "bill": true,
+      "userId": 1,
+      "id": 25
+    },
+    {
+      "name": "Electric Bill",
+      "amount": -134.32,
+      "totalFinanceId": 1,
+      "date": "2020-06-24",
+      "bill": true,
+      "userId": 1,
+      "id": 26
+    },
+    {
+      "name": "Income",
+      "amount": 800,
+      "totalFinanceId": 1,
+      "date": "2020-06-03",
+      "bill": false,
+      "userId": 1,
+      "id": 27
+    },
+    {
+      "name": "Water Bill",
+      "amount": -32.43,
+      "totalFinanceId": 1,
+      "date": "2020-06-03",
+      "bill": true,
+      "userId": 1,
+      "id": 28
+    },
+    {
+      "name": "Phone Bill",
+      "amount": -78,
+      "totalFinanceId": 1,
+      "date": "2020-06-24",
+      "bill": true,
+      "userId": 1,
+      "id": 29
+    },
+    {
+      "name": "Credit Card",
+      "amount": -55.43,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": true,
+      "userId": 1,
+      "id": 30
+    },
+    {
+      "name": "Chick-fil-A",
+      "amount": -150,
+      "totalFinanceId": 1,
+      "date": "2020-06-18",
+      "bill": true,
+      "userId": 1,
+      "id": 31
+    },
+    {
+      "name": "Income #2",
+      "amount": 800,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": false,
+      "userId": 1,
+      "id": 32
+    },
+    {
+      "name": "Internet",
+      "amount": -94.32,
+      "totalFinanceId": 1,
+      "date": "2020-06-16",
+      "bill": true,
+      "userId": 1,
+      "id": 33
+    },
+    {
+      "name": "Gas Bill",
+      "amount": -43.32,
+      "totalFinanceId": 1,
+      "date": "2020-06-19",
+      "bill": true,
+      "userId": 1,
+      "id": 34
+    },
+    {
+      "name": "Car Payment",
+      "amount": -279,
+      "totalFinanceId": 1,
+      "date": "2020-06-17",
+      "bill": true,
+      "userId": 1,
+      "id": 35
+    },
+    {
+      "id": 36,
+      "name": "Side Job",
+      "amount": 232.65,
+      "date": "2020-06-26",
+      "totalFinanceId": 1,
+      "bill": false,
+      "userId": 1
     }
   ],
   "users": [
@@ -185,9 +185,9 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -1036.73,
-      "allIncome": 1832.32,
-      "amountLeft": 795.59,
+      "allBills": -1036.82,
+      "allIncome": 1832.65,
+      "amountLeft": 795.83,
       "id": 1
     },
     {
@@ -214,7 +214,7 @@
       "id": 1,
       "name": "New Car",
       "startDate": "2020-06-10",
-      "completionDate": "2020-07-10",
+      "completionDate": "2021-10-10",
       "goalAmount": 3200,
       "amountIn": 900.43,
       "userId": 1
@@ -223,19 +223,19 @@
       "id": 2,
       "name": "College Fund",
       "startDate": "2020-06-12",
-      "completionDate": "2020-07-10",
+      "completionDate": "2022-07-10",
       "goalAmount": 5000,
       "amountIn": 3800,
       "userId": 1
     },
     {
+      "id": 4,
       "name": "New Laptop",
       "startDate": "2020-06-18",
       "completionDate": "2020-07-09",
-      "goalAmount": 3200,
+      "goalAmount": 1200,
       "amountIn": 800,
-      "userId": 1,
-      "id": 4
+      "userId": 1
     },
     {
       "name": "florida trip",

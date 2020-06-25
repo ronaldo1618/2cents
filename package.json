@@ -10,6 +10,7 @@
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^0.7.7",
     "intl": "^1.2.5",
+    "moment": "^2.27.0",
     "progressbar.js": "^1.1.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

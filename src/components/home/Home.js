@@ -94,7 +94,7 @@ const Home = (props) => {
   const getCryptoNews = () => {
     apiManager.getCryptoNews().then((news) => {
       let cryptoNewsSorted = news.sort(function (x, y) {
-        return x.dateimte - y.datetime;
+        return x.datetime - y.datetime;
       });
       let cryptoNewsNow = cryptoNewsSorted.slice(0, 5);
       for (let i = 0; i < cryptoNewsNow.length; i++) {
