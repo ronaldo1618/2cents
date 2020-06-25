@@ -28,44 +28,31 @@ const StockCard = ({
     let data = [];
     let labels = [];
     let date = "";
+    const settingGraphData = (func, id, date, today) => {
+      return func(id, date, today)
+              .then((graphData) => {
+                if(graphData.c === undefined) {
+                  console.log(graphData)
+                  return settingGraphData(func, id, date, today)
+                }
+                data = graphData;
+                data.c.forEach((data) => {
+                  labels.push("");
+                });
+              })
+              .then(() => chartDataNow(graphType, labels, data));
+    }
     if (graphType === "One Day Graph") {
       date = parseInt(today - 86400);
-      apiManager
-        .get1DGraphForStock(id, date, today)
-        .then((graphData) => {
-          if(!graphData) return
-          data = graphData;
-          data.c.forEach((data) => {
-            labels.push("");
-          });
-        })
-        .then(() => chartDataNow(graphType, labels, data));
+      settingGraphData(apiManager.get1DGraphForStock, id, date, today)
     }
     if (graphType === "One Week Graph") {
       date = parseInt(today - 432000);
-      apiManager
-        .get1WGraphForStock(id, date, today)
-        .then((graphData) => {
-          if(!graphData) return
-          data = graphData;
-          data.c.forEach((data) => {
-            labels.push("");
-          });
-        })
-        .then(() => chartDataNow(graphType, labels, data));
+      settingGraphData(apiManager.get1WGraphForStock, id, date, today)
     }
     if (graphType === "One Month Graph") {
       date = parseInt(today - 2678400);
-      apiManager
-        .get1MGraphForStock(id, date, today)
-        .then((graphData) => {
-          if(!graphData) return
-          data = graphData;
-          data.c.forEach((data) => {
-            labels.push("");
-          });
-        })
-        .then(() => chartDataNow(graphType, labels, data));
+      settingGraphData(apiManager.get1MGraphForStock, id, date, today)
     }
   };
 

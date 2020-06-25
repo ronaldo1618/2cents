@@ -125,6 +125,42 @@
       "bill": true,
       "userId": 1,
       "id": 20
+    },
+    {
+      "name": "Side Job",
+      "amount": 232.32,
+      "totalFinanceId": 1,
+      "date": "2020-06-25",
+      "bill": false,
+      "userId": 1,
+      "id": 21
+    },
+    {
+      "name": "car payment",
+      "amount": -200,
+      "totalFinanceId": 4,
+      "date": "2020-06-24",
+      "bill": true,
+      "userId": 3,
+      "id": 22
+    },
+    {
+      "name": "credit card payment ",
+      "amount": -50,
+      "totalFinanceId": 4,
+      "date": "2020-06-24",
+      "bill": true,
+      "userId": 3,
+      "id": 23
+    },
+    {
+      "name": "job ",
+      "amount": 800,
+      "totalFinanceId": 4,
+      "date": "2020-06-22",
+      "bill": false,
+      "userId": 3,
+      "id": 24
     }
   ],
   "users": [
@@ -137,6 +173,11 @@
       "id": 2,
       "email": "rol@gmail.com",
       "password": "word"
+    },
+    {
+      "email": "potato@yahoo.com",
+      "password": "1234",
+      "id": 3
     }
   ],
   "totalFinances": [
@@ -145,8 +186,8 @@
       "year": "2020",
       "userId": 1,
       "allBills": -1036.73,
-      "allIncome": 1600,
-      "amountLeft": 563.27,
+      "allIncome": 1832.32,
+      "amountLeft": 795.59,
       "id": 1
     },
     {
@@ -163,6 +204,15 @@
       "userId": 1,
       "amountLeft": null,
       "id": 3
+    },
+    {
+      "month": "June",
+      "year": "2020",
+      "userId": 3,
+      "allBills": -250,
+      "allIncome": 800,
+      "amountLeft": 550,
+      "id": 4
     }
   ],
   "projects": [
@@ -192,6 +242,24 @@
       "amountIn": 800,
       "userId": 1,
       "id": 4
+    },
+    {
+      "name": "florida trip",
+      "startDate": "2020-06-24",
+      "completionDate": "2020-07-24",
+      "goalAmount": 900,
+      "amountIn": 150,
+      "userId": 3,
+      "id": 5
+    },
+    {
+      "name": "new car",
+      "startDate": "2020-06-01",
+      "completionDate": "2020-08-01",
+      "goalAmount": 5000,
+      "amountIn": 290,
+      "userId": 3,
+      "id": 6
     }
   ],
   "cryptos": [
@@ -206,6 +274,12 @@
       "userId": 1,
       "id": 2,
       "homePage": true
+    },
+    {
+      "name": "BTC",
+      "userId": 3,
+      "homePage": true,
+      "id": 3
     }
   ],
   "stocks": [
@@ -219,13 +293,19 @@
       "name": "TSLA",
       "userId": 1,
       "id": 5,
-      "homePage": true
+      "homePage": false
     },
     {
       "name": "AMZN",
       "userId": 1,
       "id": 6,
       "homePage": true
+    },
+    {
+      "name": "TSLA",
+      "userId": 3,
+      "homePage": true,
+      "id": 7
     }
   ]
 }

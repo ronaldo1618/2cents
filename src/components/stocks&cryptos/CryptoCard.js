@@ -26,89 +26,48 @@ const CryptoCard = ({
     if (graphType === "oneMonth") setShowOneMonthGraph(!showOneMonthGraph);
   };
 
+  // Move this to a new file and call on it for cryptos and stocks after demo
   const graphMaker = (isCrypto, graphType, id) => {
     let today = parseInt(Date.now() / 1000);
     let data = [];
     let labels = [];
     let date = "";
+    const settingGraphData = (func, id, date, today) => {
+      return func(id, date, today)
+              .then((graphData) => {
+                if(graphData.c === undefined) {
+                  console.log(graphData)
+                  return settingGraphData(func, id, date, today)
+                }
+                data = graphData;
+                data.c.forEach((data) => {
+                  labels.push("");
+                });
+              })
+              .then(() => chartDataNow(graphType, labels, data));
+    }
     if (graphType === "One Day Graph") {
       date = parseInt(today - 86400);
       if (isCrypto) {
-        apiManager
-          .get1DGraphForCrypto(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1DGraphForCrypto, id, date, today)
       } else {
-        apiManager
-          .get1DGraphForStock(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1DGraphForStock, id, date, today)
       }
     }
     if (graphType === "One Week Graph") {
+      date = parseInt(today - 432000);
       if (isCrypto) {
-        date = parseInt(today - 432000);
-        apiManager
-          .get1WGraphForCrypto(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1WGraphForCrypto, id, date, today)
       } else {
-        date = parseInt(today - 432000);
-        apiManager
-          .get1WGraphForStock(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1WGraphForStock, id, date, today)
       }
     }
     if (graphType === "One Month Graph") {
+      date = parseInt(today - 2678400);
       if (isCrypto) {
-        date = parseInt(today - 2678400);
-        apiManager
-          .get1MGraphForCrypto(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1MGraphForCrypto, id, date, today)
       } else {
-        date = parseInt(today - 2678400);
-        apiManager
-          .get1MGraphForStock(id, date, today)
-          .then((graphData) => {
-            if(!graphData) return
-            data = graphData;
-            data.c.forEach((data) => {
-              labels.push("");
-            });
-          })
-          .then(() => chartDataNow(graphType, labels, data));
+        settingGraphData(apiManager.get1MGraphForStock, id, date, today)
       }
     }
   };
@@ -126,7 +85,6 @@ const CryptoCard = ({
       ],
     });
   };
-  console.log();
 
   return (
     <Card

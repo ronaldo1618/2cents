@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import StockCard from './StockCard';
 import CryptoCard from './CryptoCard';
-import { Container, Jumbotron, Form, Button, Card, InputGroup } from 'react-bootstrap';
+import { Container, Form, Button, Card, InputGroup } from 'react-bootstrap';
 
 const ObjList = props => {
   const [str, setStr] = useState('');
@@ -19,7 +19,6 @@ const ObjList = props => {
     if(str === '') return alert('no input was found')
     if(props.objURL === 'stocks') {
       apiManager.searchForStock(str).then(stockData => {
-        console.log(stockData)
         if(!stockData.c) return alert('nothing was found for stocks')
         const newSearchedStock = {
           name: str,
