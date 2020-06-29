@@ -103,6 +103,27 @@ const FinanceList = props => {
 
   const search = e => {
     e.preventDefault();
+    if(str === 'all') return viewAllEntries(e)
+    if(str === 'bill' || str === 'bills') {
+      return apiManager.getExpensesOnly(props.userId).then(result => {
+        if(result.length === 0) return alert('nothing was found')
+        setFinances(result.sort(function (x, y) {
+          return Date.parse(x.date) - Date.parse(y.date);
+        }));
+        setShowGraphButton(true);
+        setStr('')
+      })
+    }
+    if(str === 'income') {
+      return apiManager.getIncomeOnly(props.userId).then(result => {
+        if(result.length === 0) return alert('nothing was found')
+        setFinances(result.sort(function (x, y) {
+          return Date.parse(x.date) - Date.parse(y.date);
+        }));
+        setShowGraphButton(true);
+        setStr('')
+      })
+    }
     if(str === '') {
       return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
         if(totalFinance.length === 0) return setNewUser(!newUser)
@@ -156,6 +177,7 @@ const FinanceList = props => {
         return Date.parse(x.date) - Date.parse(y.date);
       }));
     })
+    setStr('')
   }
 
   return (
@@ -214,9 +236,6 @@ const FinanceList = props => {
         <hr/>
         <div className="budget-container">
           <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
-        </div>
-        <div className="budget-container">
-          <input type="button" value="View All" className="btn-new" onClick={e => viewAllEntries(e)}/>
         </div>
         <div className="d-flex justify-content-center">
           <div className="search-jumbotron">

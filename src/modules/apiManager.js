@@ -92,5 +92,11 @@ export default {
   },
   getByUserIdAndSearchTerm(collection, id, search) {
     return fetch(`${remoteURL}/${collection}/?userId=${id}&q=${search}`).then(result => result.json());
+  },
+  getExpensesOnly(id) {
+    return fetch(`${remoteURL}/finances/?userId=${id}&bill=true`).then(result => result.json());
+  },
+  getIncomeOnly(id) {
+    return fetch(`${remoteURL}/finances/?userId=${id}&bill=false`).then(result => result.json());
   }
 }
