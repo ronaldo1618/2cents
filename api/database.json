@@ -1,24 +1,6 @@
 {
   "finances": [
     {
-      "name": "imlk",
-      "amount": -320,
-      "totalFinanceId": 2,
-      "date": "2020-07-09",
-      "bill": true,
-      "userId": 1,
-      "id": 3
-    },
-    {
-      "name": "",
-      "amount": -123,
-      "totalFinanceId": 2,
-      "date": "2020-07-15",
-      "bill": true,
-      "userId": 1,
-      "id": 8
-    },
-    {
       "name": "New One",
       "amount": -123,
       "totalFinanceId": 2,
@@ -239,9 +221,9 @@
       "month": "July",
       "year": "2020",
       "userId": 1,
-      "allBills": -998.18,
+      "allBills": -555.18,
       "allIncome": 0,
-      "amountLeft": -998.18,
+      "amountLeft": -555.18,
       "id": 2
     },
     {

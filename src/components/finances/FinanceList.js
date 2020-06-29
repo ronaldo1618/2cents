@@ -103,7 +103,6 @@ const FinanceList = props => {
 
   const search = e => {
     e.preventDefault();
-    setStr('')
     if(str === '') {
       return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
         if(totalFinance.length === 0) return setNewUser(!newUser)
@@ -114,15 +113,17 @@ const FinanceList = props => {
         }))
         combineAllFinances(totalFinance[0].finances)
         setShowGraphButton(false);
+        setShowExpenseGraph(false);
+        setStr('')
       })
     } else {
-      apiManager.getByUserId('finances', props.userId).then(result => {
-        let searchedExpense = result.filter(result => result.name === str)
-        if(searchedExpense.length === 0) return alert('nothing was found')
-        setFinances(searchedExpense.sort(function (x, y) {
+      apiManager.getByUserIdAndSearchTerm('finances', props.userId, str).then(result => {
+        if(result.length === 0) return alert('nothing was found')
+        setFinances(result.sort(function (x, y) {
           return Date.parse(x.date) - Date.parse(y.date);
         }));
-        setShowGraphButton(!showGraphButton);
+        setShowGraphButton(true);
+        setStr('')
       })
     }
   }
@@ -139,13 +140,22 @@ const FinanceList = props => {
       labels: labels,
       datasets: [
         {
-          label: `Graph of ${finances[0].name}`,
+          label: `Dank Graph`,
           data: data,
           backgroundColor: "#4BB187",
         }
       ]
     })
     setShowExpenseGraph(!showExpenseGraph)
+  }
+
+  const viewAllEntries = e => {
+    e.preventDefault();
+    apiManager.getByUserId('finances', props.userId).then(result => {
+      setFinances(result.sort(function (x, y) {
+        return Date.parse(x.date) - Date.parse(y.date);
+      }));
+    })
   }
 
   return (
@@ -204,6 +214,9 @@ const FinanceList = props => {
         <hr/>
         <div className="budget-container">
           <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
+        </div>
+        <div className="budget-container">
+          <input type="button" value="View All" className="btn-new" onClick={e => viewAllEntries(e)}/>
         </div>
         <div className="d-flex justify-content-center">
           <div className="search-jumbotron">

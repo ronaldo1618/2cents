@@ -89,5 +89,8 @@ export default {
   },
   get1MGraphForCrypto(company, startDate, endDate) {
     return fetch(`https://finnhub.io/api/v1/stock/candle?symbol=BINANCE:${company}USDT&resolution=30&from=${startDate}&to=${endDate}&token=${finnhubKey}`).then(result => result.json());
+  },
+  getByUserIdAndSearchTerm(collection, id, search) {
+    return fetch(`${remoteURL}/${collection}/?userId=${id}&q=${search}`).then(result => result.json());
   }
 }
