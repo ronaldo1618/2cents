@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import apiManager from '../../modules/apiManager';
 import FinanceCard from './FinanceCard';
+import moment from 'moment';
 import { fixNum, MonthNameMaker } from '../../modules/helpers';
-import { Doughnut } from 'react-chartjs-2'
-import { Modal, Button } from 'react-bootstrap'
+import { Doughnut, Line } from 'react-chartjs-2'
+import { Modal, Button, InputGroup, Form } from 'react-bootstrap'
 import './FinanceList.css'
 
 const FinanceList = props => {
@@ -92,9 +93,60 @@ const FinanceList = props => {
   }
 
   const [show, setShow] = useState(false);
+  const [str, setStr] = useState('');
+  const [expenseGraph, setExpenseGraph] = useState({});
+  const [showExpenseGraph, setShowExpenseGraph] = useState(false);
+  const [showGraphButton, setShowGraphButton] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const search = e => {
+    e.preventDefault();
+    setStr('')
+    if(str === '') {
+      return apiManager.getTotalFinancesWithAllFinances(yearInput, monthInput, props.userId).then(totalFinance => {
+        if(totalFinance.length === 0) return setNewUser(!newUser)
+        setTotalFinance(totalFinance[0])
+        setIsLoading(!isLoading)
+        setFinances(totalFinance[0].finances.sort(function (x, y) {
+          return Date.parse(x.date) - Date.parse(y.date);
+        }))
+        combineAllFinances(totalFinance[0].finances)
+        setShowGraphButton(false);
+      })
+    } else {
+      apiManager.getByUserId('finances', props.userId).then(result => {
+        let searchedExpense = result.filter(result => result.name === str)
+        if(searchedExpense.length === 0) return alert('nothing was found')
+        setFinances(searchedExpense.sort(function (x, y) {
+          return Date.parse(x.date) - Date.parse(y.date);
+        }));
+        setShowGraphButton(!showGraphButton);
+      })
+    }
+  }
+
+  const graphExpense = e => {
+    e.preventDefault();
+    let labels = []
+    let data = []
+    finances.forEach(finance => {
+      data.push(Math.abs(finance.amount))
+      labels.push(moment(finance.date, "YYYY-MM-DD").format("MMM Do YYYY"))
+    })
+    setExpenseGraph({
+      labels: labels,
+      datasets: [
+        {
+          label: `Graph of ${finances[0].name}`,
+          data: data,
+          backgroundColor: "#4BB187",
+        }
+      ]
+    })
+    setShowExpenseGraph(!showExpenseGraph)
+  }
 
   return (
     <>
@@ -153,6 +205,31 @@ const FinanceList = props => {
         <div className="budget-container">
           <input type="button" value="New Entry" className="btn-new" onClick={() => {props.history.push("./finances/form")}}/>
         </div>
+        <div className="d-flex justify-content-center">
+          <div className="search-jumbotron">
+            <InputGroup className="mb-3">
+              <Form.Control type="text" id="name" required onChange={e => {
+                setStr(e.target.value)}} value={str} placeholder='Search'/>
+              <InputGroup.Append>
+                <Button variant="outline-primary" type="button" onClick={search}>Search</Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </div>
+        </div>
+      {
+        showGraphButton ?
+        <div className="budget-container">
+          <input type="button" value="Graph It!" className="btn-new" onClick={graphExpense}/>
+        </div>
+        :
+        null
+      }
+      {
+        showExpenseGraph ?
+        <Line data={expenseGraph}/>
+        :
+        null
+      }
       </section>
       <div className="finance-cards">
         {finances.map(finance => <FinanceCard key={finance.id} financeObj={finance} deleteFinance={deleteFinance} objURL="finances" {...props}/>)}

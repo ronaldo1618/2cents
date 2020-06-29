@@ -55,22 +55,22 @@
       "id": 24
     },
     {
+      "id": 25,
       "name": "Car Insurance",
       "amount": -170,
-      "totalFinanceId": 1,
       "date": "2020-06-29",
+      "totalFinanceId": 1,
       "bill": true,
-      "userId": 1,
-      "id": 25
+      "userId": 1
     },
     {
+      "id": 26,
       "name": "Electric Bill",
-      "amount": -134.32,
-      "totalFinanceId": 1,
+      "amount": -134.64,
       "date": "2020-06-24",
+      "totalFinanceId": 1,
       "bill": true,
-      "userId": 1,
-      "id": 26
+      "userId": 1
     },
     {
       "name": "Income",
@@ -118,13 +118,13 @@
       "id": 31
     },
     {
+      "id": 32,
       "name": "Income #2",
-      "amount": 800,
+      "amount": 875,
+      "date": "2020-06-26",
       "totalFinanceId": 1,
-      "date": "2020-06-17",
       "bill": false,
-      "userId": 1,
-      "id": 32
+      "userId": 1
     },
     {
       "name": "Internet",
@@ -134,15 +134,6 @@
       "bill": true,
       "userId": 1,
       "id": 33
-    },
-    {
-      "name": "Gas Bill",
-      "amount": -43.32,
-      "totalFinanceId": 1,
-      "date": "2020-06-19",
-      "bill": true,
-      "userId": 1,
-      "id": 34
     },
     {
       "name": "Car Payment",
@@ -161,6 +152,60 @@
       "totalFinanceId": 1,
       "bill": false,
       "userId": 1
+    },
+    {
+      "name": "Car Insurance",
+      "amount": -170,
+      "totalFinanceId": 2,
+      "date": "2020-07-09",
+      "bill": true,
+      "userId": 1,
+      "id": 38
+    },
+    {
+      "name": "Gas Bill",
+      "amount": -43.32,
+      "totalFinanceId": 2,
+      "date": "2020-07-03",
+      "bill": true,
+      "userId": 1,
+      "id": 40
+    },
+    {
+      "name": "Gas Bill",
+      "amount": -43.43,
+      "totalFinanceId": 2,
+      "date": "2020-07-09",
+      "bill": true,
+      "userId": 1,
+      "id": 42
+    },
+    {
+      "name": "gas bill",
+      "amount": -43,
+      "totalFinanceId": 2,
+      "date": "2020-07-09",
+      "bill": true,
+      "userId": 1,
+      "id": 43
+    },
+    {
+      "name": "Electric Bill",
+      "amount": -132.43,
+      "totalFinanceId": 2,
+      "date": "2020-07-09",
+      "bill": true,
+      "userId": 1,
+      "id": 44
+    },
+    {
+      "name": "Electric Bill",
+      "amount": -130,
+      "totalFinanceId": 5,
+      "date": "2020-05-20",
+      "bill": true,
+      "userId": 1,
+      "id": 45
     }
   ],
   "users": [
@@ -185,18 +230,18 @@
       "month": "June",
       "year": "2020",
       "userId": 1,
-      "allBills": -1036.82,
-      "allIncome": 1832.65,
-      "amountLeft": 795.83,
+      "allBills": -993.82,
+      "allIncome": 1907.65,
+      "amountLeft": 913.83,
       "id": 1
     },
     {
       "month": "July",
       "year": "2020",
       "userId": 1,
-      "allBills": -566,
+      "allBills": -998.18,
       "allIncome": 0,
-      "amountLeft": -566,
+      "amountLeft": -998.18,
       "id": 2
     },
     {
@@ -207,18 +252,18 @@
       "allIncome": 800,
       "amountLeft": 550,
       "id": 4
+    },
+    {
+      "month": "May",
+      "year": "2020",
+      "userId": 1,
+      "allBills": -130,
+      "allIncome": 0,
+      "amountLeft": -130,
+      "id": 5
     }
   ],
   "projects": [
-    {
-      "id": 1,
-      "name": "New Car",
-      "startDate": "2020-06-10",
-      "completionDate": "2021-10-10",
-      "goalAmount": 3200,
-      "amountIn": 900.43,
-      "userId": 1
-    },
     {
       "id": 2,
       "name": "College Fund",
@@ -254,41 +299,50 @@
       "amountIn": 290,
       "userId": 3,
       "id": 6
+    },
+    {
+      "id": 7,
+      "name": "Gift Card",
+      "startDate": "2020-06-02",
+      "completionDate": "2022-11-25",
+      "goalAmount": 500,
+      "amountIn": 450,
+      "userId": 1
     }
   ],
   "cryptos": [
     {
       "name": "BTC",
-      "userId": 1,
-      "id": 1,
-      "homePage": true
+      "userId": 3,
+      "homePage": true,
+      "id": 3
     },
     {
       "name": "XRP",
       "userId": 1,
-      "id": 2,
-      "homePage": true
+      "homePage": true,
+      "id": 4
+    },
+    {
+      "name": "ETH",
+      "userId": 1,
+      "homePage": true,
+      "id": 6
     },
     {
       "name": "BTC",
-      "userId": 3,
+      "userId": 1,
       "homePage": true,
-      "id": 3
+      "id": 7
+    },
+    {
+      "name": "USDT",
+      "userId": 1,
+      "homePage": true,
+      "id": 8
     }
   ],
   "stocks": [
-    {
-      "name": "AAPL",
-      "userId": 1,
-      "id": 2,
-      "homePage": false
-    },
-    {
-      "name": "AMZN",
-      "userId": 1,
-      "id": 6,
-      "homePage": true
-    },
     {
       "name": "TSLA",
       "userId": 3,
@@ -296,10 +350,22 @@
       "id": 7
     },
     {
+      "name": "AAPL",
+      "userId": 1,
+      "homePage": true,
+      "id": 9
+    },
+    {
       "name": "TSLA",
       "userId": 1,
       "homePage": true,
-      "id": 8
+      "id": 10
+    },
+    {
+      "name": "AMZN",
+      "userId": 1,
+      "homePage": true,
+      "id": 11
     }
   ]
 }

@@ -198,7 +198,7 @@ const CryptoCard = ({
             >
               Delete
             </Button>
-            {homePage !== true ? (
+            {cryptoObj.homePage !== true ? (
               <Button
                 className="m-2"
                 variant="outline-primary"
