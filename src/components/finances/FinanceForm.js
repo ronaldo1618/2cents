@@ -100,7 +100,7 @@ const FinanceForm = props => {
         if(expenseObj.amount > 0 && monthInput !== oldMonthInput) {
           existingTotalFinance.allIncome += expenseObj.amount
         } 
-        if(oldExpenseObj.amount !== expenseObj.amount || monthInput !== oldMonthInput) existingTotalFinance.amountLeft = fixNum(existingTotalFinance.allIncome + existingTotalFinance.allBills)
+        if(oldExpenseObj.amount !== expenseObj.amount || monthInput !== oldMonthInput) existingTotalFinance.amountLeft = existingTotalFinance.allIncome + existingTotalFinance.allBills
         existingTotalFinance.allBills = fixNum(existingTotalFinance.allBills)
         existingTotalFinance.allIncome = fixNum(existingTotalFinance.allIncome)
         delete existingTotalFinance.finances

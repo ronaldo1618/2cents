@@ -37,15 +37,6 @@
       "id": 24
     },
     {
-      "id": 25,
-      "name": "Car Insurance",
-      "amount": -170,
-      "date": "2020-06-29",
-      "totalFinanceId": 1,
-      "bill": true,
-      "userId": 1
-    },
-    {
       "id": 26,
       "name": "Electric Bill",
       "amount": -134.64,
@@ -188,6 +179,15 @@
       "bill": true,
       "userId": 1,
       "id": 45
+    },
+    {
+      "id": 46,
+      "name": "Car Insurance",
+      "amount": -170,
+      "date": "2020-06-30",
+      "totalFinanceId": 1,
+      "bill": true,
+      "userId": 1
     }
   ],
   "users": [
