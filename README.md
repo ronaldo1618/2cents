@@ -2,12 +2,11 @@
   2cents is an expense tracker that will keep track of expenses by month and year. A user can create projects where they can track their contributions towards paying a debt off or saving up for something. The homepage will be built out and display what the projects and overall expenses for that month. A user can also search for a specific stock or crypto and save it to the homepage so they can get a quick view of how their favorite stocks or cryptos are doing.
 
 ## Getting Started
-  * Register an account
-  (*) **Note: this is not true authentication.** Email addresses are saved in clear text in the JSON database, and anyone who knows your email could login to see information inside the database. Do not store any sensitive information.
+  * Register an account (*) **Note: this is not true authentication.** Email addresses are saved in clear text in the JSON database, and anyone who knows your email could login to see information inside the database. Do not store any sensitive information.
   * Your homepage will need to be built out
   * Go to the expense tab and start recording expenses and income for a specific month
   * Go to projects and make new entries for things you are trying to track
-  * Search Cryptos and Stocks and save some to your homepage(*) to use this functionality, you must register for an api key. Follow These Steps.
+  * Search Cryptos and Stocks and save some to your homepage (*) **Note: to use this functionality, you must register for an api key. [Follow These Steps.](#Getting-API-Keys)**
   * Now your homepage will be fully built out and you can get the whole 2cents experience!
 
 ## Initial Setup of 2cents
@@ -17,7 +16,8 @@
   1. `npm install` for dependencies
   1. `npm start` Should automatically open in chrome, if not type in 'http://localhost:3000' in your browser.
   Now to get the JSON server up:
-  1. `cd api`
+  1. Open a new terminal tab
+  1. `cd 2cents/api`
   1. `json-server -p 5002 -w database.json`
 
 ## Technologies Used
