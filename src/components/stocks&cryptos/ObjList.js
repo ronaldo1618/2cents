@@ -17,6 +17,8 @@ const ObjList = props => {
 
   const search = e => {
     e.preventDefault();
+    // setStr('')
+    setValue('')
     if(str === '') return alert('no input was found')
     if(props.objURL === 'stocks') {
       apiManager.searchForStock(str).then(stockData => {
@@ -43,6 +45,7 @@ const ObjList = props => {
   }
 
   const saveObj = objId => {
+    console.log(str, objId, value)
     const savedObj = {
       name: objId,
       userId: props.userId,
@@ -53,34 +56,47 @@ const ObjList = props => {
       }).then(() => {
         apiManager.getByUserId(props.objURL, props.userId).then(userObjs => {
           settingStrArr(userObjs)
+          setStr('')
         })
       })
   }
 
+  const [nothingToShow, setNothingToShow] = useState(false);
+
   const settingStrArr = (userObjs) => {
-    if(userObjs.length === 0) return
+    if(userObjs.length === 0) return setNothingToShow(!nothingToShow)
+    let sorted = userObjs.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
     for (let i = 0; i < userObjs.length; i++) {
       const trueOrFalse = userObjs[i].homePage
       const name = userObjs[i].name;
       namesArr.push(name)
       homePageValue.push(trueOrFalse)
     }
+    let nameString = namesArr.join(',')
     if(props.objURL === 'stocks') {
       getStocks(namesArr).then(() => {
         setArr(objData)
-        setIsDone(!isDone)
+        setNothingToShow(false)
       })
     } else {
-      let nameString = namesArr.join(',')
-      apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
-        getStocks(arrOfCryptos)
-        for (let i = 0; i < arrOfCryptos.length; i++) {
-          const crypto = arrOfCryptos[i];
-          crypto.homePage = homePageValue[i]
-        }
-        setArr(arrOfCryptos)
+      getCryptos(nameString).then(() => {
+        setArr(cryptoObjData.sort((a, b) => (a.last_nom > b.last_nom) ? 1 : ((b.last_nom > a.last_nom) ? -1 : 0)))
+        setNothingToShow(false)
       })
     }
+  }
+
+  let cryptoObjData = []
+
+  async function getCryptos(nameString) {
+    const result = await apiManager.searchForCrypto(nameString).then(arrOfCryptos => {
+      let arr = arrOfCryptos.sort()
+      for (let i = 0; i < arrOfCryptos.length; i++) {
+        const crypto = arrOfCryptos[i];
+        crypto.homePage = homePageValue[i]
+        cryptoObjData.push(crypto)
+      }
+    })
   }
 
   async function getStocks(namesArr) {
@@ -144,6 +160,8 @@ const ObjList = props => {
     })
   }
 
+  const [value, setValue] = useState('')
+
   return (
     <Container>
       <div className="d-flex justify-content-center">
@@ -151,7 +169,8 @@ const ObjList = props => {
           <InputGroup className="mb-3">
             <Form.Control type="text" id="name" required onChange={e => {
               setIsSearched(false)
-              setStr(e.target.value)}} placeholder={`Search for ${props.objURL}`}/>
+              setValue(e.target.value)
+              setStr(e.target.value)}} value={value} placeholder={`Search for ${props.objURL}`}/>
             <InputGroup.Append>
               <Button type="button" onClick={search}>Search</Button>
             </InputGroup.Append>
@@ -213,7 +232,7 @@ const ObjList = props => {
               <span className={`number-is-${searchedObj["1d"].price_change_pct * 100 > 0 ? "positive" : "negative"}`}>{(searchedObj["1d"].price_change_pct * 100).toFixed(2)}</span>%
               </Card.Text>
               <div>
-                <Button type="button" onClick={() => saveObj(searchedObj.id)}>Save Crypto</Button>
+                <Button type="button" onClick={() => saveObj(str)}>Save Crypto</Button>
                 <Button type="button" variant="danger" onClick={() => setIsSearched(false)}>Cancel</Button>
               </div>
             </Card.Body>
@@ -221,19 +240,24 @@ const ObjList = props => {
         </Container> : null
       }
       {
-        props.objURL === 'cryptos' ?
-        <div className="">
-        {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} homePage={crypto.homePage} deleteCrypto={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
-        </div>
-        : null
-      }
-      {
-        props.objURL === 'stocks' ?
-        <div className="">
-        {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} 
-        saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
-        </div>
-        : null
+        !nothingToShow ?
+        <>
+        {
+          props.objURL === 'cryptos' ?
+          <div className="">
+          {arr.map(crypto => <CryptoCard key={crypto.id} cryptoObj={crypto} homePage={crypto.homePage} deleteCrypto={deleteObj} saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
+          </div>
+          : null
+        }
+        {
+          props.objURL === 'stocks' ?
+          <div className="">
+          {arr.map(stock => <StockCard key={stock.name} searchedObj={stock} deleteObj={deleteObj} 
+          saveToHomePage={saveToHomePage} unSaveFromHomePage={unSaveFromHomePage} {...props}/>)}
+          </div>
+          : null
+        }
+        </> : null
       }
     </Container>
   )

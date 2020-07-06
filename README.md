@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 2cents Overview
+  2cents is an expense tracker that will keep track of expenses by month and year. A user can create projects where they can track their contributions towards paying a debt off or saving up for something. The homepage will be built out and display what the projects and overall expenses for that month. A user can also search for a specific stock or crypto and save it to the homepage so they can get a quick view of how their favorite stocks or cryptos are doing.
 
-## Available Scripts
+## Getting Started
+  * Register an account
+  (*) **Note: this is not true authentication.** Email addresses are saved in clear text in the JSON database, and anyone who knows your email could login to see information inside the database. Do not store any sensitive information.
+  * Your homepage will need to be built out
+  * Go to the expense tab and start recording expenses and income for a specific month
+  * Go to projects and make new entries for things you are trying to track
+  * Search Cryptos and Stocks and save some to your homepage(*) to use this functionality, you must register for an api key. Follow These Steps.
+  * Now your homepage will be fully built out and you can get the whole 2cents experience!
 
-In the project directory, you can run:
+## Initial Setup of 2cents
+  Follow these steps to get started:
+  1. `git clone git@github.com:ronaldo1618/2cents.git`
+  1. `cd` into 2cents
+  1. `npm install` for dependencies
+  1. `npm start` Should automatically open in chrome, if not type in 'http://localhost:3000' in your browser.
+  Now to get the JSON server up:
+  1. `cd api`
+  1. `json-server -p 5002 -w database.json`
 
-### `npm start`
+## Technologies Used
+  This app utilizes these technologies:
+  * This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  * [Semantic UI](https://react.semantic-ui.com/) for icons
+  * [React Router](https://reacttraining.com/react-router/) for page routing
+  * [React-bootstrap](https://react-bootstrap.github.io/) for forms, buttons, cards
+  * [chart-js](https://www.chartjs.org/) for charts
+  * [moment-js](https://momentjs.com/) for dates
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Skills Utilized
+  1. API Calls: POST, PUT, DELETE, GET
+  1. JavaScript: Objects, Arrays, Functions, etc.
+  1. Persistent data storage with JSON server
+  1. Github Scrum workflow
+  1. CSS
+  1. Semantic HTML
+  1. React: hooks, props, routes
+  1. Modular code
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Getting API Keys
+  1. In your terminal, cd to the modules directory
+  1. `touch APIkeys.js`
+  1. This file should already be ignored in the .gitignore but double check to make sure. Triple check.
+  1. Now you will need to register for two api keys. Get a key from (https://nomics.com/) and (https://finnhub.io/).
+  1. Once you have that file and your keys, store them in variables in APIkeys.js and export them to be used in the apiManager.js
+  * Store them as `const nomicsKey = <>your key as string here<>`
+                  `const finnhubKey = <>your key as string here<>`
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Troubleshooting
+  If you are having trouble getting the application running:
+  * Double check your file paths to make sure they are in the right directories
+  * Make sure all dependencies are installed
+  * Check to make sure your servers are correct. Should be `localhost:3000` for app and `localhost:5002` for the JSON server.
+  * Contact me through my linkedin and I would be happy to try and help (https://www.linkedin.com/in/ronald-lankford/)
