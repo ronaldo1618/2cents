@@ -3,12 +3,12 @@
 
 ## Getting Started
   * Register an account
+  (*) **Note: this is not true authentication.** Email addresses are saved in clear text in the JSON database, and anyone who knows your email could login to see information inside the database. Do not store any sensitive information.
   * Your homepage will need to be built out
   * Go to the expense tab and start recording expenses and income for a specific month
   * Go to projects and make new entries for things you are trying to track
   * Search Cryptos and Stocks and save some to your homepage(*) to use this functionality, you must register for an api key. Follow These Steps.
   * Now your homepage will be fully built out and you can get the whole 2cents experience!
-  (*) **Note: this is not true authentication.** Email addresses are saved in clear text in the JSON database, and anyone who knows your email could login to see information inside database. Do not store any sensitive information.
 
 ## Initial Setup of 2cents
   Follow these steps to get started:
@@ -49,7 +49,7 @@
                   `const finnhubKey = <>your key as string here<>`
 
 ## Troubleshooting
-  If you are having trouble getting the application running
+  If you are having trouble getting the application running:
   * Double check your file paths to make sure they are in the right directories
   * Make sure all dependencies are installed
   * Check to make sure your servers are correct. Should be `localhost:3000` for app and `localhost:5002` for the JSON server.

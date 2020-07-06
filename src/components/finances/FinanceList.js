@@ -161,7 +161,7 @@ const FinanceList = props => {
       labels: labels,
       datasets: [
         {
-          label: `Dank Graph`,
+          label: ``,
           data: data,
           backgroundColor: "#4BB187",
         }
