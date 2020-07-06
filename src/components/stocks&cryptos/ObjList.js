@@ -17,7 +17,8 @@ const ObjList = props => {
 
   const search = e => {
     e.preventDefault();
-    setStr('')
+    // setStr('')
+    setValue('')
     if(str === '') return alert('no input was found')
     if(props.objURL === 'stocks') {
       apiManager.searchForStock(str).then(stockData => {
@@ -44,6 +45,7 @@ const ObjList = props => {
   }
 
   const saveObj = objId => {
+    console.log(str, objId, value)
     const savedObj = {
       name: objId,
       userId: props.userId,
@@ -54,6 +56,7 @@ const ObjList = props => {
       }).then(() => {
         apiManager.getByUserId(props.objURL, props.userId).then(userObjs => {
           settingStrArr(userObjs)
+          setStr('')
         })
       })
   }
@@ -157,6 +160,8 @@ const ObjList = props => {
     })
   }
 
+  const [value, setValue] = useState('')
+
   return (
     <Container>
       <div className="d-flex justify-content-center">
@@ -164,7 +169,8 @@ const ObjList = props => {
           <InputGroup className="mb-3">
             <Form.Control type="text" id="name" required onChange={e => {
               setIsSearched(false)
-              setStr(e.target.value)}} value={str} placeholder={`Search for ${props.objURL}`}/>
+              setValue(e.target.value)
+              setStr(e.target.value)}} value={value} placeholder={`Search for ${props.objURL}`}/>
             <InputGroup.Append>
               <Button type="button" onClick={search}>Search</Button>
             </InputGroup.Append>

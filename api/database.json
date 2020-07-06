@@ -1,42 +1,6 @@
 {
   "finances": [
     {
-      "name": "New One",
-      "amount": -123,
-      "totalFinanceId": 2,
-      "date": "2020-07-09",
-      "bill": true,
-      "userId": 1,
-      "id": 20
-    },
-    {
-      "name": "car payment",
-      "amount": -200,
-      "totalFinanceId": 4,
-      "date": "2020-06-24",
-      "bill": true,
-      "userId": 3,
-      "id": 22
-    },
-    {
-      "name": "credit card payment ",
-      "amount": -50,
-      "totalFinanceId": 4,
-      "date": "2020-06-24",
-      "bill": true,
-      "userId": 3,
-      "id": 23
-    },
-    {
-      "name": "job ",
-      "amount": 800,
-      "totalFinanceId": 4,
-      "date": "2020-06-22",
-      "bill": false,
-      "userId": 3,
-      "id": 24
-    },
-    {
       "id": 26,
       "name": "Electric Bill",
       "amount": -134.64,
@@ -145,24 +109,6 @@
       "id": 40
     },
     {
-      "name": "Gas Bill",
-      "amount": -43.43,
-      "totalFinanceId": 2,
-      "date": "2020-07-09",
-      "bill": true,
-      "userId": 1,
-      "id": 42
-    },
-    {
-      "name": "gas bill",
-      "amount": -43,
-      "totalFinanceId": 2,
-      "date": "2020-07-09",
-      "bill": true,
-      "userId": 1,
-      "id": 43
-    },
-    {
       "name": "Electric Bill",
       "amount": -132.43,
       "totalFinanceId": 2,
@@ -188,6 +134,78 @@
       "totalFinanceId": 1,
       "bill": true,
       "userId": 1
+    },
+    {
+      "name": "Side Job",
+      "amount": 232.23,
+      "totalFinanceId": 2,
+      "date": "2020-07-08",
+      "bill": false,
+      "userId": 1,
+      "id": 47
+    },
+    {
+      "name": "Car Payment",
+      "amount": -269.69,
+      "totalFinanceId": 2,
+      "date": "2020-07-29",
+      "bill": true,
+      "userId": 1,
+      "id": 48
+    },
+    {
+      "name": "Internet",
+      "amount": -75.32,
+      "totalFinanceId": 2,
+      "date": "2020-07-16",
+      "bill": true,
+      "userId": 1,
+      "id": 49
+    },
+    {
+      "name": "Income #1",
+      "amount": 800.32,
+      "totalFinanceId": 2,
+      "date": "2020-07-17",
+      "bill": false,
+      "userId": 1,
+      "id": 50
+    },
+    {
+      "id": 51,
+      "name": "Income #2",
+      "amount": 832.23,
+      "date": "2020-07-17",
+      "totalFinanceId": 2,
+      "bill": false,
+      "userId": 1
+    },
+    {
+      "name": "Chick-fil-A",
+      "amount": 130,
+      "totalFinanceId": 2,
+      "date": "2020-07-10",
+      "bill": false,
+      "userId": 1,
+      "id": 52
+    },
+    {
+      "name": "Phone Bill",
+      "amount": -79,
+      "totalFinanceId": 2,
+      "date": "2020-07-10",
+      "bill": true,
+      "userId": 1,
+      "id": 53
+    },
+    {
+      "name": "Water Bill",
+      "amount": -32.53,
+      "totalFinanceId": 2,
+      "date": "2020-07-10",
+      "bill": true,
+      "userId": 1,
+      "id": 54
     }
   ],
   "users": [
@@ -199,7 +217,7 @@
     {
       "id": 2,
       "email": "rol@gmail.com",
-      "password": "word"
+      "password": "1234"
     },
     {
       "email": "potato@yahoo.com",
@@ -221,19 +239,10 @@
       "month": "July",
       "year": "2020",
       "userId": 1,
-      "allBills": -555.18,
-      "allIncome": 0,
-      "amountLeft": -555.18,
+      "allBills": -802.29,
+      "allIncome": 1994.78,
+      "amountLeft": 1192.49,
       "id": 2
-    },
-    {
-      "month": "June",
-      "year": "2020",
-      "userId": 3,
-      "allBills": -250,
-      "allIncome": 800,
-      "amountLeft": 550,
-      "id": 4
     },
     {
       "month": "May",
@@ -265,24 +274,6 @@
       "userId": 1
     },
     {
-      "name": "florida trip",
-      "startDate": "2020-06-24",
-      "completionDate": "2020-07-24",
-      "goalAmount": 900,
-      "amountIn": 150,
-      "userId": 3,
-      "id": 5
-    },
-    {
-      "name": "new car",
-      "startDate": "2020-06-01",
-      "completionDate": "2020-08-01",
-      "goalAmount": 5000,
-      "amountIn": 290,
-      "userId": 3,
-      "id": 6
-    },
-    {
       "id": 7,
       "name": "Gift Card",
       "startDate": "2020-06-02",
@@ -294,43 +285,19 @@
   ],
   "cryptos": [
     {
-      "name": "BTC",
-      "userId": 3,
-      "homePage": true,
-      "id": 3
-    },
-    {
       "name": "XRP",
       "userId": 1,
-      "homePage": true,
+      "homePage": false,
       "id": 4
     },
     {
       "name": "ETH",
       "userId": 1,
       "homePage": true,
-      "id": 6
-    },
-    {
-      "name": "BTC",
-      "userId": 1,
-      "homePage": true,
-      "id": 7
-    },
-    {
-      "name": "USDT",
-      "userId": 1,
-      "homePage": true,
-      "id": 8
+      "id": 5
     }
   ],
   "stocks": [
-    {
-      "name": "TSLA",
-      "userId": 3,
-      "homePage": true,
-      "id": 7
-    },
     {
       "name": "AAPL",
       "userId": 1,
@@ -338,16 +305,10 @@
       "id": 9
     },
     {
-      "name": "TSLA",
-      "userId": 1,
-      "homePage": true,
-      "id": 10
-    },
-    {
       "name": "AMZN",
       "userId": 1,
       "homePage": true,
-      "id": 11
+      "id": 10
     }
   ]
 }

@@ -193,7 +193,7 @@ const FinanceList = props => {
           {
             isLoading ?
             <div className="ta-jumbotron-homepage">
-              <p className="display-4">Amount to spend for {totalFinance.month} <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft)}</span></p>
+              <p className="display-4">Amount to spend for {totalFinance.month} <span className={`number-is-${totalFinance.amountLeft > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.amountLeft.toFixed(2))}</span></p>
               <hr/>
               <p>Total amount spent on bills this month <span className={`number-is-${totalFinance.allBills > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allBills)}</span></p>
               <p>Total amount of income this month <span className={`number-is-${totalFinance.allIncome > 0 ? 'positive' : 'negative'}`}>${Math.abs(totalFinance.allIncome)}</span></p>

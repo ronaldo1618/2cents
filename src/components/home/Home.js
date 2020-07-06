@@ -191,7 +191,7 @@ const Home = (props) => {
                     totalFinance.amountLeft > 0 ? "positive" : "negative"
                   }`}
                 >
-                  ${Math.abs(totalFinance.amountLeft)}
+                  ${Math.abs(totalFinance.amountLeft).toFixed(2)}
                 </span>
               </p>
               <hr />
